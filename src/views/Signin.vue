@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <HomePage msg="The home page content goes here." />
+    <SigninForm msg="Welcome to Signin page" />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HomePage from "@/components/HomePage.vue";
+import SigninForm from "@/components/SigninForm.vue";
 
 export default {
-  name: "Home",
+  name: "Signin",
   components: {
-    HomePage,
+    SigninForm,
   },
 };
 </script>
