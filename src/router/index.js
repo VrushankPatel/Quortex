@@ -15,15 +15,15 @@ const routes = [{
     component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/Signup',
-    name: 'Signup',
+    path: '/signup',
+    name: 'signup',
     component: () => import( /* webpackChunkName: "about" */ '../views/Signup.vue')
   },
-  // {
-  //   path: '/signin',
-  //   name: 'Signin',
-  //   component: () => import( /* webpackChunkName: "about" */ '../views/Signin.vue')
-  // }
+  {
+    path: '/signin',
+    name: 'Signin',
+    component: () => import( /* webpackChunkName: "about" */ '../views/Signin.vue')
+  }
 ]
 
 const router = new VueRouter({

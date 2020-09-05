@@ -6,17 +6,19 @@
       <div class="double-wide">
         <FormulateInput
           name="firstname"
-          type="password"
+          type="text"
           label="firstname"
           placeholder="Your Firstname"
           validation="required"
+          autocomplete="off"
         />
         <FormulateInput
           name="lastname"
-          type="password"
+          type="text"
           label="lastname"
           placeholder="Your Lastname"
           validation="required"
+          autocomplete="off"
         />
       </div>
       <FormulateInput
@@ -25,6 +27,7 @@
         label="Email address"
         placeholder="Email address"
         validation="email"
+        autocomplete="off"
       />
       <FormulateInput
         type="date"
@@ -32,10 +35,33 @@
         label="Date of birth"
         placeholder="Date of birth"
         validation="required"
+        autocomplete="off"
       />
       <!-- validation="required|after:2019-01-01"
         min="2018-12-01"
       max="2021-01-01"-->
+      <FormulateInput
+        name="Grade"
+        type="text"
+        label="Grade"
+        placeholder="Grade"
+        validation="required"
+        autocomplete="off"
+      />
+      <FormulateInput
+        name="School"
+        type="text"
+        label="School"
+        placeholder="School"
+        validation="required"
+      />
+      <FormulateInput
+        name="Country"
+        type="text"
+        label="Country"
+        placeholder="Country"
+        validation="required"
+      />
       <div class="double-wide">
         <FormulateInput
           name="password"
@@ -49,15 +75,15 @@
           type="password"
           label="Confirm your password"
           placeholder="Confirm password"
-          validation="required|confirm"
+          validation="confirm"
           validation-name="Confirmation"
         />
       </div>
-      <FormulateInput type="submit" label="Register" />
+      <FormulateInput type="submit" label="Sign up" />
     </FormulateForm>
     <div class="text-center">
       Already have an account?
-      <a href="#">Sign in</a>
+      <a href="/Signin">Sign in</a>
     </div>
   </div>
 </template>
@@ -81,6 +107,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@import "../styles/common.css";
 .login-form {
   padding: 2em;
   border: 1px solid #b3aeae;
@@ -109,5 +136,4 @@ export default {
     margin-left: 0.5em;
   }
 }
-@import "../styles/signup.css";
 </style>

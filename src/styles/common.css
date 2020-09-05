@@ -4,25 +4,10 @@ body {
     font-family: "Roboto", sans-serif;
 }
 
-.form-control {
-    height: 40px;
-    box-shadow: none;
-    color: #969fa4;
-}
-
-.form-control:focus {
-    border-color: #5cb85c;
-}
-
-.form-control,
-.btn {
-    border-radius: 3px;
-}
-
 .signup-form {
-    width: 450px;
+    width: 500px;
     margin: 0 auto;
-    padding: 30px 0;
+    padding: 10px 0;
     font-size: 15px;
 }
 
@@ -67,33 +52,6 @@ body {
     padding: 30px;
 }
 
-.signup-form .form-group {
-    margin-bottom: 20px;
-}
-
-.signup-form FormulateInput {
-    margin-top: 3px;
-}
-
-.signup-form input[type="checkbox"] {
-    margin-top: 3px;
-}
-
-.signup-form .btn {
-    font-size: 16px;
-    font-weight: bold;
-    min-width: 140px;
-    outline: none !important;
-}
-
-.signup-form .row div:first-child {
-    padding-right: 10px;
-}
-
-.signup-form .row div:last-child {
-    padding-left: 10px;
-}
-
 .signup-form a {
     color: #fff;
     text-decoration: underline;
@@ -101,13 +59,4 @@ body {
 
 .signup-form a:hover {
     text-decoration: none;
-}
-
-.signup-form form a {
-    color: #5cb85c;
-    text-decoration: none;
-}
-
-.signup-form form a:hover {
-    text-decoration: underline;
 }
