@@ -10,15 +10,15 @@
           placeholder="Email address"
           validation="email"
         />
-      </div>
-      <FormulateInput
-        name="password"
-        type="password"
-        label="Password"
-        placeholder="Your password"
-        validation="required"
-      />
 
+        <FormulateInput
+          name="password"
+          type="password"
+          label="Password"
+          placeholder="Your password"
+          validation="required"
+        />
+      </div>
       <FormulateInput class="submit" type="submit" label="Register" />
     </FormulateForm>
     <div class="text-center">
@@ -50,8 +50,7 @@ export default {
 @import "../styles/common.css";
 @media (min-width: 420px) {
   .submit,
-  .single-wide,
-  .double-wide {
+  .single-wide {
     padding-top: 5%;
   }
   .login-form {
