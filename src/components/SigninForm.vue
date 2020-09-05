@@ -11,23 +11,14 @@
           validation="email"
         />
       </div>
-      <div class="double-wide">
-        <FormulateInput
-          name="password"
-          type="password"
-          label="Password"
-          placeholder="Your password"
-          validation="required"
-        />
-        <FormulateInput
-          name="password_confirm"
-          type="password"
-          label="Confirm your password"
-          placeholder="Confirm password"
-          validation="confirm"
-          validation-name="Confirmation"
-        />
-      </div>
+      <FormulateInput
+        name="password"
+        type="password"
+        label="Password"
+        placeholder="Your password"
+        validation="required"
+      />
+
       <FormulateInput class="submit" type="submit" label="Register" />
     </FormulateForm>
     <div class="text-center">
