@@ -110,7 +110,7 @@ export default {
     async handleSubmit() {
       this.convertDateFormat();
       await axios
-        .post("http://localhost:8080/signup", this.formValues)
+        .post("http://winterfell:8080/signup", this.formValues)
         .then((response) => {
           this.$swal(response.data + ", please login to continue.");
           this.formValues = { role: "USER" };
