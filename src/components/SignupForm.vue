@@ -1,10 +1,11 @@
 <template>
   <div class="signup-form">
-    <FormulateForm v-model="formValues" @submit="handleSubmit" class="login-form">
+    <FormulateForm @submit="handleSubmit" class="login-form">
       <h2>Questa</h2>
       <p class="hint-text">Create your account. It's free and only takes a minute.</p>
       <div class="double-wide">
         <FormulateInput
+          v-model="formValues.firstname"
           name="firstname"
           type="text"
           label="firstname"
@@ -13,6 +14,7 @@
           autocomplete="off"
         />
         <FormulateInput
+          v-model="formValues.lastname"
           name="lastname"
           type="text"
           label="lastname"
@@ -22,6 +24,7 @@
         />
       </div>
       <FormulateInput
+        v-model="formValues.email"
         name="email"
         type="email"
         label="Email address"
@@ -30,6 +33,7 @@
         autocomplete="off"
       />
       <FormulateInput
+        v-model="formValues.birthdate"
         type="date"
         name="DOB"
         label="Date of birth"
@@ -41,6 +45,7 @@
         min="2018-12-01"
       max="2021-01-01"-->
       <FormulateInput
+        v-model="formValues.grade"
         name="Grade"
         type="text"
         label="Grade"
@@ -49,6 +54,7 @@
         autocomplete="off"
       />
       <FormulateInput
+        v-model="formValues.school"
         name="School"
         type="text"
         label="School"
@@ -56,6 +62,7 @@
         validation="required"
       />
       <FormulateInput
+        v-model="formValues.country"
         name="Country"
         type="text"
         label="Country"
@@ -64,6 +71,7 @@
       />
       <div class="double-wide">
         <FormulateInput
+          v-model="formValues.password"
           name="password"
           type="password"
           label="Password"
@@ -89,18 +97,36 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "SigninForm",
   data: () => ({
-    formValues: {},
+    formValues: {
+      role: "USER",
+    },
   }),
   methods: {
-    handleSubmit() {
-      alert("temp");
+    async handleSubmit() {
+      this.convertDateFormat();
+      await axios
+        .post("http://localhost:8080/signup", this.formValues)
+        .then((response) => {
+          this.$swal(response.data + ", please login to continue.");
+          this.formValues = { role: "USER" };
+          this.$router.push("/Signin");
+        })
+        .catch((error) => {
+          console.log("error" + error);
+          // this.$swal(error);
+        });
     },
-  },
-  props: {
-    msg: String,
+    convertDateFormat() {
+      this.formValues.birthdate = this.formValues.birthdate
+        .split("-")
+        .reverse()
+        .join("/");
+    },
   },
 };
 </script>

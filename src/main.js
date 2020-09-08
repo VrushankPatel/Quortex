@@ -5,9 +5,10 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/formulate.css';
 import VueFormulate from '@braid/vue-formulate';
+import VueSweetalert2 from 'vue-sweetalert2';
 
 Vue.use(VueFormulate);
-Vue.config.productionTip = false
+Vue.use(VueSweetalert2);
 
 new Vue({
   router,
