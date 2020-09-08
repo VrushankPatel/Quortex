@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 
 export default {
   name: "SigninForm",
@@ -109,17 +109,25 @@ export default {
   methods: {
     async handleSubmit() {
       this.convertDateFormat();
-      await axios
-        .post("http://winterfell:8080/signup", this.formValues)
-        .then((response) => {
-          this.$swal(response.data + ", please login to continue.");
-          this.formValues = { role: "USER" };
-          this.$router.push("/Signin");
-        })
-        .catch((error) => {
-          console.log("error" + error);
-          // this.$swal(error);
-        });
+      await fetch("http://questaapp.herokuapp.com/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        body: this.formValues,
+      })
+        .then((response) => console.log(response))
+        .catch((error) => console.error(error));
+      // await axios
+      //   .post("http://localhost:8080/signup", this.formValues)
+      //   .then((response) => {
+      //     this.$swal(response.data + ", please login to continue.");
+      //     this.formValues = { role: "USER" };
+      //     this.$router.push("/Signin");
+      //   })
+      //   .catch((error) => {
+      //     console.log("error" + error);
+      //     // this.$swal(error);
+      //   });
     },
     convertDateFormat() {
       this.formValues.birthdate = this.formValues.birthdate

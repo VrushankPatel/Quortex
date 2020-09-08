@@ -10,11 +10,6 @@ const routes = [{
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: () => import( /* webpackChunkName: "about" */ '../views/About.vue')
-  },
-  {
     path: '/signup',
     name: 'signup',
     component: () => import( /* webpackChunkName: "about" */ '../views/Signup.vue')
@@ -27,7 +22,7 @@ const routes = [{
 ]
 
 const router = new VueRouter({
-  mode: "history",
+  mode: "hash",
   routes
 })
 
