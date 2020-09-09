@@ -1,11 +1,11 @@
 <template>
   <div class="signup-form">
-    <FormulateForm @submit="handleSubmit" class="login-form">
+    <FormulateForm @submit="signUp" class="login-form">
       <h2>Questa</h2>
       <p class="hint-text">Create your account. It's free and only takes a minute.</p>
       <div class="double-wide">
         <FormulateInput
-          v-model="formValues.firstname"
+          v-model="formData.firstname"
           name="firstname"
           type="text"
           label="firstname"
@@ -14,7 +14,7 @@
           autocomplete="off"
         />
         <FormulateInput
-          v-model="formValues.lastname"
+          v-model="formData.lastname"
           name="lastname"
           type="text"
           label="lastname"
@@ -24,7 +24,7 @@
         />
       </div>
       <FormulateInput
-        v-model="formValues.email"
+        v-model="formData.email"
         name="email"
         type="email"
         label="Email address"
@@ -33,7 +33,7 @@
         autocomplete="off"
       />
       <FormulateInput
-        v-model="formValues.birthdate"
+        v-model="formData.birthdate"
         type="date"
         name="DOB"
         label="Date of birth"
@@ -45,7 +45,7 @@
         min="2018-12-01"
       max="2021-01-01"-->
       <FormulateInput
-        v-model="formValues.grade"
+        v-model="formData.grade"
         name="Grade"
         type="text"
         label="Grade"
@@ -54,7 +54,7 @@
         autocomplete="off"
       />
       <FormulateInput
-        v-model="formValues.school"
+        v-model="formData.school"
         name="School"
         type="text"
         label="School"
@@ -62,7 +62,7 @@
         validation="required"
       />
       <FormulateInput
-        v-model="formValues.country"
+        v-model="formData.country"
         name="Country"
         type="text"
         label="Country"
@@ -71,7 +71,7 @@
       />
       <div class="double-wide">
         <FormulateInput
-          v-model="formValues.password"
+          v-model="formData.password"
           name="password"
           type="password"
           label="Password"
@@ -89,6 +89,7 @@
       </div>
       <FormulateInput type="submit" label="Sign up" />
     </FormulateForm>
+    <h1>{{this.formData}}</h1>
     <div class="text-center">
       Already have an account?
       <a href="/Signin">Sign in</a>
@@ -97,43 +98,39 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
+import properties from "@/common/properties.js";
+import utilities from "@/common/utilities.js";
 
 export default {
   name: "SigninForm",
   data: () => ({
-    formValues: {
+    formData: {
       role: "USER",
     },
+    baseUrl: properties.baseUrl(),
   }),
   methods: {
-    async handleSubmit() {
-      this.convertDateFormat();
-      await fetch("http://questaapp.herokuapp.com/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        mode: "no-cors",
-        body: this.formValues,
-      })
-        .then((response) => console.log(response))
-        .catch((error) => console.error(error));
-      // await axios
-      //   .post("http://localhost:8080/signup", this.formValues)
-      //   .then((response) => {
-      //     this.$swal(response.data + ", please login to continue.");
-      //     this.formValues = { role: "USER" };
-      //     this.$router.push("/Signin");
-      //   })
-      //   .catch((error) => {
-      //     console.log("error" + error);
-      //     // this.$swal(error);
-      //   });
-    },
-    convertDateFormat() {
-      this.formValues.birthdate = this.formValues.birthdate
-        .split("-")
-        .reverse()
-        .join("/");
+    async signUp() {
+      console.log(utilities.getPlainJSONHeader());
+      this.formData = utilities.trimFormData(this.formData);
+      console.log(this.formData);
+      var data = JSON.stringify(this.formData);
+      var config = {
+        method: "post",
+        url: this.baseUrl + "/signup",
+        headers: utilities.getPlainJSONHeader(),
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          this.$swal(response.data + ", please signin to continue");
+          // this.$router.push("/Signin");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     },
   },
 };
