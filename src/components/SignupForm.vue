@@ -50,7 +50,7 @@
         type="number"
         label="Grade"
         placeholder="Grade"
-        validation="required"
+        validation="required|min:1"
         autocomplete="off"
       />
       <FormulateInput
