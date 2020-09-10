@@ -1,14 +1,12 @@
 <template>
   <div class="home">
     <SignupForm v-on:actionSignUp="signUp" />
-    <Loader />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import SignupForm from "@/components/SignupForm.vue";
-import Loader from "@/components/Loader.vue";
 import axios from "axios";
 import properties from "@/common/properties.js";
 import actions from "@/common/actions.js";
@@ -18,7 +16,6 @@ export default {
   name: "Signin",
   components: {
     SignupForm,
-    Loader,
   },
   data: () => ({
     baseUrl: properties.baseUrl(),
