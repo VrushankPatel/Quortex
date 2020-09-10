@@ -6,7 +6,7 @@
       <div class="double-wide">
         <FormulateInput
           v-model="formData.firstname"
-          name="firstname"
+          name="Firstname"
           type="text"
           label="firstname"
           placeholder="Your Firstname"
