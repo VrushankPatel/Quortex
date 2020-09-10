@@ -4,6 +4,8 @@ import router from './router'
 import './styles/formulate.css';
 import VueFormulate from '@braid/vue-formulate';
 import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 Vue.use(VueFormulate);
 Vue.use(VueSweetalert2);

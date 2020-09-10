@@ -89,7 +89,6 @@
       </div>
       <FormulateInput type="submit" label="Sign up" />
     </FormulateForm>
-    <h1>{{this.formData}}</h1>
     <div class="text-center">
       Already have an account?
       <a href="/Signin">Sign in</a>
@@ -98,9 +97,7 @@
 </template>
 
 <script>
-import axios from "axios";
 import properties from "@/common/properties.js";
-import utilities from "@/common/utilities.js";
 
 export default {
   name: "SigninForm",
@@ -111,26 +108,8 @@ export default {
     baseUrl: properties.baseUrl(),
   }),
   methods: {
-    async signUp() {
-      console.log(utilities.getPlainJSONHeader());
-      this.formData = utilities.trimFormData(this.formData);
-      console.log(this.formData);
-      var data = JSON.stringify(this.formData);
-      var config = {
-        method: "post",
-        url: this.baseUrl + "/signup",
-        headers: utilities.getPlainJSONHeader(),
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          this.$swal(response.data + ", please signin to continue");
-          // this.$router.push("/Signin");
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+    signUp() {
+      this.$emit("actionSignUp", this.formData, this.$swal, this.$router);
     },
   },
 };
