@@ -9,6 +9,7 @@
 import SignupForm from "@/components/SignupForm.vue";
 import axios from "axios";
 import properties from "@/common/properties.js";
+import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 
 export default {
@@ -21,9 +22,7 @@ export default {
   }),
   methods: {
     async signUp(formData, swal, router) {
-      console.log(utilities.getPlainJSONHeader());
       formData = utilities.trimFormData(formData);
-      console.log(formData);
       var data = JSON.stringify(formData);
       var config = {
         method: "post",
@@ -31,21 +30,22 @@ export default {
         headers: utilities.getPlainJSONHeader(),
         data: data,
       };
-
       axios(config)
         .then(function (response) {
-          console.log(response.data);
-          swal.fire({
-            icon: "success",
-            title: "Success",
-            text: "Account successfully created, \nPlease signin to continue.",
-          });
-          router.push("/Signin");
+          actions.successSignup(
+            swal,
+            response.data.code,
+            response.data.status,
+            router
+          );
         })
         .catch(function (error) {
-          console.log(error);
+          actions.errorSignup(
+            swal,
+            error.response.data.code,
+            error.response.data.status
+          );
         });
-      return "something";
     },
   },
 };

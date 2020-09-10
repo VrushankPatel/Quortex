@@ -47,7 +47,7 @@
       <FormulateInput
         v-model="formData.grade"
         name="Grade"
-        type="text"
+        type="number"
         label="Grade"
         placeholder="Grade"
         validation="required"
