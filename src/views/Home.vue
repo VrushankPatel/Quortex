@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HomePage msg="The home page content goes here." />
+    <HomePage v-on:actionHome="home" />
   </div>
 </template>
 

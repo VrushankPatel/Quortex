@@ -5,7 +5,7 @@
       <p class="hint-text">Create your account. It's free and only takes a minute.</p>
       <div class="double-wide">
         <FormulateInput
-          v-model="formData.firstname"
+          v-model="formData.firstName"
           name="firstname"
           type="text"
           label="firstname"
@@ -14,7 +14,7 @@
           autocomplete="off"
         />
         <FormulateInput
-          v-model="formData.lastname"
+          v-model="formData.lastName"
           name="lastname"
           type="text"
           label="lastname"
@@ -100,7 +100,7 @@
 import properties from "@/common/properties.js";
 
 export default {
-  name: "SigninForm",
+  name: "SignupForm",
   data: () => ({
     formData: {
       role: "USER",

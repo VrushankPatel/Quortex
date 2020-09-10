@@ -13,7 +13,7 @@ import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 
 export default {
-  name: "Signin",
+  name: "Signup",
   components: {
     SignupForm,
   },
