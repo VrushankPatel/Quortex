@@ -1,9 +1,10 @@
 <template>
   <div class="signup-form">
-    <FormulateForm v-model="formValues" @submit="handleSubmit" class="login-form">
+    <FormulateForm @submit="handleSubmit" class="login-form">
       <h2>Questa</h2>
       <div class="single-wide">
         <FormulateInput
+          v-model="formValues.username"
           name="email"
           type="email"
           label="Email address"
@@ -12,6 +13,7 @@
         />
 
         <FormulateInput
+          v-model="formValues.password"
           name="password"
           type="password"
           label="Password"
@@ -29,14 +31,17 @@
 </template>
 
 <script>
+import properties from "@/common/properties.js";
+
 export default {
   name: "SigninForm",
   data: () => ({
     formValues: {},
+    baseUrl: properties.baseUrl(),
   }),
   methods: {
     handleSubmit() {
-      alert("temp");
+      this.$emit("actionSignIn", this.formValues, this.$swal, this.$router);
     },
   },
   props: {
