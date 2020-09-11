@@ -9,5 +9,11 @@ export default {
         return {
             "Content-Type": "application/json",
         }
+    },
+
+    getAuthJSONHeader() {
+        return {
+            "Authorization": "Bearer " + localStorage.getItem('token'),
+        }
     }
 }
