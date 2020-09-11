@@ -1,6 +1,7 @@
 <template>
-  <div class="hello">
-    <h1>Welcome to Home Page</h1>
+  <div class="hello" >
+    <h1>Hi {{message.firstName}}!Welcome to Questa world</h1>
+    <div  class="success">{{ message.firstName }}testsdfsdf</div>
   </div>
 </template>
 
@@ -10,7 +11,11 @@ export default {
   props: {
     msg: String,
   },
-};
+  created() {
+    console.log('Component has been created!');
+    this.$emit("actionHome");
+  }
+}; 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

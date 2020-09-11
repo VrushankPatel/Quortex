@@ -31,6 +31,8 @@ export default {
       };
       axios(config)
         .then(function (response) {
+          localStorage.setItem('userId', response.data.userId)
+          localStorage.setItem('token', response.data.token)
           actions.successSignin(
             swal,
             response.data.code,
