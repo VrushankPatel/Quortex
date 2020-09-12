@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <SigninForm v-on:actionSignIn="signIn" />
+    <Loader v-if="showLoader" />
   </div>
 </template>
 
@@ -11,28 +12,34 @@ import axios from "axios";
 import properties from "@/common/properties.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import Loader from "@/components/Loader.vue";
 
 export default {
   name: "Signin",
   components: {
     SigninForm,
+    Loader
   },
   data: () => ({
     baseUrl: properties.baseUrl(),
-  }),methods: {
+    showLoader: false
+  }),
+  methods: {
     async signIn(formValues, swal, router) {
-      formValues = utilities.trimFormData(formValues);
-      var data = JSON.stringify(formValues);
+      this.showLoader = true;
+      const trimmedFormValues = utilities.trimFormData(formValues);
+      const data = JSON.stringify(trimmedFormValues);
       var config = {
         method: "post",
         url: this.baseUrl + "/login",
         headers: utilities.getPlainJSONHeader(),
-        data: data,
+        data: data
       };
       axios(config)
-        .then(function (response) {
-          localStorage.setItem('userId', response.data.userId)
-          localStorage.setItem('token', response.data.token)
+        .then(response => {
+          this.showLoader = false;
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("token", response.data.token);
           actions.successSignin(
             swal,
             response.data.code,
@@ -40,14 +47,15 @@ export default {
             router
           );
         })
-        .catch(function (error) {
+        .catch(error => {
+          this.showLoader = false;
           actions.errorSignin(
             swal,
             error.response.data.code,
             error.response.data.status
           );
         });
-    },
-  },
+    }
+  }
 };
 </script>

@@ -11,11 +11,6 @@ export default {
     },
     successSignin(swal, code, status, router) {
         if (status == true && code == 200) {
-            swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "Login successfully.",
-            });
             router.push("/home");
         }
     },
