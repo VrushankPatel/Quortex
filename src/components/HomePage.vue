@@ -1,23 +1,23 @@
 <template>
-  <div class="hello" >
-    <h1>Hi {{message.firstName}}!Welcome to Questa world</h1>
-    <div  class="success">{{ message.firstName }}testsdfsdf</div>
+  <div>
+    <QuestionCard v-on:actionLike="like()" disabled />
   </div>
 </template>
 
 <script>
+import QuestionCard from "@/components/QuestionCard.vue";
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
+  name: "HomePage",
+  components: {
+    QuestionCard,
   },
-  created() {
-    console.log('Component has been created!');
-    this.$emit("actionHome");
-  }
-}; 
+  methods: {
+    like() {
+      alert("Liked");
+    },
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

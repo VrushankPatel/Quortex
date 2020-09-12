@@ -5,8 +5,11 @@ import './styles/formulate.css';
 import VueFormulate from '@braid/vue-formulate';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
 
-
+Vue.use(VueMaterial)
 Vue.use(VueFormulate);
 Vue.use(VueSweetalert2);
 

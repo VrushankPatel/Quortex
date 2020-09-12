@@ -7,8 +7,7 @@ import Signin from '../views/Signin.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
+const routes = [{
     path: '/signup',
     name: 'signup',
     component: Signup
