@@ -8,7 +8,9 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
+import LoadScript from 'vue-plugin-load-script';
 
+Vue.use(LoadScript);
 Vue.use(VueMaterial)
 Vue.use(VueFormulate);
 Vue.use(VueSweetalert2);
