@@ -152,6 +152,7 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
+      axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
       axios(config)
         .then((response) => {
           var result = actions.successQuestionPost(
@@ -172,6 +173,10 @@ export default {
           }
         })
         .catch((error) => {
+          window.setTimeout(() => {
+            this.showFailureSnackBar = true;
+            this.sending = false;
+          }, 1500);
           actions.errorQuestionPost(
             error.response.data.code,
             error.response.data.status,

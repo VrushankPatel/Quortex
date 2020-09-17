@@ -48,6 +48,7 @@ export default {
           );
         })
         .catch((error) => {
+          console.log(error);
           this.showLoader = false;
           actions.errorSignin(
             swal,
