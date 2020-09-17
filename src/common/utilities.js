@@ -15,7 +15,7 @@ export default {
         if (actions.checkSignedIn()) {
             return {
                 "Authorization": "Bearer " + localStorage.getItem('questatoken'),
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             }
         } else {
             swal.fire({

@@ -5,7 +5,6 @@
         <md-card-header>
           <div class="md-title">Didn't find your question? ask your question here..</div>
         </md-card-header>
-
         <md-card-content>
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
@@ -110,7 +109,14 @@ export default {
       },
     },
   },
+  beforeMount() {
+    this.getData();
+  },
   methods: {
+    getData: function () {
+      //Here write a code to get data
+      console.log("get data");
+    },
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {
@@ -137,7 +143,6 @@ export default {
     },
     validateUser() {
       this.$v.$touch();
-
       if (!this.$v.$invalid) {
         this.actionPostQuestion();
       }
@@ -152,9 +157,9 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
       axios(config)
         .then((response) => {
+          console.log("got response" + JSON.stringify(response));
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
@@ -173,6 +178,7 @@ export default {
           }
         })
         .catch((error) => {
+          console.log(error);
           window.setTimeout(() => {
             this.showFailureSnackBar = true;
             this.sending = false;

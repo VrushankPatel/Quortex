@@ -1,6 +1,5 @@
 module.exports = {
     devServer: {
-        // proxy: 'http://localhost:9090',
         proxy: 'http://questaapp.herokuapp.com',
         disableHostCheck: true,
         port: 8080,
