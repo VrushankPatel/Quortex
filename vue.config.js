@@ -3,7 +3,7 @@ module.exports = {
         // proxy: 'http://localhost:9090',
         proxy: 'http://questaapp.herokuapp.com',
         disableHostCheck: true,
-        port: 8080,
+        port: 5000,
         host: '0.0.0.0'
     }
 }
