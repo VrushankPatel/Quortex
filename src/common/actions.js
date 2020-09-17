@@ -31,5 +31,14 @@ export default {
                 text: "Incorrect username or password, please try again.",
             });
         }
-    }
+    },
+    successQuestionPost(swal, code, status) {
+        if (status == true && code == 200) {
+            swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Your question is posted successfully",
+            });
+        }
+    },
 }

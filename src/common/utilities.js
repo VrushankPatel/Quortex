@@ -13,7 +13,8 @@ export default {
 
     getAuthJSONHeader() {
         return {
-            "Authorization": "Bearer " + localStorage.getItem('token'),
+            "userId": localStorage.getItem('questauserId'),
+            "Authorization": "Bearer " + localStorage.getItem('questatoken'),
         }
     }
 }

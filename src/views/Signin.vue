@@ -18,11 +18,11 @@ export default {
   name: "Signin",
   components: {
     SigninForm,
-    Loader
+    Loader,
   },
   data: () => ({
     baseUrl: properties.baseUrl(),
-    showLoader: false
+    showLoader: false,
   }),
   methods: {
     async signIn(formValues, swal, router) {
@@ -33,13 +33,13 @@ export default {
         method: "post",
         url: this.baseUrl + "/login",
         headers: utilities.getPlainJSONHeader(),
-        data: data
+        data: data,
       };
       axios(config)
-        .then(response => {
+        .then((response) => {
           this.showLoader = false;
-          localStorage.setItem("userId", response.data.userId);
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("questauserId", response.data.userId);
+          localStorage.setItem("questatoken", response.data.token);
           actions.successSignin(
             swal,
             response.data.code,
@@ -47,7 +47,7 @@ export default {
             router
           );
         })
-        .catch(error => {
+        .catch((error) => {
           this.showLoader = false;
           actions.errorSignin(
             swal,
@@ -55,7 +55,7 @@ export default {
             error.response.data.status
           );
         });
-    }
-  }
+    },
+  },
 };
 </script>

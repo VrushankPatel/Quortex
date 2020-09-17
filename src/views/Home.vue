@@ -17,7 +17,7 @@
                 <md-icon md-menu-trigger>more_vert</md-icon>
               </md-button>
               <md-menu-content>
-                <md-menu-item>My Item 1</md-menu-item>
+                <md-menu-item @click="alert('hello')">Account Settings</md-menu-item>
                 <md-menu-item>My Item 2</md-menu-item>
                 <md-menu-item>Logout</md-menu-item>
               </md-menu-content>
