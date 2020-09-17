@@ -9,13 +9,24 @@ import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import LoadScript from 'vue-plugin-load-script';
+import actions from "./common/actions.js";
 
 Vue.use(LoadScript);
 Vue.use(VueMaterial)
 Vue.use(VueFormulate);
 Vue.use(VueSweetalert2);
-
+Vue.config.silent = true
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(App),
+  created() {
+    if (!actions.checkSignedIn() && this.$route.name.toLowerCase() != "signin" && this.$route.name.toLowerCase() != "signup" && this.$route.name.toLowerCase() != "welcome") {
+      this.$swal.fire({
+        icon: "info",
+        title: "Session timeout",
+        text: "Your session is timed out, please sign in to continue.",
+      });
+      this.$router.push('/signin')
+    }
+  },
 }).$mount('#app')

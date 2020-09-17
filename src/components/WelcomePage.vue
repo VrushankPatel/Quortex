@@ -83,7 +83,7 @@
 <script>
 import Vue from "vue";
 export default {
-  name: "Welcome Page",
+  name: "WelcomePage",
   mounted: function () {
     Vue.loadScript("https://code.getmdl.io/1.3.0/material.min.js")
       .then(() => {

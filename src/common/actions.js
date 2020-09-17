@@ -32,13 +32,34 @@ export default {
             });
         }
     },
-    successQuestionPost(swal, code, status) {
+    successQuestionPost(code, status) {
         if (status == true && code == 200) {
-            swal.fire({
-                icon: "success",
-                title: "Success",
-                text: "Your question is posted successfully",
-            });
+            return true
         }
+        return false
     },
+    // errorQuestionPost(code, status, router, swal) {
+    //     // TO DO : error code for invalid token and invalid userId.
+    //     if (this.checkSignedIn()) {
+    //         swal.fire({
+    //             icon: "info",
+    //             title: "Session timeout",
+    //             text: "Your session is timed out, please sign in to continue.",
+    //         });
+    //         // router.push('/signin');
+    //     }
+    // },
+    invalidate() {
+        localStorage.setItem("questauserId", "");
+        localStorage.setItem("questatoken", "");
+    },
+    checkSignedIn() {
+        var token = localStorage.getItem('questatoken');
+        var questauserId = localStorage.getItem('questauserId');
+        if (token != null && token.length != 0 && questauserId != null && questauserId.length != 0) {
+            return true
+        }
+        return false;
+    }
+
 }

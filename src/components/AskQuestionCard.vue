@@ -29,35 +29,42 @@
               <md-field :class="getValidationClass('topic')">
                 <label for="topic">Topic</label>
                 <md-input name="topic" id="topic" v-model="form.topic" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.topic.required">The last name is required</span>
-                <span class="md-error" v-else-if="!$v.form.topic.minlength">Invalid last name</span>
+                <span class="md-error" v-if="!$v.form.topic.required">The topic is required</span>
+                <span class="md-error" v-else-if="!$v.form.topic.minlength">Invalid topic.</span>
               </md-field>
             </div>
           </div>
 
-          <md-field :class="getValidationClass('question')">
+          <md-field :class="getValidationClass('questionDesc')">
             <label for="question">Type your question here</label>
             <md-textarea
-              type="questin"
+              type="text"
               name="question"
               id="question"
               autocomplete="question"
-              v-model="form.question"
+              v-model="form.questionDesc"
               :disabled="sending"
             />
-            <span class="md-error" v-if="!$v.form.question.required">The question is required</span>
-            <span class="md-error" v-else-if="!$v.form.question.minlength">Invalid question</span>
+            <span class="md-error" v-if="!$v.form.questionDesc.required">The question is required</span>
+            <span class="md-error" v-else-if="!$v.form.questionDesc.minlength">Invalid question</span>
           </md-field>
         </md-card-content>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
         <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Create user</md-button>
+          <md-button type="submit" class="md-primary" :disabled="sending">Submit</md-button>
         </md-card-actions>
       </md-card>
 
-      <md-snackbar :md-active.sync="userSaved">The user {{ lastUser }} was saved with success!</md-snackbar>
+      <md-snackbar
+        :md-position="position"
+        :md-active.sync="showSuccessSnackBar"
+      >The question posted successfully!</md-snackbar>
+      <md-snackbar
+        :md-position="position"
+        :md-active.sync="showFailureSnackBar"
+      >Error occured, Unable to post question</md-snackbar>
     </form>
   </div>
 </template>
@@ -65,18 +72,27 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength } from "vuelidate/lib/validators";
+import axios from "axios";
+import properties from "@/common/properties.js";
+import actions from "@/common/actions.js";
+import utilities from "@/common/utilities.js";
 
 export default {
   name: "FormValidation",
   mixins: [validationMixin],
   data: () => ({
+    position: "left",
     form: {
       subject: null,
       topic: null,
-      question: null,
+      questionDesc: null,
+      createDate: null,
+      userId: null,
     },
-    userSaved: false,
+    showSuccessSnackBar: false,
+    showFailureSnackBar: false,
     sending: false,
+    baseUrl: properties.baseUrl(),
     lastUser: null,
   }),
   validations: {
@@ -88,7 +104,7 @@ export default {
         required,
         minLength: minLength(3),
       },
-      question: {
+      questionDesc: {
         required,
         minLength: minLength(3),
       },
@@ -97,7 +113,6 @@ export default {
   methods: {
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
-
       if (field) {
         return {
           "md-invalid": field.$invalid && field.$dirty,
@@ -108,24 +123,62 @@ export default {
       this.$v.$reset();
       this.form.subject = null;
       this.form.topic = null;
-      this.form.question = null;
+      this.form.questionDesc = null;
+      this.form.createDate = null;
+      this.form.userId = null;
     },
-    saveUser() {
+    actionPostQuestion() {
       this.sending = true;
-      // Instead of this timeout, here you can call your API
-      window.setTimeout(() => {
-        this.lastUser = `${this.form.firstName} ${this.form.lastName}`;
-        this.userSaved = true;
-        this.sending = false;
-        this.clearForm();
-      }, 1500);
+      var moment = require("moment");
+      this.form["createDate"] = moment(new Date()).format("yyyy-MM-DD");
+      this.form["userId"] = utilities.getUserId(this.$router);
+
+      this.postQuestion(this.form);
     },
     validateUser() {
       this.$v.$touch();
 
       if (!this.$v.$invalid) {
-        this.saveUser();
+        this.actionPostQuestion();
       }
+    },
+    postQuestion(formValues) {
+      actions.checkSignedIn();
+      const trimmedFormValues = utilities.trimFormData(formValues);
+      const data = JSON.stringify(trimmedFormValues);
+      var config = {
+        method: "post",
+        url: this.baseUrl + "/createquestion",
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: data,
+      };
+      axios(config)
+        .then((response) => {
+          var result = actions.successQuestionPost(
+            response.data.code,
+            response.data.status
+          );
+          if (result == true) {
+            window.setTimeout(() => {
+              this.showSuccessSnackBar = true;
+              this.sending = false;
+            }, 1500);
+            this.clearForm();
+          } else {
+            window.setTimeout(() => {
+              this.showFailureSnackBar = true;
+              this.sending = false;
+            }, 1500);
+          }
+        })
+        .catch((error) => {
+          actions.errorQuestionPost(
+            error.response.data.code,
+            error.response.data.status,
+            this.$router,
+            this.$swal
+          );
+        });
     },
   },
 };
