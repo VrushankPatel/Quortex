@@ -1,13 +1,14 @@
 <template>
-  <div>
+  <div style="min-height:650px">
+    <Loader v-if="showLoader" />
     <div v-for="item in questions" :key="item.questionId">
-      {{item}}
       <QuestionCard
         v-on:actionLike="like()"
         :subject="item.subject"
         :topic="item.topic"
         :dateOfPosted="item.createDate"
         :questionDesc="item.questionDesc"
+        :answerList="item.answerList"
         disabled
       />
     </div>
@@ -16,9 +17,10 @@
 </template>
 
 <script>
-import QuestionCard from "@/components/QuestionCard.vue";
 import Loader from "@/components/Loader.vue";
+import QuestionCard from "@/components/QuestionCard.vue";
 import axios from "axios";
+import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 export default {
   name: "HomePage",
@@ -42,16 +44,28 @@ export default {
       axios(config)
         .then((response) => {
           this.questions = response.data;
-          console.log(JSON.stringify(response));
+          this.showLoader = false;
         })
         .catch((error) => {
+          if (
+            error.response.data.code == 401 ||
+            error.response.data.code == 555
+          ) {
+            actions.invalidate();
+            this.$swal.fire({
+              icon: "info",
+              title: "Session timeout",
+              text: "Your session is timed out, please sign in to continue.",
+            });
+            this.$router.push("/signin");
+          }
           console.log(JSON.stringify(error));
         });
     },
   },
   data: () => ({
     questions: null,
-    showLoader: false,
+    showLoader: true,
   }),
 };
 </script>

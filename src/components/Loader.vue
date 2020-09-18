@@ -4,7 +4,7 @@
       loader="bars"
       color="#fff"
       background-color="#000000"
-      :opacity="0.7"
+      :opacity="0.5"
       :active.sync="isLoading"
       :can-cancel="false"
       :on-cancel="onCancel"
@@ -19,11 +19,11 @@ import "vue-loading-overlay/dist/vue-loading.css";
 export default {
   data() {
     return {
-      isLoading: true
+      isLoading: true,
     };
   },
   components: {
-    Loading
+    Loading,
   },
   methods: {
     doAjax() {
@@ -35,7 +35,7 @@ export default {
     },
     onCancel() {
       console.log("User cancelled the loader.");
-    }
-  }
+    },
+  },
 };
 </script> 

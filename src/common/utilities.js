@@ -12,7 +12,9 @@ export default {
         }
     },
     getAuthJSONHeader(router, swal) {
+        console.log("here");
         if (actions.checkSignedIn()) {
+            console.log("here 2");
             return {
                 "Authorization": "Bearer " + localStorage.getItem('questatoken'),
                 "Content-Type": "application/json"
