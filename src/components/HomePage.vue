@@ -1,14 +1,16 @@
 <template>
   <div>
-    <QuestionCard
-      v-on:actionLike="like()"
-      v-bind:title="this.title"
-      v-bind:subject="this.subject"
-      v-bind:topic="this.topic"
-      v-bind:dateOfPosted="this.dateOfPosted"
-      v-bind:questionDesc="this.questionDesc"
-      disabled
-    />
+    <div v-for="item in questions" :key="item.questionId">
+      {{item}}
+      <QuestionCard
+        v-on:actionLike="like()"
+        :subject="item.subject"
+        :topic="item.topic"
+        :dateOfPosted="item.createDate"
+        :questionDesc="item.questionDesc"
+        disabled
+      />
+    </div>
     <Loader v-if="showLoader" />
   </div>
 </template>
@@ -32,7 +34,6 @@ export default {
       alert("Liked");
     },
     getData() {
-      console.log("getting data");
       var config = {
         method: "post",
         url: "/findallquestions",
@@ -40,6 +41,7 @@ export default {
       };
       axios(config)
         .then((response) => {
+          this.questions = response.data;
           console.log(JSON.stringify(response));
         })
         .catch((error) => {
@@ -48,13 +50,8 @@ export default {
     },
   },
   data: () => ({
+    questions: null,
     showLoader: false,
-    title: "vrushank patel",
-    subject: "this is subject",
-    topic: "this is tofdpic",
-    dateOfPosted: "11-11-2011",
-    questionDesc:
-      "this is the question bodythis is the question bodythis is the question bodythis is the question bodythis is the question bodythis is the question bodythis is the question bodythis is the question body",
   }),
 };
 </script>
