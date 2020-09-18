@@ -9,6 +9,7 @@
         :dateOfPosted="item.createDate"
         :questionDesc="item.questionDesc"
         :answerList="item.answerList"
+        :questionId="item.questionId"
         disabled
       />
     </div>

@@ -10,12 +10,12 @@
           <div
             class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
           >
-            <div class="md-title" style="float: left;">topic : {{topic}}</div>
+            <div class="md-title" style="float: left;">Topic : {{topic}}</div>
           </div>
           <div
             class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
           >
-            <div class="md-title" style="float: right;">subject : {{subject}}</div>
+            <div class="md-title" style="float: right;">Subject : {{subject}}</div>
           </div>
 
           <div
@@ -33,7 +33,7 @@
         </div>
       </div>
       <md-card-actions>
-        <md-button>Answer</md-button>
+        <md-button @click="answerTheQuestion({questionId})">Answer</md-button>
         <md-button>Follow</md-button>
         <md-button>
           <md-icon>thumb_up</md-icon>
@@ -69,25 +69,50 @@
             style="padding-right:2.5%"
           >
             <md-card-actions>
-              <md-button>
-                <md-icon>thumb_up</md-icon>
+              <md-button @click="item.userFeedbackList[0].liked = !item.userFeedbackList[0].liked">
+                <md-icon v-if="item.userFeedbackList[0].liked == false">thumb_up</md-icon>
+                <md-icon v-else style="color:blue">thumb_up</md-icon>
               </md-button>
-              <md-button>
-                <md-icon>thumb_down</md-icon>
+              <md-button @click="item.userFeedbackList[0].liked = !item.userFeedbackList[0].liked">
+                <md-icon v-if="item.userFeedbackList[0].liked == true">thumb_down</md-icon>
+                <md-icon v-else style="color:blue">thumb_down</md-icon>
               </md-button>
             </md-card-actions>
           </div>
         </div>
       </div>
     </md-card>
+    <md-dialog :md-active.sync="showDialog">
+      <md-dialog-title>Answer the question :</md-dialog-title>
+      <div style="padding:10px">
+        <md-field>
+          <label>Textarea</label>
+          <md-textarea v-model="textarea" required></md-textarea>
+          <span class="md-helper-text">Write your answer here.</span>
+          <span class="md-error">There is an error</span>
+        </md-field>
+      </div>
+      <md-dialog-actions>
+        <md-button class="md-primary" @click="showDialog = false">Close</md-button>
+        <md-button class="md-primary" @click="showDialog = false">Post</md-button>
+      </md-dialog-actions>
+    </md-dialog>
   </div>
 </template>
 
 <script>
 export default {
+  data: () => ({
+    showDialog: false,
+  }),
   methods: {
     actionLike() {
       this.$emit("actionLike");
+    },
+    answerTheQuestion(questionId) {
+      questionId = questionId["questionId"];
+      console.log(questionId);
+      this.showDialog = true;
     },
   },
   props: {
@@ -96,6 +121,12 @@ export default {
     dateOfPosted: String,
     questionDesc: String,
     answerList: String,
+    questionId: Number,
   },
 };
 </script>
+<style scoped>
+.md-dialog ::v-deep .md-dialog-container {
+  width: 50%;
+}
+</style>
