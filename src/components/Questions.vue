@@ -1,11 +1,14 @@
 <template>
-  <div>Following page is here.</div>
+  <AskQuestionCard disabled />
 </template>
 
 <script>
+import AskQuestionCard from "@/components/AskQuestionCard.vue";
 export default {
   name: "HomePage",
-  components: {},
+  components: {
+    AskQuestionCard,
+  },
   beforeMount() {
     this.getData();
   },

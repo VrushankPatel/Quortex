@@ -16,13 +16,16 @@ import Loader from "@/components/Loader.vue";
 
 export default {
   name: "Signup",
+  beforeMount() {
+    document.body.style.backgroundColor = "rgb(99,115,138)";
+  },
   components: {
     SignupForm,
-    Loader
+    Loader,
   },
   data: () => ({
     baseUrl: properties.baseUrl(),
-    showLoader: false
+    showLoader: false,
   }),
   methods: {
     async signUp(formData, swal, router) {
@@ -33,10 +36,10 @@ export default {
         method: "post",
         url: this.baseUrl + "/signup",
         headers: utilities.getPlainJSONHeader(),
-        data: data
+        data: data,
       };
       axios(config)
-        .then(response => {
+        .then((response) => {
           this.showLoader = false;
           actions.successSignup(
             swal,
@@ -45,7 +48,7 @@ export default {
             router
           );
         })
-        .catch(error => {
+        .catch((error) => {
           this.showLoader = false;
           actions.errorSignup(
             swal,
@@ -53,7 +56,7 @@ export default {
             error.response.data.status
           );
         });
-    }
-  }
+    },
+  },
 };
 </script>

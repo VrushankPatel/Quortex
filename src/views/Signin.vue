@@ -16,6 +16,9 @@ import Loader from "@/components/Loader.vue";
 
 export default {
   name: "Signin",
+  beforeMount() {
+    document.body.style.backgroundColor = "rgb(99,115,138)";
+  },
   components: {
     SigninForm,
     Loader,
@@ -48,7 +51,6 @@ export default {
           );
         })
         .catch((error) => {
-          console.log(error);
           this.showLoader = false;
           actions.errorSignin(
             swal,

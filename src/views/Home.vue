@@ -30,7 +30,7 @@
             <md-tab id="tab-home" md-label="Home" @click="moveToHomePage()"></md-tab>
             <md-tab id="tab-following" md-label="Following" @click="moveToFollowingPage()"></md-tab>
             <md-tab id="tab-answers" md-label="Answers"></md-tab>
-            <md-tab id="tab-questions" md-label="Questions"></md-tab>
+            <md-tab id="tab-questions" md-label="Questions" @click="moveToQuestionsPage()"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
@@ -42,6 +42,7 @@
       <md-app-content>
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
+        <Questions v-if="ifQuestions" />
       </md-app-content>
     </md-app>
   </div>
@@ -51,17 +52,23 @@
 import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
 import Following from "@/components/Following.vue";
+import Questions from "@/components/Questions.vue";
 export default {
   name: "Home",
+  beforeMount() {
+    document.body.style.backgroundColor = "white";
+  },
   data: () => ({
     menuVisible: false,
     ifHome: true,
     ifFollowing: false,
+    ifQuestions: false,
   }),
   components: {
     HomePageDrawer,
     HomePage,
     Following,
+    Questions,
   },
   methods: {
     temp() {
@@ -70,10 +77,17 @@ export default {
     moveToHomePage() {
       this.ifHome = true;
       this.ifFollowing = false;
+      this.ifQuestions = false;
     },
     moveToFollowingPage() {
-      this.ifHome = !this.ifHome;
-      this.ifFollowing = !this.ifFollowing;
+      this.ifHome = false;
+      this.ifFollowing = true;
+      this.ifQuestions = false;
+    },
+    moveToQuestionsPage() {
+      this.ifHome = false;
+      this.ifFollowing = false;
+      this.ifQuestions = true;
     },
   },
 };

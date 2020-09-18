@@ -38,17 +38,20 @@ export default {
         }
         return false
     },
-    // errorQuestionPost(code, status, router, swal) {
-    //     // TO DO : error code for invalid token and invalid userId.
-    //     if (this.checkSignedIn()) {
-    //         swal.fire({
-    //             icon: "info",
-    //             title: "Session timeout",
-    //             text: "Your session is timed out, please sign in to continue.",
-    //         });
-    //         // router.push('/signin');
-    //     }
-    // },
+    errorQuestionPost(code, status, router, swal) {
+        // TO DO : error code for invalid token and invalid userId.
+
+
+        if (!this.checkSignedIn() || code == 555) {
+            this.invalidate();
+            swal.fire({
+                icon: "info",
+                title: "Session timeout",
+                text: "Your session is timed out, please sign in to continue.",
+            });
+            router.push('/signin');
+        }
+    },
     invalidate() {
         localStorage.setItem("questauserId", "");
         localStorage.setItem("questatoken", "");

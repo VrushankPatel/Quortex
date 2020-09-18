@@ -3,7 +3,7 @@
     <form novalidate @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-95 md-small-size-95">
         <md-card-header>
-          <div class="md-title">Didn't find your question? ask your question here..</div>
+          <div class="md-title">Apply filters</div>
         </md-card-header>
         <md-card-content>
           <div class="md-layout md-gutter">
@@ -33,20 +33,6 @@
               </md-field>
             </div>
           </div>
-
-          <md-field :class="getValidationClass('questionDesc')">
-            <label for="question">Type your question here</label>
-            <md-textarea
-              type="text"
-              name="question"
-              id="question"
-              autocomplete="question"
-              v-model="form.questionDesc"
-              :disabled="sending"
-            />
-            <span class="md-error" v-if="!$v.form.questionDesc.required">The question is required</span>
-            <span class="md-error" v-else-if="!$v.form.questionDesc.minlength">Invalid question</span>
-          </md-field>
         </md-card-content>
 
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
@@ -84,8 +70,6 @@ export default {
     form: {
       subject: null,
       topic: null,
-      questionDesc: null,
-      createDate: null,
       userId: null,
     },
     showSuccessSnackBar: false,
@@ -100,10 +84,6 @@ export default {
         required,
       },
       topic: {
-        required,
-        minLength: minLength(3),
-      },
-      questionDesc: {
         required,
         minLength: minLength(3),
       },
@@ -129,25 +109,21 @@ export default {
       this.$v.$reset();
       this.form.subject = null;
       this.form.topic = null;
-      this.form.questionDesc = null;
-      this.form.createDate = null;
       this.form.userId = null;
     },
-    actionPostQuestion() {
+    actionFilterQuestion() {
       this.sending = true;
       var moment = require("moment");
-      this.form["createDate"] = moment(new Date()).format("yyyy-MM-DD");
       this.form["userId"] = utilities.getUserId(this.$router);
-
-      this.postQuestion(this.form);
+      this.filterQuestion(this.form);
     },
     validateUser() {
       this.$v.$touch();
       if (!this.$v.$invalid) {
-        this.actionPostQuestion();
+        this.actionFilterQuestion();
       }
     },
-    postQuestion(formValues) {
+    filterQuestion(formValues) {
       actions.checkSignedIn();
       const trimmedFormValues = utilities.trimFormData(formValues);
       const data = JSON.stringify(trimmedFormValues);
