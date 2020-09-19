@@ -21,12 +21,7 @@ new Vue({
   render: h => h(App),
   created() {
     if (!actions.checkSignedIn() && this.$route.name.toLowerCase() != "signin" && this.$route.name.toLowerCase() != "signup" && this.$route.name.toLowerCase() != "welcome") {
-      this.$swal.fire({
-        icon: "info",
-        title: "Session timeout",
-        text: "Your session is timed out, please sign in to continue.",
-      });
-      this.$router.push('/signin')
+      actions.fireLoggedOut(this.$swal, this.$router);
     }
   },
 }).$mount('#app')

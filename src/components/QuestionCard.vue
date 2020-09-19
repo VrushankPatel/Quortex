@@ -38,6 +38,9 @@
         </div>
         <md-divider></md-divider>
         <md-card-actions>
+          <div style="width:100%;float:left;">
+            <md-button style="color:white;float:left;" @click="toggleAnswers()">Show Answers</md-button>
+          </div>
           <md-button style="color:white" @click="answerTheQuestion({questionId})">Answer</md-button>
           <md-button style="color:white">Follow</md-button>
           <md-button>
@@ -46,61 +49,63 @@
         </md-card-actions>
       </div>
       <md-divider></md-divider>
-      <div class="md-layout md-gutter md-alignment-center" v-for="item in answerList" :key="item">
-        <div
-          class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
-        >
-          <md-divider style="width:106%"></md-divider>
-          <div class="md-title" style="float: left; padding-top:2%;padding-left:2%;">Answer</div>
-        </div>
-        <div
-          class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
-        >
-          <md-divider></md-divider>
+      <div v-if="showAnswers">
+        <div class="md-layout md-gutter md-alignment-center" v-for="item in answerList" :key="item">
           <div
-            class="md-title"
-            style="float: right;padding-top:2%;padding-right:2%;float: right;font-size:115%"
-          >Posted on : {{item.createDate}}</div>
-        </div>
-        <div class="md-layout md-gutter md-alignment-center">
-          <div
-            class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
+            class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
           >
+            <md-divider style="width:106%"></md-divider>
+            <div class="md-title" style="float: left; padding-top:2%;padding-left:2%;">Answer</div>
+          </div>
+          <div
+            class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
+          >
+            <md-divider></md-divider>
             <div
               class="md-title"
-              style="float: left; text-align:left;font-size:120%;padding-left:1.5%;padding-top:1.5%"
-            >{{item.answerDesc}}</div>
+              style="float: right;padding-top:2%;padding-right:2%;float: right;font-size:115%"
+            >Posted on : {{item.createDate}}</div>
           </div>
-
-          <div
-            class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
-            style="padding-right:2.5%"
-          >
-            <div v-if="item.userFeedbackList.length > 0">
-              <md-card-actions>
-                <md-button
-                  @click="item.userFeedbackList[0].liked = !item.userFeedbackList[0].liked"
-                >
-                  <md-icon v-if="item.userFeedbackList[0].liked == false">thumb_up</md-icon>
-                  <md-icon v-else style="color:blue">thumb_up</md-icon>
-                </md-button>
-                <md-button
-                  @click="item.userFeedbackList[0].liked = !item.userFeedbackList[0].liked"
-                >
-                  <md-icon v-if="item.userFeedbackList[0].liked == true">thumb_down</md-icon>
-                  <md-icon v-else style="color:blue">thumb_down</md-icon>
-                </md-button>
-              </md-card-actions>
+          <div class="md-layout md-gutter md-alignment-center">
+            <div
+              class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
+            >
+              <div
+                class="md-title"
+                style="float: left; text-align:left;font-size:120%;padding-left:1.5%;padding-top:1.5%"
+              >{{item.answerDesc}}</div>
             </div>
-            <div v-else>
-              <md-card-actions>
-                <md-button>
-                  <md-icon>thumb_up</md-icon>
-                </md-button>
-                <md-button>
-                  <md-icon>thumb_down</md-icon>
-                </md-button>
-              </md-card-actions>
+
+            <div
+              class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
+              style="padding-right:2.5%"
+            >
+              <div v-if="item.userFeedbackList.length > 0">
+                <md-card-actions>
+                  <md-button
+                    @click="item.userFeedbackList[0].liked = !item.userFeedbackList[0].liked"
+                  >
+                    <md-icon v-if="item.userFeedbackList[0].liked == false">thumb_up</md-icon>
+                    <md-icon v-else style="color:blue">thumb_up</md-icon>
+                  </md-button>
+                  <md-button
+                    @click="item.userFeedbackList[0].liked = !item.userFeedbackList[0].liked"
+                  >
+                    <md-icon v-if="item.userFeedbackList[0].liked == true">thumb_down</md-icon>
+                    <md-icon v-else style="color:blue">thumb_down</md-icon>
+                  </md-button>
+                </md-card-actions>
+              </div>
+              <div v-else>
+                <md-card-actions>
+                  <md-button>
+                    <md-icon>thumb_up</md-icon>
+                  </md-button>
+                  <md-button>
+                    <md-icon>thumb_down</md-icon>
+                  </md-button>
+                </md-card-actions>
+              </div>
             </div>
           </div>
         </div>
@@ -144,8 +149,12 @@ export default {
     showSuccessSnackBar: false,
     showFailureSnackBar: false,
     showInvalidBar: false,
+    showAnswers: false,
   }),
   methods: {
+    toggleAnswers() {
+      this.showAnswers = !this.showAnswers;
+    },
     actionLike() {
       this.$emit("actionLike");
     },

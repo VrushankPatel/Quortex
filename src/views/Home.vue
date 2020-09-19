@@ -18,8 +18,7 @@
               </md-button>
               <md-menu-content>
                 <md-menu-item @click="alert('hello')">Account Settings</md-menu-item>
-                <md-menu-item>My Item 2</md-menu-item>
-                <md-menu-item>Logout</md-menu-item>
+                <md-menu-item @click="logout()">Logout</md-menu-item>
               </md-menu-content>
             </md-menu>
           </div>
@@ -53,6 +52,7 @@ import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
 import Following from "@/components/Following.vue";
 import Questions from "@/components/Questions.vue";
+import actions from "@/common/actions.js";
 export default {
   name: "Home",
   beforeMount() {
@@ -88,6 +88,9 @@ export default {
       this.ifHome = false;
       this.ifFollowing = false;
       this.ifQuestions = true;
+    },
+    logout() {
+      actions.fireLoggedOut(this.$swal, this.$router);
     },
   },
 };

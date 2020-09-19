@@ -12,21 +12,14 @@ export default {
         }
     },
     getAuthJSONHeader(router, swal) {
-        console.log("here");
         if (actions.checkSignedIn()) {
-            console.log("here 2");
             return {
                 "Authorization": "Bearer " + localStorage.getItem('questatoken'),
                 "Content-Type": "application/json"
             }
         } else {
-            swal.fire({
-                icon: "info",
-                title: "Session timeout",
-                text: "Your session is timed out, please sign in to continue.",
-            });
-            actions.invalidate();
-            router.push('/signin')
+            actions.fireLoggedOut(swal, router);
+            return;
         }
     },
     getUserId(router) {

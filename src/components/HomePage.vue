@@ -53,15 +53,9 @@ export default {
             error.response.data.code == 401 ||
             error.response.data.code == 555
           ) {
-            actions.invalidate();
-            this.$swal.fire({
-              icon: "info",
-              title: "Session timeout",
-              text: "Your session is timed out, please sign in to continue.",
-            });
-            this.$router.push("/signin");
+            actions.fireLoggedOut(this.$swal, this.$router);
+            return;
           }
-          console.log(JSON.stringify(error));
         });
     },
   },

@@ -40,14 +40,12 @@ export default {
     },
     errorQuestionPost(code, status, router, swal) {
         // TO DO : error code for invalid token and invalid userId.
-
-
         if (!this.checkSignedIn() || code == 555) {
             this.invalidate();
             swal.fire({
                 icon: "info",
-                title: "Session timeout",
-                text: "Your session is timed out, please sign in to continue.",
+                title: "Logged out",
+                text: "You're logged out of questa, please login to continue.",
             });
             router.push('/signin');
         }
@@ -63,6 +61,15 @@ export default {
             return true
         }
         return false;
+    },
+    fireLoggedOut(swal, router) {
+        this.invalidate();
+        swal.fire({
+            icon: "info",
+            title: "Logged out",
+            text: "You're logged out of questa, please login to continue.",
+        });
+        router.push('/signin')
     }
 
 }
