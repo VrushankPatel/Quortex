@@ -10,6 +10,7 @@
         :questionDesc="item.questionDesc"
         :answerList="item.answerList"
         :questionId="item.questionId"
+        v-on:actionReload="getData"
         disabled
       />
     </div>
@@ -34,7 +35,7 @@ export default {
   },
   methods: {
     like() {
-      alert("Liked");
+      // alert("Liked");
     },
     getData() {
       var config = {

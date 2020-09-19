@@ -30,7 +30,7 @@
             <md-tab id="tab-home" md-label="Home" @click="moveToHomePage()"></md-tab>
             <md-tab id="tab-following" md-label="Following" @click="moveToFollowingPage()"></md-tab>
             <md-tab id="tab-answers" md-label="Answers"></md-tab>
-            <md-tab id="tab-questions" md-label="Questions" @click="moveToQuestionsPage()"></md-tab>
+            <md-tab id="tab-questions" md-label="Q/A" @click="moveToQuestionsPage()"></md-tab>
           </md-tabs>
         </div>
       </md-app-toolbar>
