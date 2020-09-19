@@ -1,19 +1,44 @@
 <template>
   <div style="min-height:650px">
     <Loader v-if="showLoader" />
-    <div v-for="item in questions" :key="item.questionId">
-      <QuestionCard
-        v-on:actionLike="like()"
-        :subject="item.subject"
-        :topic="item.topic"
-        :dateOfPosted="item.createDate"
-        :questionDesc="item.questionDesc"
-        :answerList="item.answerList"
-        :questionId="item.questionId"
-        v-on:actionReload="getData"
-        disabled
-      />
+    <FilterQuestion v-on:doFilter="doFilter" v-on:clearFilter="clearFilter" />
+    <div v-if="nonfiltered">
+      <div v-for="item in questions" :key="item.questionId">
+        <QuestionCard
+          :item="item"
+          :subject="item.subject"
+          :topic="item.topic"
+          :dateOfPosted="item.createDate"
+          :questionDesc="item.questionDesc"
+          :answerList="item.answerList"
+          :questionId="item.questionId"
+          :noOfAnswers="item.noOfAnswers"
+          :noOfLikes="item.noOfLikes"
+          :noOfFollowers="item.noOfFollowers"
+          v-on:actionReload="getData"
+          disabled
+        />
+      </div>
     </div>
+
+    <div v-if="filtered">
+      <div v-for="item in questions" :key="item.questionId">
+        <QuestionCard
+          :subject="item.subject"
+          :topic="item.topic"
+          :dateOfPosted="item.createDate"
+          :questionDesc="item.questionDesc"
+          :answerList="item.answerList"
+          :questionId="item.questionId"
+          :noOfAnswers="item.noOfAnswers"
+          :noOfLikes="item.noOfLikes"
+          :noOfFollowers="item.noOfFollowers"
+          v-on:actionReload="getData"
+          disabled
+        />
+      </div>
+    </div>
+
     <Loader v-if="showLoader" />
   </div>
 </template>
@@ -21,6 +46,7 @@
 <script>
 import Loader from "@/components/Loader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
+import FilterQuestion from "@/components/FilterQuestion.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
@@ -29,18 +55,22 @@ export default {
   components: {
     QuestionCard,
     Loader,
+    FilterQuestion,
   },
   beforeMount() {
     this.getData();
   },
   methods: {
-    like() {
-      // alert("Liked");
+    clearFilter() {
+      this.filtered = false;
+      this.nonfiltered = true;
+      this.showLoader = true;
+      this.getData();
     },
     getData() {
       var config = {
         method: "post",
-        url: "/findallquestions",
+        url: "/findallquestions/1",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
       axios(config)
@@ -49,6 +79,7 @@ export default {
           this.showLoader = false;
         })
         .catch((error) => {
+          alert(JSON.stringify(error));
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -58,10 +89,40 @@ export default {
           }
         });
     },
+    doFilter(data) {
+      this.showLoader = true;
+      this.filtered = true;
+      this.nonfiltered = false;
+      var config = {
+        method: "post",
+        url: "/findallbysubjecttopic",
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: data,
+      };
+      axios(config)
+        .then((response) => {
+          this.questions = response.data;
+          this.showLoader = false;
+        })
+        .catch((error) => {
+          alert(error);
+          window.setTimeout(() => {
+            this.sending = false;
+          }, 1500);
+          actions.errorQuestionPost(
+            error.response.data.code,
+            error.response.data.status,
+            this.$router,
+            this.$swal
+          );
+        });
+    },
   },
   data: () => ({
     questions: null,
     showLoader: true,
+    nonfiltered: true,
+    filtered: false,
   }),
 };
 </script>
