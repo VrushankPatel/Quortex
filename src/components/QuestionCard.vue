@@ -130,9 +130,12 @@
               <div v-if="item.answerFeedbackByCurrentUser">
                 <md-card-actions>
                   <div style="width:100%;float:left;padding-left:1.5%">
-                    <span
-                      style="text-transform-lowercase;float:left;"
-                    >{{item.noOfLikes}} likes {{item.noOfDislikes}} dislikes</span>
+                    <span style="text-transform-lowercase;float:left;">
+                      <span v-if="item.noOfLikes >= 0">{{item.noOfLikes}}</span>
+                      <span v-else>0</span> likes
+                      <span v-if="item.noOfDislikes >= 0">{{item.noOfDislikes}}</span>
+                      <span v-else>0</span> dislikes
+                    </span>
                   </div>
                   <md-button
                     v-if="item.answerFeedbackByCurrentUser.liked == false"
