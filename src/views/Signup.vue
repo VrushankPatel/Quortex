@@ -49,6 +49,7 @@ export default {
           );
         })
         .catch((error) => {
+          console.log(JSON.stringify(error));
           this.showLoader = false;
           actions.errorSignup(
             swal,

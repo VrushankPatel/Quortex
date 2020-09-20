@@ -52,6 +52,7 @@ export default {
         })
         .catch((error) => {
           this.showLoader = false;
+          console.log(JSON.stringify(error));
           actions.errorSignin(
             swal,
             error.response.data.code,
