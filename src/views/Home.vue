@@ -28,7 +28,7 @@
           <md-tabs class="md-primary">
             <md-tab id="tab-home" md-label="Home" @click="moveToHomePage()"></md-tab>
             <md-tab id="tab-following" md-label="Following" @click="moveToFollowingPage()"></md-tab>
-            <md-tab id="tab-answers" md-label="Answers"></md-tab>
+            <md-tab id="tab-answers" md-label="Answers" @click="moveToAnswersPage()"></md-tab>
             <md-tab id="tab-questions" md-label="Q/A" @click="moveToQuestionsPage()"></md-tab>
           </md-tabs>
         </div>
@@ -41,6 +41,7 @@
       <md-app-content>
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
+        <AnsweredByUser v-if="ifAnsweredByUser" />
         <Questions v-if="ifQuestions" />
       </md-app-content>
     </md-app>
@@ -51,6 +52,7 @@
 import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
 import Following from "@/components/Following.vue";
+import AnsweredByUser from "@/components/AnsweredByUser.vue";
 import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
 export default {
@@ -62,12 +64,14 @@ export default {
     menuVisible: false,
     ifHome: true,
     ifFollowing: false,
+    ifAnsweredByUser: false,
     ifQuestions: false,
   }),
   components: {
     HomePageDrawer,
     HomePage,
     Following,
+    AnsweredByUser,
     Questions,
   },
   methods: {
@@ -77,16 +81,25 @@ export default {
     moveToHomePage() {
       this.ifHome = true;
       this.ifFollowing = false;
+      this.ifAnsweredByUser = false;
       this.ifQuestions = false;
     },
     moveToFollowingPage() {
       this.ifHome = false;
       this.ifFollowing = true;
+      this.ifAnsweredByUser = false;
+      this.ifQuestions = false;
+    },
+    moveToAnswersPage() {
+      this.ifHome = false;
+      this.ifFollowing = false;
+      this.ifAnsweredByUser = true;
       this.ifQuestions = false;
     },
     moveToQuestionsPage() {
       this.ifHome = false;
       this.ifFollowing = false;
+      this.ifAnsweredByUser = false;
       this.ifQuestions = true;
     },
     logout() {

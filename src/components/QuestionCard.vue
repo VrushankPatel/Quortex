@@ -46,27 +46,29 @@
             </md-button>
           </div>
           <div style="width:100%;float:left;padding-left:1.5%">
-            <span
-              style="text-transform-lowercase;float:left;"
-            >{{noOfLikes}} Likes {{noOfFollowers}} Followers</span>
+            <span style="text-transform-lowercase;float:left;">
+              <span v-if="noOfLikes">{{noOfLikes}}</span>
+              <span v-else>0</span>
+              Likes {{noOfFollowers}} Followers
+            </span>
           </div>
           <md-button style="color:white" @click="answerTheQuestion({questionId})">Answer</md-button>
           <div v-if="item.followerByCurrentUser">
             <md-button
               style="color:white"
               v-if="!item.followerByCurrentUser.followed == true"
-              @click="followTheQuestion({questionId},true)"
+              @click="item.followerByCurrentUser.followed = !item.followerByCurrentUser.followed;followUnfollowQuestion({questionId}, true)"
             >Follow</md-button>
             <md-button
               style="color:white"
               v-else
-              @click="unfollowTheQuestion({questionId}, false)"
+              @click="item.followerByCurrentUser.followed = !item.followerByCurrentUser.followed;followUnfollowQuestion({questionId}, false)"
             >Following</md-button>
           </div>
           <div v-else>
             <md-button
               style="color:white"
-              @click="item['followerByCurrentUser'] = {'followed':true};followTheQuestion({questionId})"
+              @click="item['followerByCurrentUser'] = {'followed':true};followUnfollowQuestion({questionId},true)"
             >Follow</md-button>
           </div>
 
@@ -215,8 +217,6 @@ export default {
     showFailureSnackBar: false,
     showInvalidBar: false,
     showAnswers: false,
-    following: false,
-    follow: true,
   }),
   methods: {
     likeAnswer(questionId, answerId) {
@@ -298,6 +298,7 @@ export default {
       };
       axios(config)
         .then((response) => {
+          console.log(JSON.stringify(response));
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
@@ -308,12 +309,14 @@ export default {
             }, 1500);
             this.$emit("actionReload");
           } else {
+            console.log(JSON.stringify(response));
             window.setTimeout(() => {
               this.showFailureSnackBar = true;
             }, 1500);
           }
         })
         .catch((error) => {
+          console.log(JSON.stringify(error));
           window.setTimeout(() => {
             this.showFailureSnackBar = true;
           }, 1500);
@@ -330,9 +333,8 @@ export default {
       this.showDialog = false;
       this.answer = "";
     },
-    followTheQuestion(questionId, follow) {
+    followUnfollowQuestion(questionId, follow) {
       questionId = questionId["questionId"];
-      console.log(questionId);
       const data = {
         userId: localStorage.getItem("questauserId"),
         questionId: this.questionId,
@@ -349,22 +351,13 @@ export default {
       axios(config)
         .then((response) => {
           console.log(JSON.stringify(response));
-          var result = actions.successQuestionPost(
-            response.data.code,
-            response.data.status
-          );
         })
         .catch((error) => {
+          console.log(error);
           window.setTimeout(() => {
             console.log("failure");
           }, 1500);
         });
-    },
-    unfollowTheQuestion(questionId) {
-      questionId = questionId["questionId"];
-      console.log(questionId);
-      this.follow = !this.follow;
-      this.following = !this.following;
     },
   },
   props: {

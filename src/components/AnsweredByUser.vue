@@ -52,7 +52,7 @@ import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 export default {
-  name: "Following",
+  name: "AnsweredByUser",
   components: {
     QuestionCard,
     Loader,
@@ -71,7 +71,7 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: "/findallbyfollower/" + utilities.getUserId(this.$router),
+        url: "/findallbyanswer/" + utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
       axios(config)
