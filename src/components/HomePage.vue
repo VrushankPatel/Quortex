@@ -24,6 +24,7 @@
     <div v-if="filtered">
       <div v-for="item in questions" :key="item.questionId">
         <QuestionCard
+          :item="item"
           :subject="item.subject"
           :topic="item.topic"
           :dateOfPosted="item.createDate"
@@ -70,7 +71,7 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: "/findallquestions/1",
+        url: "/findallquestions/" + utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
       axios(config)
@@ -79,7 +80,6 @@ export default {
           this.showLoader = false;
         })
         .catch((error) => {
-          alert(JSON.stringify(error));
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -105,7 +105,6 @@ export default {
           this.showLoader = false;
         })
         .catch((error) => {
-          alert(error);
           window.setTimeout(() => {
             this.sending = false;
           }, 1500);

@@ -51,31 +51,43 @@
             >{{noOfLikes}} Likes {{noOfFollowers}} Followers</span>
           </div>
           <md-button style="color:white" @click="answerTheQuestion({questionId})">Answer</md-button>
-          <md-button
-            style="color:white"
-            v-if="follow"
-            @click="followTheQuestion({questionId})"
-          >Follow</md-button>
-          <md-button
-            style="color:white"
-            v-if="following"
-            @click="unfollowTheQuestion({questionId})"
-          >Following</md-button>
+          <div v-if="item.followerByCurrentUser">
+            <md-button
+              style="color:white"
+              v-if="!item.followerByCurrentUser.followed == true"
+              @click="followTheQuestion({questionId},true)"
+            >Follow</md-button>
+            <md-button
+              style="color:white"
+              v-else
+              @click="unfollowTheQuestion({questionId}, false)"
+            >Following</md-button>
+          </div>
+          <div v-else>
+            <md-button
+              style="color:white"
+              @click="item['followerByCurrentUser'] = {'followed':true};followTheQuestion({questionId})"
+            >Follow</md-button>
+          </div>
 
           <div v-if="item.followerByCurrentUser">
             <md-button
               v-bind:id="{questionId}"
-              v-if="item.followerByCurrentUser.liked"
-              @click="dislikeQuestion({questionId})"
+              v-if="item.followerByCurrentUser.liked == true"
+              @click="item.followerByCurrentUser.liked = !item.followerByCurrentUser.liked;dislikeQuestion({questionId})"
             >
               <md-icon style="color:skyblue">thumb_up</md-icon>
             </md-button>
-            <md-button v-else v-bind:class="questionId" @click="likeQuestion({questionId})">
+            <md-button
+              v-else
+              v-bind:class="questionId"
+              @click="item.followerByCurrentUser.liked = !item.followerByCurrentUser.liked;likeQuestion({questionId})"
+            >
               <md-icon>thumb_up</md-icon>
             </md-button>
           </div>
           <div v-else>
-            <md-button>
+            <md-button @click="item['followerByCurrentUser'] = {'liked':true}">
               <md-icon>thumb_up</md-icon>
             </md-button>
           </div>
@@ -121,16 +133,22 @@
                     >{{item.noOfLikes}} likes {{item.noOfDislikes}} dislikes</span>
                   </div>
                   <md-button
-                    @click="item.answerFeedbackByCurrentUser.liked = !item.answerFeedbackByCurrentUser.liked"
+                    v-if="item.answerFeedbackByCurrentUser.liked == false"
+                    @click="item.answerFeedbackByCurrentUser.liked = true;item.noOfLikes++;item.noOfDislikes--;likeAnswer(questionId,item.answerId);"
                   >
-                    <md-icon v-if="item.answerFeedbackByCurrentUser.liked == false">thumb_up</md-icon>
-                    <md-icon v-else style="color:blue">thumb_up</md-icon>
+                    <md-icon>thumb_up</md-icon>
+                  </md-button>
+                  <md-button v-else @click="item.answerFeedbackByCurrentUser.liked = true;">
+                    <md-icon style="color:blue">thumb_up</md-icon>
                   </md-button>
                   <md-button
-                    @click="item.answerFeedbackByCurrentUser.liked = !item.answerFeedbackByCurrentUser.liked"
+                    v-if="item.answerFeedbackByCurrentUser.liked == true"
+                    @click="item.answerFeedbackByCurrentUser.liked = false;item.noOfLikes--;item.noOfDislikes++;dislikeAnswer(questionId,item.answerId);"
                   >
-                    <md-icon v-if="item.answerFeedbackByCurrentUser.liked == true">thumb_down</md-icon>
-                    <md-icon v-else style="color:blue">thumb_down</md-icon>
+                    <md-icon>thumb_down</md-icon>
+                  </md-button>
+                  <md-button v-else @click="item.answerFeedbackByCurrentUser.liked = false;">
+                    <md-icon style="color:blue">thumb_down</md-icon>
                   </md-button>
                 </md-card-actions>
               </div>
@@ -141,10 +159,14 @@
                       style="text-transform-lowercase;float:left;"
                     >{{item.noOfLikes}} likes {{item.noOfDislikes}} dislikes</span>
                   </div>
-                  <md-button>
+                  <md-button
+                    @click="item.answerFeedbackByCurrentUser = {'liked':true,'unliked':false};item.noOfLikes++;item.noOfDislikes--;likeAnswer(questionId,item.answerId);"
+                  >
                     <md-icon>thumb_up</md-icon>
                   </md-button>
-                  <md-button>
+                  <md-button
+                    @click="item.answerFeedbackByCurrentUser = {'liked':false,'unliked':true};item.noOfLikes--;item.noOfDislikes++;dislikeAnswer(questionId,item.answerId);"
+                  >
                     <md-icon>thumb_down</md-icon>
                   </md-button>
                 </md-card-actions>
@@ -197,13 +219,50 @@ export default {
     follow: true,
   }),
   methods: {
+    likeAnswer(questionId, answerId) {
+      this.likeDislikeFunction(true, questionId, answerId);
+    },
+    dislikeAnswer(questionId, answerId) {
+      this.likeDislikeFunction(false, questionId, answerId);
+    },
+    likeDislikeFunction(like, questionId, answerId) {
+      var config = {
+        method: "post",
+        url: "/createfeedback",
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: {
+          userId: utilities.getUserId(this.$router),
+          questionId: questionId,
+          answerId: answerId,
+          liked: like,
+          unliked: !like,
+          reportDesc: "nothing much",
+        },
+      };
+      console.log(config);
+      axios(config)
+        .then((response) => {
+          console.log(JSON.stringify(response));
+          var result = actions.successQuestionPost(
+            response.data.code,
+            response.data.status
+          );
+          console.log(result);
+        })
+        .catch((error) => {
+          console.log(JSON.stringify(error));
+          var result = actions.successQuestionPost(
+            error.data.code,
+            error.data.status
+          );
+          console.log(result);
+        });
+    },
     likeQuestion(questionId) {
-      questionId = questionId["questionId"];
-      alert("like question" + questionId);
+      console.log(questionId);
     },
     dislikeQuestion(questionId) {
-      questionId = questionId["questionId"];
-      alert("dislike question" + questionId);
+      console.log(questionId);
     },
     toggleAnswers() {
       this.showAnswers = !this.showAnswers;
@@ -271,51 +330,35 @@ export default {
       this.showDialog = false;
       this.answer = "";
     },
-    followTheQuestion(questionId) {
+    followTheQuestion(questionId, follow) {
       questionId = questionId["questionId"];
       console.log(questionId);
-      this.follow = !this.follow;
-      this.following = !this.following;
-      // const data = {
-      //   userId: localStorage.getItem("questauserId"),
-      //   questionId: this.questionId,
-      // };
-      // var config = {
-      //   method: "post",
-      //   url: "/createfollower",
-      //   headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
-      //   data: data,
-      // };
-      // axios(config)
-      //   .then((response) => {
-      //     var result = actions.successQuestionPost(
-      //       response.data.code,
-      //       response.data.status
-      //     );
-      //     if (result == true) {
-      //       window.setTimeout(() => {
-      //         // this.showSuccessSnackBar = true;
-      //         // TODO show following button
-      //       }, 1500);
-      //       // this.$emit("actionReload");
-      //     } else {
-      //       window.setTimeout(() => {
-      //         // this.showFailureSnackBar = true;
-      //         console.log("failure");
-      //       }, 1500);
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     window.setTimeout(() => {
-      //       console.log("failure");
-      //     }, 1500);
-      //     actions.errorQuestionPost(
-      //       error.response.data.code,
-      //       error.response.data.status,
-      //       this.$router,
-      //       this.$swal
-      //     );
-      //   });
+      const data = {
+        userId: localStorage.getItem("questauserId"),
+        questionId: this.questionId,
+        followed: follow,
+      };
+      var config = {
+        method: "post",
+        url: "/createfollower",
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: data,
+      };
+      console.log(config);
+      console.log(data);
+      axios(config)
+        .then((response) => {
+          console.log(JSON.stringify(response));
+          var result = actions.successQuestionPost(
+            response.data.code,
+            response.data.status
+          );
+        })
+        .catch((error) => {
+          window.setTimeout(() => {
+            console.log("failure");
+          }, 1500);
+        });
     },
     unfollowTheQuestion(questionId) {
       questionId = questionId["questionId"];
