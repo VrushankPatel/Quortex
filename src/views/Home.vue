@@ -17,7 +17,7 @@
                 <md-icon md-menu-trigger>more_vert</md-icon>
               </md-button>
               <md-menu-content>
-                <md-menu-item @click="alert('hello')">Account Settings</md-menu-item>
+                <md-menu-item @click="EditProfileDialog()">Edit Profile</md-menu-item>
                 <md-menu-item @click="logout()">Logout</md-menu-item>
               </md-menu-content>
             </md-menu>
@@ -45,12 +45,16 @@
         <Questions v-if="ifQuestions" />
       </md-app-content>
     </md-app>
+    <md-dialog :md-active.sync="showDialog">
+      <EditProfileField v-on:editProfile="EditProfileDialog()" />
+    </md-dialog>
   </div>
 </template>
 
 <script>
 import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
+import EditProfileField from "@/components/EditProfileField.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
 import Questions from "@/components/Questions.vue";
@@ -66,6 +70,17 @@ export default {
     ifFollowing: false,
     ifAnsweredByUser: false,
     ifQuestions: false,
+    showDialog: false,
+    form: {
+      firstName: null,
+      lastName: null,
+      gender: null,
+      age: null,
+      email: null,
+    },
+    userSaved: false,
+    sending: false,
+    lastUser: null,
   }),
   components: {
     HomePageDrawer,
@@ -73,6 +88,7 @@ export default {
     Following,
     AnsweredByUser,
     Questions,
+    EditProfileField,
   },
   methods: {
     temp() {
@@ -105,6 +121,9 @@ export default {
     logout() {
       actions.fireLoggedOut(this.$swal, this.$router);
     },
+    EditProfileDialog() {
+      this.showDialog = true;
+    },
   },
 };
 </script>
@@ -119,5 +138,10 @@ export default {
 .md-drawer {
   width: 230px;
   max-width: calc(100vw - 125px);
+}
+.md-dialog ::v-deep .md-dialog-container {
+  border-radius: 0.5em;
+  max-height: 900px;
+  background-color: transparent;
 }
 </style>
