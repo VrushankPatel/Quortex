@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="height:90px">
     <md-dialog :md-active.sync="showDialog">
       <EditProfileField />
     </md-dialog>
@@ -27,13 +27,4 @@ export default {
 };
 </script>
 <style scoped>
-.md-dialog ::v-deep .md-dialog-container {
-  background-color: transparent;
-}
-.md-progress-bar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-}
 </style>

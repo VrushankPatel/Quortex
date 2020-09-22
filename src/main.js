@@ -16,6 +16,7 @@ Vue.use(VueMaterial)
 Vue.use(VueFormulate);
 Vue.use(VueSweetalert2);
 Vue.config.silent = true
+
 new Vue({
   router,
   render: h => h(App),

@@ -13,8 +13,8 @@
 
           <div class="md-toolbar-section-end">
             <md-menu md-direction="bottom-start">
-              <md-button>
-                <md-icon md-menu-trigger>more_vert</md-icon>
+              <md-button md-menu-trigger>
+                <md-icon>more_vert</md-icon>
               </md-button>
               <md-menu-content>
                 <md-menu-item @click="EditProfileDialog()">Edit Profile</md-menu-item>
