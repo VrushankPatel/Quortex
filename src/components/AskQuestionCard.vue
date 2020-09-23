@@ -153,7 +153,7 @@ export default {
       const data = JSON.stringify(trimmedFormValues);
       var config = {
         method: "post",
-        url: "/createquestion",
+        url: properties.baseUrl() + "/createquestion",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };

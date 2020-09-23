@@ -212,6 +212,7 @@
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import properties from "@/common/properties.js";
 export default {
   data: () => ({
     showDialog: false,
@@ -231,7 +232,7 @@ export default {
     likeDislikeFunction(like, questionId, answerId) {
       var config = {
         method: "post",
-        url: "/createfeedback",
+        url: properties.baseUrl() + "/createfeedback",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           userId: utilities.getUserId(this.$router),
@@ -295,7 +296,7 @@ export default {
       };
       var config = {
         method: "post",
-        url: "/createanswer",
+        url: properties.baseUrl() + "/createanswer",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
@@ -345,7 +346,7 @@ export default {
       };
       var config = {
         method: "post",
-        url: "/createfollower",
+        url: properties.baseUrl() + "/createfollower",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };

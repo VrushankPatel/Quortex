@@ -51,6 +51,7 @@ import FilterQuestion from "@/components/FilterQuestion.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import properties from "@/common/properties.js";
 export default {
   name: "HomePage",
   components: {
@@ -71,15 +72,20 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: "/findallquestions/" + utilities.getUserId(this.$router),
+        url:
+          properties.baseUrl() +
+          "/findallquestions/" +
+          utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
+      console.log(JSON.stringify(config));
       axios(config)
         .then((response) => {
           this.questions = response.data;
           this.showLoader = false;
         })
         .catch((error) => {
+          alert(error);
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -95,10 +101,11 @@ export default {
       this.nonfiltered = false;
       var config = {
         method: "post",
-        url: "/findallbysubjecttopic",
+        url: properties.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
+      console.log(config);
       axios(config)
         .then((response) => {
           this.questions = response.data;

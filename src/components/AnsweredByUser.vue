@@ -51,6 +51,7 @@ import QuestionCard from "@/components/QuestionCard.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import properties from "@/common/properties.js";
 export default {
   name: "AnsweredByUser",
   components: {
@@ -71,7 +72,10 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: "/findallbyanswer/" + utilities.getUserId(this.$router),
+        url:
+          properties.baseUrl() +
+          "/findallbyanswer/" +
+          utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
       axios(config)
@@ -95,7 +99,7 @@ export default {
       this.nonfiltered = false;
       var config = {
         method: "post",
-        url: "/findallbysubjecttopic",
+        url: properties.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
