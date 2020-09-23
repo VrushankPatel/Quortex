@@ -21,7 +21,7 @@
           validation="required"
         />
       </div>
-      <FormulateInput class="submit" type="submit" label="Register" />
+      <FormulateInput class="submit" type="submit" label="Signin" />
     </FormulateForm>
     <div class="text-center">
       Don't have an account?
