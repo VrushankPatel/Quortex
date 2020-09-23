@@ -17,7 +17,9 @@ export default {
         if (actions.checkSignedIn()) {
             return {
                 "Authorization": "Bearer " + localStorage.getItem('questatoken'),
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
             }
         } else {
             actions.fireLoggedOut(swal, router);
