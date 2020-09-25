@@ -1,12 +1,13 @@
 <template>
   <div class="signup-form">
+  <Loader v-if="showLoader" />
     <FormulateForm @submit="signUp" class="login-form">
       <h2>Questa</h2>
       <center>
         <u>
           <p style="font-size:120%;color:grey">Edit Profile</p>
         </u>
-      </center>
+      </center>      
       <div class="double-wide">
         <FormulateInput
           v-model="formData.firstName"
@@ -109,7 +110,7 @@
           @click="togglePasswordFields()"
           label="Keep password as it is"
         />
-        <FormulateInput style="padding-left:32%" type="submit" label="Sign up" />
+        <div><FormulateInput  type="submit" label="Apply" /></div>
       </div>
     </FormulateForm>
   </div>
@@ -117,15 +118,27 @@
 
 <script>
 import properties from "@/common/properties.js";
-
+import axios from "axios";
+import utilities from "@/common/utilities.js";
+import Loader from "@/components/Loader.vue";
 export default {
   name: "EditProfileField",
+  components: {    
+    Loader,
+  },
   data: () => ({
-    formData: {},
+    formData: {
+      
+    },
+    showLoader:true,
     changePassword: false,
     baseUrl: properties.baseUrl(),
     toggler: true,
   }),
+  beforeMount() {
+    this.getUserData();
+  },
+  
   methods: {
     signUp() {
       console.log("here we'll call api");
@@ -134,6 +147,30 @@ export default {
       this.changePassword = !this.changePassword;
       this.toggler = !this.toggler;
     },
+    getUserData(){
+      var config = {
+        method: "post",
+        url: properties.baseUrl() + "/getuser/" + utilities.getUserId(this.$router),
+        headers: utilities.getAuthJSONHeader()
+      };
+      
+    axios(config)
+        .then((response) => {
+          this.showLoader = false;                              
+          this.formData['firstName'] = response.data.firstName;
+          this.formData['lastName'] = response.data.lastName;
+          this.formData['email'] = response.data.email;
+          this.formData['birthdate'] = response.data.birthdate;
+          this.formData['grade'] = response.data.grade;
+          this.formData['school'] = response.data.school;
+          this.formData['country'] = response.data.country;
+          this.formData['password'] = response.data.country;          
+        })
+        .catch((error) => {
+          this.showLoader = false;
+          console.log(JSON.stringify(error));          
+        });
+    }
   },
 };
 </script>

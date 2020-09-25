@@ -17,8 +17,42 @@
                   md-dense
                   :disabled="sending"
                 >
-                  <md-option value="Calculas">Calculas</md-option>
-                  <md-option value="Algebra">Algebra</md-option>
+                  <md-option value="1"
+                    >Literature and Writing (9th grade))</md-option
+                  >
+                  <md-option value="2"
+                    >World Literature and Writing (10th grade)
+                  </md-option>
+                  <md-option value="3"
+                    >American Literature and Writing (Regular and Honors)
+                  </md-option>
+                  <md-option value="4">Algebra 1 </md-option>
+                  <md-option value="5"
+                    >Geometry (Regular and Enriched)
+                  </md-option>
+                  <md-option value="6"
+                    >Algebra 2 (With or without trigonometry)
+                  </md-option>
+                  <md-option value="7"
+                    >Pre-Calculus (Regular and Honors)
+                  </md-option>
+                  <md-option value="8">AP®️ Calculus AB </md-option>
+                  <md-option value="9">AP®️ Calculus BC </md-option>
+                  <md-option value="10">AP®️ Statistics</md-option>
+                  <md-option value="11">Economics</md-option>
+                  <md-option value="12">Spanish 1 </md-option>
+                  <md-option value="13">Spanish 2 </md-option>
+                  <md-option value="14">Spanish 3 </md-option>
+                  <md-option value="15">Biology </md-option>
+                  <md-option value="16"
+                    >Chemistry (Regular and Honors)
+                  </md-option>
+                  <md-option value="17">AP®️ Physics I </md-option>
+                  <md-option value="18"
+                    >World Core History (10th grade)
+                  </md-option>
+                  <md-option value="19">AP®️ World History </md-option>
+                  <md-option value="20">AP®️ US History</md-option>
                 </md-select>
                 <span class="md-error">The Subject is required</span>
               </md-field>
@@ -27,9 +61,18 @@
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('topic')">
                 <label for="topic">Topic</label>
-                <md-input name="topic" id="topic" v-model="form.topic" :disabled="sending" />
-                <span class="md-error" v-if="!$v.form.topic.required">The topic is required</span>
-                <span class="md-error" v-else-if="!$v.form.topic.minlength">Invalid topic.</span>
+                <md-input
+                  name="topic"
+                  id="topic"
+                  v-model="form.topic"
+                  :disabled="sending"
+                />
+                <span class="md-error" v-if="!$v.form.topic.required"
+                  >The topic is required</span
+                >
+                <span class="md-error" v-else-if="!$v.form.topic.minlength"
+                  >Invalid topic.</span
+                >
               </md-field>
             </div>
           </div>
@@ -38,18 +81,18 @@
         <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
         <md-card-actions>
-          <md-button type="submit" class="md-primary" :disabled="sending">Submit</md-button>
+          <md-button type="submit" class="md-primary" :disabled="sending"
+            >Submit</md-button
+          >
         </md-card-actions>
       </md-card>
 
-      <md-snackbar
-        :md-position="position"
-        :md-active.sync="showSuccessSnackBar"
-      >The question posted successfully!</md-snackbar>
-      <md-snackbar
-        :md-position="position"
-        :md-active.sync="showFailureSnackBar"
-      >Error occured, Unable to post question</md-snackbar>
+      <md-snackbar :md-position="position" :md-active.sync="showSuccessSnackBar"
+        >The question posted successfully!</md-snackbar
+      >
+      <md-snackbar :md-position="position" :md-active.sync="showFailureSnackBar"
+        >Error occured, Unable to post question</md-snackbar
+      >
     </form>
   </div>
 </template>
