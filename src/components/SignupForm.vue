@@ -2,7 +2,9 @@
   <div class="signup-form">
     <FormulateForm @submit="signUp" class="login-form">
       <h2>Questa</h2>
-      <p class="hint-text">Create your account. It's free and only takes a minute.</p>
+      <p class="hint-text">
+        Create your account. It's free and only takes a minute.
+      </p>
       <div class="double-wide">
         <FormulateInput
           v-model="formData.firstName"
@@ -71,13 +73,15 @@
       />
       <div class="double-wide">
         <FormulateInput
-          v-model="formData.password"
+          id="pwdfield"
           name="password"
           type="password"
           label="Password"
           placeholder="Your password"
           validation="required"
         />
+        <!-- below line was for testing in password field -->
+        <!-- v-model="formData.password" -->
         <FormulateInput
           name="password_confirm"
           type="password"
@@ -109,6 +113,20 @@ export default {
   }),
   methods: {
     signUp() {
+      let pwdRegEx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+      let password = document.getElementById("pwdfield").value;
+      if (!pwdRegEx.test(password)) {
+        this.$swal.fire({
+          icon: "error",
+          title: "Oops..",
+          text:
+            "Password should be of eight characters and must contain one uppercase, one lowercase, one number and one special character.",
+        });
+        return;
+      }
+
+      this.formData["password"] = password;
+      // console.log(this.formData);
       this.$emit("actionSignUp", this.formData, this.$swal, this.$router);
     },
   },

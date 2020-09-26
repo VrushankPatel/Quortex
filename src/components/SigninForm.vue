@@ -11,9 +11,10 @@
           placeholder="Email address"
           validation="email"
         />
-
+        <!-- below line was for testing in password field -->
+        <!-- v-model="formValues.password" -->
         <FormulateInput
-          v-model="formValues.password"
+          id="pwdfield"
           name="password"
           type="password"
           label="Password"
@@ -41,6 +42,7 @@ export default {
   }),
   methods: {
     handleSubmit() {
+      this.formValues["password"] = document.getElementById("pwdfield").value;
       this.$emit("actionSignIn", this.formValues, this.$swal, this.$router);
     },
   },
