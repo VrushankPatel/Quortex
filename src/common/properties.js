@@ -27,4 +27,5 @@ export default {
 		19: "AP®️ World History ",
 		20: "AP®️ US History",
 	},
+	logger: true,
 };

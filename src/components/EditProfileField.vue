@@ -1,13 +1,13 @@
 <template>
   <div class="signup-form">
-  <Loader v-if="showLoader" />
-    <FormulateForm @submit="signUp" class="login-form">
+    <Loader v-if="showLoader" />
+    <FormulateForm @submit="editProfile" class="login-form">
       <h2>Questa</h2>
       <center>
         <u>
-          <p style="font-size:120%;color:grey">Edit Profile</p>
+          <p style="font-size: 120%; color: grey">Edit Profile</p>
         </u>
-      </center>      
+      </center>
       <div class="double-wide">
         <FormulateInput
           v-model="formData.firstName"
@@ -80,8 +80,8 @@
       />
       <div class="double-wide" v-if="changePassword">
         <FormulateInput
-          v-model="formData.password"
           name="password"
+          id="passwordConf"
           type="password"
           label="Password"
           placeholder="Your password"
@@ -110,7 +110,7 @@
           @click="togglePasswordFields()"
           label="Keep password as it is"
         />
-        <div><FormulateInput  type="submit" label="Apply" /></div>
+        <div><FormulateInput type="submit" label="Apply" /></div>
       </div>
     </FormulateForm>
   </div>
@@ -119,18 +119,17 @@
 <script>
 import properties from "@/common/properties.js";
 import axios from "axios";
+import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import Loader from "@/components/Loader.vue";
 export default {
   name: "EditProfileField",
-  components: {    
+  components: {
     Loader,
   },
   data: () => ({
-    formData: {
-      
-    },
-    showLoader:true,
+    formData: {},
+    showLoader: true,
     changePassword: false,
     baseUrl: properties.baseUrl(),
     toggler: true,
@@ -138,39 +137,47 @@ export default {
   beforeMount() {
     this.getUserData();
   },
-  
+
   methods: {
-    signUp() {
-      console.log("here we'll call api");
+    editProfile() {
+      const password =
+        this.changePassword == true
+          ? document.getElementById("passwordConf").value
+          : "";
+      alert("edit profile" + password);
     },
     togglePasswordFields() {
       this.changePassword = !this.changePassword;
       this.toggler = !this.toggler;
     },
-    getUserData(){
+    getUserData() {
       var config = {
         method: "post",
-        url: properties.baseUrl() + "/getuser/" + utilities.getUserId(this.$router),
-        headers: utilities.getAuthJSONHeader()
+        url:
+          properties.baseUrl() +
+          "/getuser/" +
+          utilities.getUserId(this.$router),
+        headers: utilities.getAuthJSONHeader(),
       };
-      
-    axios(config)
+
+      axios(config)
         .then((response) => {
-          this.showLoader = false;                              
-          this.formData['firstName'] = response.data.firstName;
-          this.formData['lastName'] = response.data.lastName;
-          this.formData['email'] = response.data.email;
-          this.formData['birthdate'] = response.data.birthdate;
-          this.formData['grade'] = response.data.grade;
-          this.formData['school'] = response.data.school;
-          this.formData['country'] = response.data.country;
-          this.formData['password'] = response.data.country;          
+          this.showLoader = false;
+          this.formData["firstName"] = response.data.firstName;
+          this.formData["lastName"] = response.data.lastName;
+          this.formData["email"] = response.data.email;
+          this.formData["birthdate"] = response.data.birthdate;
+          this.formData["grade"] = response.data.grade;
+          this.formData["school"] = response.data.school;
+          this.formData["country"] = response.data.country;
+          this.formData["password"] = response.data.country;
         })
         .catch((error) => {
+          console.log(error);
           this.showLoader = false;
-          console.log(JSON.stringify(error));          
+          actions.fireLoggedOut(this.$swal, this.$router);
         });
-    }
+    },
   },
 };
 </script>

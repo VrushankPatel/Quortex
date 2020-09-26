@@ -1,42 +1,52 @@
 <template>
-  <div style="min-height:650px">
+  <div style="min-height: 650px">
     <Loader v-if="showLoader" />
     <!--<FilterQuestion v-on:doFilter="doFilter" v-on:clearFilter="clearFilter" />-->
     <div v-if="nonfiltered">
-      <div v-for="item in questions" :key="item.questionId">
-        <QuestionCard
-          :item="item"
-          :subject="item.subject"
-          :topic="item.topic"
-          :dateOfPosted="item.createDate"
-          :questionDesc="item.questionDesc"
-          :answerList="item.answerList"
-          :questionId="item.questionId"
-          :noOfAnswers="item.noOfAnswers"
-          :noOfLikes="item.noOfLikes"
-          :noOfFollowers="item.noOfFollowers"
-          v-on:actionReload="getData"
-          disabled
-        />
+      <div v-if="questions.length > 0">
+        <div v-for="item in questions" :key="item.questionId">
+          <QuestionCard
+            :item="item"
+            :subject="item.subject"
+            :topic="item.topic"
+            :dateOfPosted="item.createDate"
+            :questionDesc="item.questionDesc"
+            :answerList="item.answerList"
+            :questionId="item.questionId"
+            :noOfAnswers="item.noOfAnswers"
+            :noOfLikes="item.noOfLikes"
+            :noOfFollowers="item.noOfFollowers"
+            v-on:actionReload="getData"
+            disabled
+          />
+        </div>
+      </div>
+      <div v-else>
+        <DataNotFound message="You're not following any question." />
       </div>
     </div>
 
     <div v-if="filtered">
-      <div v-for="item in questions" :key="item.questionId">
-        <QuestionCard
-          :item="item"
-          :subject="item.subject"
-          :topic="item.topic"
-          :dateOfPosted="item.createDate"
-          :questionDesc="item.questionDesc"
-          :answerList="item.answerList"
-          :questionId="item.questionId"
-          :noOfAnswers="item.noOfAnswers"
-          :noOfLikes="item.noOfLikes"
-          :noOfFollowers="item.noOfFollowers"
-          v-on:actionReload="getData"
-          disabled
-        />
+      <div v-if="questions.length > 0">
+        <div v-for="item in questions" :key="item.questionId">
+          <QuestionCard
+            :item="item"
+            :subject="item.subject"
+            :topic="item.topic"
+            :dateOfPosted="item.createDate"
+            :questionDesc="item.questionDesc"
+            :answerList="item.answerList"
+            :questionId="item.questionId"
+            :noOfAnswers="item.noOfAnswers"
+            :noOfLikes="item.noOfLikes"
+            :noOfFollowers="item.noOfFollowers"
+            v-on:actionReload="getData"
+            disabled
+          />
+        </div>
+      </div>
+      <div v-else>
+        <DataNotFound message="You're not following any question." />
       </div>
     </div>
 
@@ -47,6 +57,7 @@
 <script>
 import Loader from "@/components/Loader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
+import DataNotFound from "@/components/DataNotFound.vue";
 // import FilterQuestion from "@/components/FilterQuestion.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
@@ -57,6 +68,7 @@ export default {
   components: {
     QuestionCard,
     Loader,
+    DataNotFound,
     // FilterQuestion,
   },
   beforeMount() {

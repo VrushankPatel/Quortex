@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height:650px">
+  <div style="min-height: 650px">
     <Loader v-if="showLoader" />
     <FilterQuestion v-on:doFilter="doFilter" v-on:clearFilter="clearFilter" />
     <div v-if="nonfiltered">
@@ -78,14 +78,12 @@ export default {
           utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
-      console.log(JSON.stringify(config));
       axios(config)
         .then((response) => {
           this.questions = response.data;
           this.showLoader = false;
         })
         .catch((error) => {
-          alert(error);
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -105,7 +103,6 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      console.log(config);
       axios(config)
         .then((response) => {
           this.questions = response.data;

@@ -340,7 +340,6 @@ export default {
   }),
   methods: {
     getSubjectFromCode(code) {
-      console.log(this.subjectByCodes[code.subject]);
       return this.subjectByCodes[code.subject];
     },
     likeAnswer(questionId, answerId) {
@@ -363,10 +362,9 @@ export default {
           reportDesc: "nothing much",
         },
       };
-      console.log(config);
+
       axios(config)
         .then((response) => {
-          console.log(JSON.stringify(response));
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
