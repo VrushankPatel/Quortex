@@ -1,7 +1,7 @@
 <template>
   <div>
     <form novalidate @submit.prevent="validateUser">
-      <md-card class="md-layout-item md-size-95 md-small-size-95">
+      <md-card class="md-layout-item md-size-100 md-small-size-100">
         <md-card-header>
           <div class="md-title">
             Didn't find your question? ask your question here..
@@ -218,6 +218,7 @@ export default {
               this.sending = false;
             }, 1500);
             this.clearForm();
+            this.$emit("actionReload");
           } else {
             window.setTimeout(() => {
               this.showFailureSnackBar = true;
