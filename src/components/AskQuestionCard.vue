@@ -108,10 +108,10 @@
       </md-card>
 
       <md-snackbar :md-position="position" :md-active.sync="showSuccessSnackBar"
-        >The question posted successfully!</md-snackbar
+        >Your question has been submitted!</md-snackbar
       >
       <md-snackbar :md-position="position" :md-active.sync="showFailureSnackBar"
-        >Error occured, Unable to post question</md-snackbar
+        >Error occured, Unable to submit question</md-snackbar
       >
     </form>
   </div>

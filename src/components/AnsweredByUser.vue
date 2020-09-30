@@ -1,31 +1,31 @@
 <template>
-	<div style="min-height: 650px">
-		<div v-if="showLoader">
-			<md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
-			<h4>Loading Data</h4>
-		</div>
+  <div style="min-height: 650px">
+    <div v-if="showLoader">
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+      <h4>Loading Data</h4>
+    </div>
 
-		<div v-for="item in questions" :key="item.questionId">
-			<QuestionCard
-				:item="item"
-				:subject="item.subject"
-				:topic="item.topic"
-				:dateOfPosted="item.createDate"
-				:questionDesc="item.questionDesc"
-				:answerList="item.answerList"
-				:questionId="item.questionId"
-				:noOfAnswers="item.noOfAnswers"
-				:noOfLikes="item.noOfLikes"
-				:noOfFollowers="item.noOfFollowers"
-				v-on:actionReload="getData"
-				disabled
-			/>
-		</div>
+    <div v-for="item in questions" :key="item.questionId">
+      <QuestionCard
+        :item="item"
+        :subject="item.subject"
+        :topic="item.topic"
+        :dateOfPosted="item.createDate"
+        :questionDesc="item.questionDesc"
+        :answerList="item.answerList"
+        :questionId="item.questionId"
+        :noOfAnswers="item.noOfAnswers"
+        :noOfLikes="item.noOfLikes"
+        :noOfFollowers="item.noOfFollowers"
+        v-on:actionReload="getData"
+        disabled
+      />
+    </div>
 
-		<div v-if="dataNotFound">
-			<DataNotFound message="You haven't answered any question." />
-		</div>
-	</div>
+    <div v-if="dataNotFound">
+      <DataNotFound message="You haven not answered any question." />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -36,55 +36,55 @@ import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import properties from "@/common/properties.js";
 export default {
-	name: "AnsweredByUser",
-	components: {
-		QuestionCard,
-		DataNotFound,
-	},
-	beforeMount() {
-		this.getData();
-	},
-	methods: {
-		clearFilter() {
-			this.filtered = false;
-			this.nonfiltered = true;
-			this.showLoader = true;
-			this.getData();
-		},
-		getData() {
-			var config = {
-				method: "post",
-				url:
-					properties.baseUrl() +
-					"/findallbyanswer/" +
-					utilities.getUserId(this.$router),
-				headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
-			};
-			axios(config)
-				.then((response) => {
-					if (!response.data.length) {
-						this.dataNotFound = true;
-					} else {
-						this.dataNotFound = false;
-					}
-					this.questions = response.data;
-					this.showLoader = false;
-				})
-				.catch((error) => {
-					if (
-						error.response.data.code == 401 ||
-						error.response.data.code == 555
-					) {
-						actions.fireLoggedOut(this.$swal, this.$router);
-						return;
-					}
-				});
-		},
-	},
-	data: () => ({
-		questions: null,
-		showLoader: true,
-	}),
+  name: "AnsweredByUser",
+  components: {
+    QuestionCard,
+    DataNotFound,
+  },
+  beforeMount() {
+    this.getData();
+  },
+  methods: {
+    clearFilter() {
+      this.filtered = false;
+      this.nonfiltered = true;
+      this.showLoader = true;
+      this.getData();
+    },
+    getData() {
+      var config = {
+        method: "post",
+        url:
+          properties.baseUrl() +
+          "/findallbyanswer/" +
+          utilities.getUserId(this.$router),
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+      };
+      axios(config)
+        .then((response) => {
+          if (!response.data.length) {
+            this.dataNotFound = true;
+          } else {
+            this.dataNotFound = false;
+          }
+          this.questions = response.data;
+          this.showLoader = false;
+        })
+        .catch((error) => {
+          if (
+            error.response.data.code == 401 ||
+            error.response.data.code == 555
+          ) {
+            actions.fireLoggedOut(this.$swal, this.$router);
+            return;
+          }
+        });
+    },
+  },
+  data: () => ({
+    questions: null,
+    showLoader: true,
+  }),
 };
 </script>
 
