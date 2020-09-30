@@ -28,6 +28,11 @@ new Vue({
 			this.$route.name.toLowerCase() != "welcome"
 		) {
 			actions.fireLoggedOut(this.$swal, this.$router);
+		} else if (
+			actions.checkSignedIn() &&
+			this.$route.name.toLowerCase() == "signin"
+		) {
+			router.push("/home");
 		}
 	},
 }).$mount("#app");
