@@ -1,6 +1,15 @@
 <template>
   <div class="home">
-    <SigninForm v-on:actionSignIn="signIn" />
+    <SigninForm
+      v-on:toggleWindows="toggleSigninForgotPwdWindows"
+      v-on:actionSignIn="signIn"
+      v-if="signin"
+    />
+    <ForgotPasswordField
+      v-on:toggleWindows="toggleSigninForgotPwdWindows"
+      v-on:actionForgotPassword="actionForgotPassword"
+      v-else
+    />
     <Loader v-if="showLoader" />
   </div>
 </template>
@@ -8,6 +17,7 @@
 <script>
 // @ is an alias to /src
 import SigninForm from "@/components/SigninForm.vue";
+import ForgotPasswordField from "@/components/ForgotPasswordField.vue";
 import axios from "axios";
 import properties from "@/common/properties.js";
 import actions from "@/common/actions.js";
@@ -22,10 +32,12 @@ export default {
   components: {
     SigninForm,
     Loader,
+    ForgotPasswordField,
   },
   data: () => ({
     baseUrl: properties.baseUrl(),
     showLoader: false,
+    signin: true,
   }),
   methods: {
     async signIn(formValues, swal, router) {
@@ -53,13 +65,41 @@ export default {
         })
         .catch((error) => {
           this.showLoader = false;
-          console.log(JSON.stringify(error));
           actions.errorSignin(
             swal,
             error.response.data.code,
             error.response.data.status
           );
         });
+    },
+    async actionForgotPassword(formData) {
+      this.showLoader = true;
+      const trimmedFormValues = utilities.trimFormData(formData);
+      const data = JSON.stringify(trimmedFormValues);
+      var config = {
+        method: "post",
+        url: properties.baseUrl() + "/resetpassword",
+        headers: utilities.getPlainJSONHeader(),
+        data: data,
+      };
+
+      axios(config)
+        .then((response) => {
+          this.showLoader = false;
+          actions.successForgotPassword(
+            this.$swal,
+            response.data.code,
+            response.data.status
+          );
+          this.toggleSigninForgotPwdWindows();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.showLoader = false;
+        });
+    },
+    toggleSigninForgotPwdWindows() {
+      this.signin = !this.signin;
     },
   },
 };

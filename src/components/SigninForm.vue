@@ -26,24 +26,32 @@
     </FormulateForm>
     <div class="text-center">
       Don't have an account?
-      <a href="/Signup">Sign up</a>
+      <a style="color: lightgrey; cursor: pointer" href="/Signup">Sign up</a>
+    </div>
+    <div class="text-center">
+      <a style="color: lightgrey; cursor: pointer" @click="showForgotPasswrd()"
+        >Forgot Password</a
+      >
     </div>
   </div>
 </template>
 
 <script>
 import properties from "@/common/properties.js";
-
 export default {
   name: "SigninForm",
   data: () => ({
     formValues: {},
     baseUrl: properties.baseUrl(),
+    showForgotDialog: false,
   }),
   methods: {
     handleSubmit() {
       this.formValues["password"] = document.getElementById("pwdfield").value;
       this.$emit("actionSignIn", this.formValues, this.$swal, this.$router);
+    },
+    showForgotPasswrd() {
+      this.$emit("toggleWindows");
     },
   },
   props: {

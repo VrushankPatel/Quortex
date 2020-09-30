@@ -50,6 +50,22 @@ export default {
 			router.push("/signin");
 		}
 	},
+	successForgotPassword(swal, code, status) {
+		if (status == true && code == 200) {
+			swal.fire({
+				icon: "success",
+				title: "Success",
+				text:
+					"Password is successfully sent to your email Id, \nPlease signin to continue.",
+			});
+		} else if (status == true && code == 550) {
+			swal.fire({
+				icon: "error",
+				title: "Profile not found",
+				text: "There is no account registered with this mail id.",
+			});
+		}
+	},
 	invalidate() {
 		localStorage.setItem("questauserId", "");
 		localStorage.setItem("questatoken", "");
