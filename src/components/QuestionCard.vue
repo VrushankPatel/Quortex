@@ -14,16 +14,19 @@
               class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
             >
               <div class="md-title" style="float: left">
-                <span class="topicAndSubject">Topic : {{ topic }}</span>
+                <!-- write nick name here -->
+                <span class="topicAndSubject">{{ topic }}</span>
               </div>
             </div>
             <div
               class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
             >
               <div class="md-title" style="float: right">
-                <span class="topicAndSubject"
-                  >Subject : {{ this.getSubjectFromCode({ subject }) }}</span
-                >
+                <span class="topicAndSubject">{{
+                  this.getSubjectFromCode({ subject })
+                }}</span>
+                :
+                <span class="topicAndSubject">{{ topic }}</span>
               </div>
             </div>
 
@@ -56,7 +59,7 @@
               @click="toggleAnswers()"
             >
               <md-badge class="md-primary" :md-content="noOfAnswers">
-                <span style="padding-top: 9%">Show Answers......</span>
+                <span style="padding-top: 9%">Show Comments......</span>
               </md-badge>
             </md-button>
           </div>
@@ -163,7 +166,7 @@
               class="md-title"
               style="float: left; padding-top: 2%; padding-left: 4%"
             >
-              Answer
+              Comment
             </div>
           </div>
           <div
@@ -227,7 +230,7 @@
                       item.answerFeedbackByCurrentUser.liked = true;
                       item.noOfLikes++;
                       item.noOfDislikes--;
-                      likeAnswer(questionId, item.answerId);
+                      likeAnswer(item.answerId);
                     "
                   >
                     <md-icon>thumb_up</md-icon>
@@ -244,7 +247,7 @@
                       item.answerFeedbackByCurrentUser.liked = false;
                       item.noOfLikes--;
                       item.noOfDislikes++;
-                      dislikeAnswer(questionId, item.answerId);
+                      dislikeAnswer(item.answerId);
                     "
                   >
                     <md-icon>thumb_down</md-icon>
@@ -273,7 +276,7 @@
                       };
                       item.noOfLikes++;
                       item.noOfDislikes--;
-                      likeAnswer(questionId, item.answerId);
+                      likeAnswer(item.answerId);
                     "
                   >
                     <md-icon>thumb_up</md-icon>
@@ -286,7 +289,7 @@
                       };
                       item.noOfLikes--;
                       item.noOfDislikes++;
-                      dislikeAnswer(questionId, item.answerId);
+                      dislikeAnswer(item.answerId);
                     "
                   >
                     <md-icon>thumb_down</md-icon>
@@ -346,20 +349,19 @@ export default {
     getSubjectFromCode(code) {
       return this.subjectByCodes[code.subject];
     },
-    likeAnswer(questionId, answerId) {
-      this.likeDislikeAnswer(true, questionId, answerId);
+    likeAnswer(answerId) {
+      this.likeDislikeAnswer(true, answerId);
     },
-    dislikeAnswer(questionId, answerId) {
-      this.likeDislikeAnswer(false, questionId, answerId);
+    dislikeAnswer(answerId) {
+      this.likeDislikeAnswer(false, answerId);
     },
-    likeDislikeAnswer(like, questionId, answerId) {
+    likeDislikeAnswer(like, answerId) {
       var config = {
         method: "post",
         url: properties.baseUrl() + "/createfeedback",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           userId: utilities.getUserId(this.$router),
-          questionId: questionId,
           answerId: answerId,
           liked: like,
           unliked: !like,

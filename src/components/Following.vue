@@ -25,6 +25,10 @@
     <div v-if="dataNotFound">
       <DataNotFound message="You have not followed any question." />
     </div>
+
+    <div v-if="unableToFetchData">
+      <DataNotFound message="Unable to fetch data, please try again later." />
+    </div>
   </div>
 </template>
 
@@ -72,6 +76,8 @@ export default {
             actions.fireLoggedOut(this.$swal, this.$router);
             return;
           }
+          this.showLoader = false;
+          this.unableToFetchData = true;
         });
     },
   },
@@ -79,6 +85,7 @@ export default {
     questions: null,
     showLoader: true,
     dataNotFound: false,
+    unableToFetchData: false,
   }),
 };
 </script>

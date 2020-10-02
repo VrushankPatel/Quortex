@@ -56,11 +56,12 @@
         <FormulateInput
           v-model="formData.grade"
           name="Grade"
-          type="number"
+          type="select"
           label="Grade"
           placeholder="Grade"
-          validation="min:1"
+          validation="required"
           autocomplete="off"
+          :options="grades"
         />
         <FormulateInput
           v-model="formData.school"
@@ -122,6 +123,7 @@ import properties from "@/common/properties.js";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import grades from "@/common/grades.js";
 import Loader from "@/components/Loader.vue";
 export default {
   name: "EditProfileField",
@@ -138,6 +140,7 @@ export default {
       school: "",
       country: "",
     },
+    grades: grades.grades,
     showLoader: true,
     changePassword: false,
     baseUrl: properties.baseUrl(),

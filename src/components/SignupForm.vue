@@ -49,11 +49,12 @@
       <FormulateInput
         v-model="formData.grade"
         name="Grade"
-        type="number"
+        type="select"
         label="Grade"
         placeholder="Grade"
-        validation="required|min:1"
+        validation="required"
         autocomplete="off"
+        :options="grades"
       />
       <FormulateInput
         v-model="formData.school"
@@ -105,6 +106,7 @@
 <script>
 import properties from "@/common/properties.js";
 import countriesNames from "@/common/countriesNames.js";
+import grades from "@/common/grades.js";
 
 export default {
   name: "SignupForm",
@@ -114,6 +116,7 @@ export default {
     },
     baseUrl: properties.baseUrl(),
     countries: countriesNames.countries,
+    grades: grades.grades,
   }),
   methods: {
     signUp() {

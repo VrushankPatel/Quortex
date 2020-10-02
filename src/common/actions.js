@@ -48,6 +48,7 @@ export default {
 				text: "You're logged out of questa, please login to continue.",
 			});
 			router.push("/signin");
+			return;
 		}
 	},
 	successForgotPassword(swal, code, status) {
