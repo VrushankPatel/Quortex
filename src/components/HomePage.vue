@@ -103,6 +103,7 @@ export default {
       };
       axios(config)
         .then((response) => {
+          console.log(JSON.stringify(response.data));
           this.questions = response.data;
           this.showLoader = false;
         })
