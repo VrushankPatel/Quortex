@@ -25,6 +25,10 @@
 		<div v-if="dataNotFound">
 			<DataNotFound message="You have not commented any question." />
 		</div>
+
+		<div v-if="unableToFetchData">
+			<DataNotFound message="Unable to fetch data, please try again later." />
+		</div>
 	</div>
 </template>
 
@@ -71,6 +75,8 @@ export default {
 					this.showLoader = false;
 				})
 				.catch((error) => {
+					this.showLoader = false;
+					this.unableToFetchData = true;
 					if (
 						error.response.data.code == 401 ||
 						error.response.data.code == 555
@@ -84,6 +90,7 @@ export default {
 	data: () => ({
 		questions: null,
 		showLoader: true,
+		unableToFetchData: false,
 	}),
 };
 </script>
