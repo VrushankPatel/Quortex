@@ -8,10 +8,24 @@
         @click="openAskQuestionDialog()"
       >
         Ask your question
-      </div></md-card
-    >
+        <md-icon v-if="!showAskQuestionDialog">arrow_drop_down</md-icon>
+        <md-icon v-else>arrow_drop_up</md-icon>
+      </div>
+    </md-card>
+    <AskQuestionCard
+      v-if="showAskQuestionDialog"
+      v-on:actionReload="getData"
+      disabled
+    />
+    <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
+      <div v-if="!dataNotFound" class="questtext" @click="openFilterDialog()">
+        Filter Results
+        <md-icon v-if="!showAskQuestionDialog">arrow_drop_down</md-icon>
+        <md-icon v-else>arrow_drop_up</md-icon>
+      </div>
+    </md-card>
     <FilterQuestion
-      v-if="!dataNotFound"
+      v-if="!dataNotFound && showFilterCard"
       v-on:doFilter="doFilter"
       v-on:clearFilter="clearFilter"
     />
@@ -54,9 +68,6 @@
     </div>
 
     <Loader v-if="showLoader" />
-    <md-dialog :md-active.sync="showAskQuestionDialog">
-      <AskQuestionCard v-on:actionReload="getData" disabled />
-    </md-dialog>
     <div v-if="dataNotFound">
       <DataNotFound message="Unable to fetch data, please try again later." />
     </div>
@@ -86,6 +97,9 @@ export default {
     this.getData();
   },
   methods: {
+    openFilterDialog() {
+      this.showFilterCard = !this.showFilterCard;
+    },
     clearFilter() {
       this.filtered = false;
       this.nonfiltered = true;
@@ -156,6 +170,7 @@ export default {
     nonfiltered: true,
     filtered: false,
     showAskQuestionDialog: false,
+    showFilterCard: false,
     dataNotFound: false,
   }),
 };
@@ -165,21 +180,13 @@ export default {
 .questtext {
   padding: 10px;
 }
-.customcard {
-  cursor: pointer;
-  font-size: 14px;
-  transition-property: all;
-  transition-duration: 0.7s;
-}
-.customcard:hover {
-  border-radius: 15px;
-  color: white;
-  background-color: #57606f;
-  font-size: 16px;
-  transition-property: all;
-  transition-duration: 0.7s;
-}
 .md-dialog ::v-deep .md-dialog-container {
   width: 40%;
+}
+.questtext {
+  cursor: pointer;
+}
+.customcard {
+  border: 1px solid lightgrey;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <form novalidate @submit.prevent="validateUser">
-      <md-card class="md-layout-item md-size-100 md-small-size-100">
+      <md-card class="md-layout-item md-size-95 md-small-size-95">
         <md-card-header>
           <div class="md-title">
             Didn't find your question? ask your question here..
@@ -119,7 +119,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required, minLength } from "vuelidate/lib/validators";
+import { required, minLength, maxLength } from "vuelidate/lib/validators";
 import axios from "axios";
 import properties from "@/common/properties.js";
 import actions from "@/common/actions.js";
@@ -151,6 +151,7 @@ export default {
       topic: {
         required,
         minLength: minLength(3),
+        maxLength: maxLength(50),
       },
       questionDesc: {
         required,
