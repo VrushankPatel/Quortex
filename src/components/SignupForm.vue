@@ -122,7 +122,7 @@
     </FormulateForm>
     <div class="text-center">
       Already have an account?
-      <a href="/Signin">Sign in</a>
+      <a id="signinlink" href="/Signin">Sign in</a>
     </div>
   </div>
 </template>
@@ -208,5 +208,8 @@ export default {
   .double-wide .formulate-input:last-child {
     margin-left: 0.5em;
   }
+}
+#signinlink {
+  color: white;
 }
 </style>
