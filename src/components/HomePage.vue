@@ -19,8 +19,8 @@
     />
     <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
       <div v-if="!dataNotFound" class="questtext" @click="openFilterDialog()">
-        Filter Results
-        <md-icon v-if="!showAskQuestionDialog">arrow_drop_down</md-icon>
+        Apply filters here
+        <md-icon v-if="!showFilterCard">arrow_drop_down</md-icon>
         <md-icon v-else>arrow_drop_up</md-icon>
       </div>
     </md-card>
