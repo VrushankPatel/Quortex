@@ -33,7 +33,7 @@
 				<!-- reported questions window  -->
 				<div v-if="admin" style="padding-left: 2%">
 					<md-button style="border-bottom: 3px solid white">
-						ReportedQuestions
+						Reported
 					</md-button>
 				</div>
 				<!--  -->

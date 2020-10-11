@@ -167,6 +167,29 @@
 					v-for="item in answerList"
 					:key="item"
 				>
+					<md-dialog :md-active.sync="showReportDialog">
+						<md-dialog-title>Report :</md-dialog-title>
+						<div style="padding: 10px">
+							<md-field>
+								<label>Report</label>
+								<md-textarea v-model="reportDesc" required></md-textarea>
+								<span class="md-helper-text"
+									>Write your report description here.</span
+								>
+								<span class="md-error"
+									>report description can not be empty.</span
+								>
+							</md-field>
+						</div>
+						<md-dialog-actions>
+							<md-button class="md-primary">Close</md-button>
+							<md-button
+								class="md-primary"
+								@click="postReport(item.questionId, reportDesc)"
+								>Post</md-button
+							>
+						</md-dialog-actions>
+					</md-dialog>
 					<div
 						class="md-layout-item md-large-size-50 md-medium-size-50 md-small-size-50 md-xsmall-size-50"
 					>
@@ -177,7 +200,7 @@
 						>
 							<span class="topicAndSubject">
 								<md-icon>person</md-icon>
-								{{ nickName }}
+								{{ item.nickName }}
 							</span>
 						</div>
 					</div>
@@ -270,7 +293,10 @@
 									>
 										<md-icon style="color: blue">thumb_down</md-icon>
 									</md-button>
-									<md-button title="Report as inappropriate">
+									<md-button
+										title="Report as inappropriate"
+										@click="openReportDialog(item.answerId)"
+									>
 										<md-icon>report</md-icon>
 									</md-button>
 								</md-card-actions>
@@ -309,7 +335,10 @@
 									>
 										<md-icon>thumb_down</md-icon>
 									</md-button>
-									<md-button title="Report as inappropriate">
+									<md-button
+										title="Report as inappropriate"
+										@click="openReportDialog(item.answerId)"
+									>
 										<md-icon>report</md-icon>
 									</md-button>
 								</md-card-actions>
@@ -359,6 +388,8 @@ import utilities from "@/common/utilities.js";
 import properties from "@/common/properties.js";
 export default {
 	data: () => ({
+		showReportDialog: false,
+		reportDesc: "",
 		showDialog: false,
 		answer: null,
 		showSuccessSnackBar: false,
@@ -368,9 +399,22 @@ export default {
 		subjectByCodes: properties.subjectByCodes,
 		startingTime: 0,
 		endingTime: 0,
-		admin: false, // for admin, this will become true.
+		admin: false,
+		currentAnswerId: 0,
 	}),
 	methods: {
+		postReport(questionId, reportDesc) {
+			alert(
+				this.currentAnswerId + "  ==  " + questionId + "  ==  " + reportDesc
+			);
+			// TO DO
+			// Write your Endpoint of post report here
+			this.reportDesc = "";
+		},
+		openReportDialog(id) {
+			this.currentAnswerId = id;
+			this.showReportDialog = true;
+		},
 		async startTimer() {
 			this.startingTime = new Date().getTime();
 		},
