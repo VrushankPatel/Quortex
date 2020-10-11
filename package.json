@@ -10,8 +10,8 @@
 	"dependencies": {
 		"@braid/vue-formulate": "^2.4.3",
 		"axios": "^0.20.0",
-		"axios-cancel": "^0.2.2",
 		"core-js": "^3.6.5",
+		"crypto-js": "^4.0.0",
 		"jquery": "^3.5.1",
 		"moment": "^2.28.0",
 		"popper.js": "^1.16.1",

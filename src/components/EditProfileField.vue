@@ -32,6 +32,15 @@
       </div>
       <div class="double-wide">
         <FormulateInput
+          v-model="formData.nickName"
+          name="nickName"
+          type="text"
+          label="Nick Name"
+          placeholder="Your Nickname"
+          validation="required"
+          autocomplete="off"
+        />
+        <FormulateInput
           v-model="formData.email"
           name="email"
           type="email"
@@ -40,6 +49,11 @@
           validation="email"
           autocomplete="off"
         />
+      </div>
+      <!-- validation="required|after:2019-01-01"
+        min="2018-12-01"
+      max="2021-01-01"-->
+      <div class="double-wide">
         <FormulateInput
           v-model="formData.birthdate"
           type="date"
@@ -49,11 +63,6 @@
           validation="required"
           autocomplete="off"
         />
-      </div>
-      <!-- validation="required|after:2019-01-01"
-        min="2018-12-01"
-      max="2021-01-01"-->
-      <div class="double-wide">
         <FormulateInput
           v-model="formData.grade"
           name="Grade"
@@ -64,6 +73,8 @@
           autocomplete="off"
           :options="grades"
         />
+      </div>
+      <div class="double-wide">
         <FormulateInput
           v-model="formData.school"
           name="School"
@@ -72,17 +83,17 @@
           placeholder="School"
           validation="required"
         />
+        <FormulateInput
+          v-model="formData.country"
+          name="Country"
+          type="select"
+          label="Country"
+          placeholder="Choose your country"
+          validation="required"
+          autocomplete="off"
+          :options="countries"
+        />
       </div>
-      <FormulateInput
-        v-model="formData.country"
-        name="Country"
-        type="select"
-        label="Country"
-        placeholder="Choose your country"
-        validation="required"
-        autocomplete="off"
-        :options="countries"
-      />
       <!-- <FormulateInput
         v-model="formData.country"
         name="Country"
@@ -155,6 +166,7 @@ export default {
       firstName: "",
       lastName: "",
       email: "",
+      nickName: "",
       birthdate: "",
       grade: "",
       school: "",
@@ -176,6 +188,7 @@ export default {
     restoreFormDefaults() {
       this.formData["firstName"] = this.defaults.firstName;
       this.formData["lastName"] = this.defaults.lastName;
+      this.formData["nickName"] = this.defaults.nickName;
       this.formData["email"] = this.defaults.email;
       this.formData["birthdate"] = this.defaults.birthdate;
       this.formData["grade"] = this.defaults.grade;
@@ -218,6 +231,7 @@ export default {
 
       axios(config)
         .then((response) => {
+          console.log(response.data);
           this.showLoader = false;
           this.defaults = response.data;
           this.restoreFormDefaults();

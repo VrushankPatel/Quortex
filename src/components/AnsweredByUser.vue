@@ -10,6 +10,7 @@
         :item="item"
         :subject="item.subject"
         :topic="item.topic"
+        :nickName="item.nickName"
         :dateOfPosted="item.createDate"
         :questionDesc="item.questionDesc"
         :answerList="item.answerList"

@@ -1,3 +1,4 @@
+import cryptoUtil from "@/common/cryptoUtil.js";
 export default {
 	successSignup(swal, code, status, router) {
 		if (status == true && code == 200) {
@@ -68,12 +69,11 @@ export default {
 		}
 	},
 	invalidate() {
-		localStorage.setItem("questauserId", "");
-		localStorage.setItem("questatoken", "");
+		localStorage.clear();
 	},
 	checkSignedIn() {
-		var token = localStorage.getItem("questatoken");
-		var questauserId = localStorage.getItem("questauserId");
+		var token = cryptoUtil.getItem("questatoken");
+		var questauserId = cryptoUtil.getItem("questauserId");
 		if (
 			token != null &&
 			token.length != 0 &&
