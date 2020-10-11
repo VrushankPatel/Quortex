@@ -71,9 +71,9 @@ export default {
 	invalidate() {
 		localStorage.clear();
 	},
-	checkSignedIn() {
-		var token = cryptoUtil.getItem("questatoken");
-		var questauserId = cryptoUtil.getItem("questauserId");
+	checkSignedIn(router) {
+		var token = cryptoUtil.getItem("questatoken", router);
+		var questauserId = cryptoUtil.getItem("questauserId", router);
 		if (
 			token != null &&
 			token.length != 0 &&

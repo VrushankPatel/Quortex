@@ -5,8 +5,11 @@ export default {
 	setItem(key, value) {
 		localStorage.setItem(this.getEncrypted(key), this.getEncrypted(value));
 	},
-	getItem(key) {
+	getItem(key, router) {
 		const encValue = localStorage.getItem(this.getEncrypted(key));
+		if (encValue == "" || encValue == null) {
+			router.push("/signin");
+		}
 		return this.getDecrypted(encValue);
 	},
 	getEncrypted(data) {

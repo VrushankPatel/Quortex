@@ -22,9 +22,9 @@ new Vue({
 	render: (h) => h(App),
 	created() {
 		if (
-			!actions.checkSignedIn() &&
+			!actions.checkSignedIn(this.$router) &&
 			this.$route.name.toLowerCase() != "signin" &&
-			this.$route.name.toLowerCase() != "signup" &&
+			this.$route.name.toLowerCase() != "home" &&
 			this.$route.name.toLowerCase() != "welcome"
 		) {
 			actions.fireLoggedOut(this.$swal, this.$router);

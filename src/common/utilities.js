@@ -14,7 +14,7 @@ export default {
 	getAuthJSONHeader(router, swal) {
 		if (actions.checkSignedIn()) {
 			return {
-				Authorization: "Bearer " + cryptoUtil.getItem("questatoken"),
+				Authorization: "Bearer " + cryptoUtil.getItem("questatoken", router),
 				"Content-Type": "application/json",
 			};
 		} else {
@@ -23,7 +23,7 @@ export default {
 		}
 	},
 	getUserId(router) {
-		var userId = cryptoUtil.getItem("questauserId");
+		var userId = cryptoUtil.getItem("questauserId", router);
 		if (userId != null) {
 			return userId;
 		} else {
@@ -31,8 +31,9 @@ export default {
 		}
 	},
 	getUserType(router, swal) {
-		var userType = cryptoUtil.getItem("questausertype");
+		var userType = cryptoUtil.getItem("questausertype", router);
 		console.log("usertype = " + (userType == ""));
+
 		if (userType != "") {
 			return userType;
 		} else {
