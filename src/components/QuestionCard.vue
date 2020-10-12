@@ -36,7 +36,7 @@
 							class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
 						>
 							<div class="md-title" style="float: right; font-size: 115%">
-								Posted on : {{ dateOfPosted }}
+								Posted on : {{ getFormattedDate(dateOfPosted) }}
 							</div>
 						</div>
 					</div>
@@ -183,9 +183,7 @@
 						</div>
 						<md-dialog-actions>
 							<md-button class="md-primary">Close</md-button>
-							<md-button
-								class="md-primary"
-								@click="postReport(item.questionId, reportDesc)"
+							<md-button class="md-primary" @click="postReport(reportDesc)"
 								>Post</md-button
 							>
 						</md-dialog-actions>
@@ -218,7 +216,7 @@
                 font-size: 115%;
               "
 						>
-							Posted on : {{ item.createDate }}
+							Posted on : {{ getFormattedDate(item.createDate) }}
 						</div>
 					</div>
 					<div class="md-layout md-gutter md-alignment-center">
@@ -372,8 +370,18 @@
 		<md-snackbar :md-position="position" :md-active.sync="showSuccessSnackBar"
 			>Your answer submitted successfully!</md-snackbar
 		>
+		<md-snackbar
+			:md-position="position"
+			:md-active.sync="showReportSuccessSnackBar"
+			>Answer is reported successfully!</md-snackbar
+		>
+		<md-snackbar
+			:md-position="position"
+			:md-active.sync="showReportFailureSnackBar"
+			>Error occured! Unable to report answer</md-snackbar
+		>
 		<md-snackbar :md-position="position" :md-active.sync="showFailureSnackBar"
-			>Error occured, Unable to submit answer</md-snackbar
+			>Error occured! Unable to submit answer</md-snackbar
 		>
 		<md-snackbar :md-position="position" :md-active.sync="showInvalidBar"
 			>Invalid answer.</md-snackbar
@@ -394,8 +402,10 @@ export default {
 		answer: null,
 		showSuccessSnackBar: false,
 		showFailureSnackBar: false,
+		showReportSuccessSnackBar: false,
 		showInvalidBar: false,
 		showAnswers: false,
+		showReportFailureSnackBar: false,
 		subjectByCodes: properties.subjectByCodes,
 		startingTime: 0,
 		endingTime: 0,
@@ -403,12 +413,54 @@ export default {
 		currentAnswerId: 0,
 	}),
 	methods: {
-		postReport(questionId, reportDesc) {
-			alert(
-				this.currentAnswerId + "  ==  " + questionId + "  ==  " + reportDesc
+		getFormattedDate(dateString) {
+			console.log(dateString);
+			var date = dateString.split("-");
+			console.log(parseInt(date[1]));
+			return (
+				properties.months[parseInt(date[1])] + " " + date[2] + ", " + date[0]
 			);
-			// TO DO
-			// Write your Endpoint of post report here
+		},
+		postReport(reportDesc) {
+			var config = {
+				method: "post",
+				url: properties.baseUrl() + "/createfeedback",
+				headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+				data: {
+					userId: utilities.getUserId(this.$router),
+					answerId: this.currentAnswerId,
+					reportDesc: reportDesc,
+				},
+			};
+			console.log(config.data);
+
+			axios(config)
+				.then((response) => {
+					console.log(JSON.stringify(response));
+					var result = actions.successQuestionPost(
+						response.data.code,
+						response.data.status
+					);
+					if (result == true) {
+						window.setTimeout(() => {
+							this.showReportSuccessSnackBar = true;
+						}, 1500);
+					} else {
+						console.log(JSON.stringify(response));
+						window.setTimeout(() => {
+							this.showReportFailureSnackBar = true;
+						}, 1500);
+					}
+					this.showReportDialog = false;
+				})
+				.catch((error) => {
+					console.log(JSON.stringify(error));
+					var result = actions.successQuestionPost(
+						error.data.code,
+						error.data.status
+					);
+					console.log(result);
+				});
 			this.reportDesc = "";
 		},
 		openReportDialog(id) {
