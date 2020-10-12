@@ -86,7 +86,7 @@
 				<!-- <Questions v-if="ifQuestions" /> -->
 			</md-app-content>
 			<md-app-content v-else>
-				<h1>this is the content for admin</h1>
+				<ReportedQuestionsForAdmin />
 			</md-app-content>
 		</md-app>
 		<md-dialog :md-active.sync="showProfileDialog">
@@ -101,6 +101,7 @@ import HomePage from "@/components/HomePage.vue";
 import EditProfileField from "@/components/EditProfileField.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
+import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vue";
 // import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
@@ -130,6 +131,7 @@ export default {
 		lastUser: null,
 	}),
 	components: {
+		ReportedQuestionsForAdmin,
 		HomePageDrawer,
 		HomePage,
 		Following,

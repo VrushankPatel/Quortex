@@ -151,13 +151,6 @@
 							<md-icon>thumb_up</md-icon>
 						</md-button>
 					</div>
-					<div
-						v-if="admin"
-						class="md-title"
-						style="float: left; cursor: pointer"
-					>
-						<md-icon class="deletebtn">delete</md-icon>
-					</div>
 				</md-card-actions>
 			</div>
 			<!-- <md-divider></md-divider> -->
@@ -226,37 +219,62 @@
 							<div
 								class="md-title"
 								style="
-                  float: left;
-                  text-align: left;
-                  font-size: 120%;
-                  padding-left: 2.5%;
-                  padding-top: 1.5%;
-                "
+									float: left;
+									text-align: left;
+									font-size: 120%;
+									padding-left: 2.5%;
+									padding-top: 1.5%;
+									"
 							>
 								{{ item.answerDesc }}
 							</div>
 						</div>
-
 						<div
 							class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
 							style="padding-right: 2.5%"
 						>
 							<div v-if="item.answerFeedbackByCurrentUser">
-								<md-card-actions>
-									<div style="width: 100%; float: left; padding-left: 1.5%">
-										<span
-											style="text-transform-lowercase;float:left;padding-left: 2.5%"
-										>
-											<span v-if="item.noOfLikes >= 0">{{
-												item.noOfLikes
-											}}</span>
-											<span v-else>0</span> likes
-											<span v-if="item.noOfDislikes >= 0">{{
-												item.noOfDislikes
-											}}</span>
-											<span v-else>0</span> dislikes
-										</span>
+								<div
+									v-if="admin"
+									class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
+								>
+									<div
+										class="md-title"
+										style="
+									float: left;
+									text-align: left;
+									font-size: 120%;
+									padding-left: 2.5%;
+									padding-top: 1.5%;
+									"
+									>
+										{{ item.answerFeedbackByCurrentUser.reportDesc }}
 									</div>
+								</div>
+								<div
+									style="width: 70%; float: left; padding-left: 1.5%;padding-top:1.5%;padding-bottom:1%"
+								>
+									<span
+										style="text-transform-lowercase;float:left;padding-left: 2.5%;"
+									>
+										<span v-if="item.noOfLikes >= 0">{{ item.noOfLikes }}</span>
+										<span v-else>0</span> likes
+										<span v-if="item.noOfDislikes >= 0">{{
+											item.noOfDislikes
+										}}</span>
+										<span v-else>0</span> dislikes
+									</span>
+								</div>
+								<md-card-actions v-if="admin" style="padding-right:3%">
+									<div
+										v-if="admin"
+										class="md-title"
+										style="float: left; cursor: pointer"
+									>
+										<md-icon class="deletebtn">delete</md-icon>
+									</div>
+								</md-card-actions>
+								<md-card-actions v-else>
 									<md-button
 										v-if="item.answerFeedbackByCurrentUser.liked == false"
 										@click="
@@ -300,13 +318,25 @@
 								</md-card-actions>
 							</div>
 							<div v-else>
-								<md-card-actions>
-									<div style="width: 100%; float: left; padding-left: 2.5%">
-										<span style="text-transform-lowercase;float:left;"
-											>{{ item.noOfLikes }} likes
-											{{ item.noOfDislikes }} dislikes</span
-										>
+								<div
+									style="width: 70%; float: left; padding-left: 2.5%;padding-top:1.5%;padding-bottom:1%"
+								>
+									<span
+										style="text-transform-lowercase;float:left;padding-left: 2.5%;"
+										>{{ item.noOfLikes }} likes
+										{{ item.noOfDislikes }} dislikes</span
+									>
+								</div>
+								<md-card-actions v-if="admin" style="padding-right:3%">
+									<div
+										v-if="admin"
+										class="md-title"
+										style="float: left; cursor: pointer"
+									>
+										<md-icon class="deletebtn">delete</md-icon>
 									</div>
+								</md-card-actions>
+								<md-card-actions v-else>
 									<md-button
 										@click="
 											item.answerFeedbackByCurrentUser = {
@@ -394,6 +424,7 @@ import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import properties from "@/common/properties.js";
+
 export default {
 	data: () => ({
 		showReportDialog: false,
@@ -409,7 +440,7 @@ export default {
 		subjectByCodes: properties.subjectByCodes,
 		startingTime: 0,
 		endingTime: 0,
-		admin: false,
+		admin: utilities.getUserType() == "ADMIN",
 		currentAnswerId: 0,
 	}),
 	methods: {
