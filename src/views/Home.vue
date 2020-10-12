@@ -21,7 +21,7 @@
 								<md-icon class="rotating_vert">more_vert</md-icon>
 							</md-button>
 							<md-menu-content>
-								<md-menu-item @click="EditProfileDialog()"
+								<md-menu-item @click="EditProfileDialog()" v-if="!admin"
 									>Edit Profile</md-menu-item
 								>
 								<md-menu-item @click="logout()">Logout</md-menu-item>

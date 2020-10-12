@@ -74,11 +74,12 @@
 						</span>
 					</div>
 					<md-button
+						v-if="!admin"
 						style="color: white"
 						@click="answerTheQuestion({ questionId })"
 						>Comment</md-button
 					>
-					<div v-if="item.followerByCurrentUser">
+					<div v-if="item.followerByCurrentUser && !admin">
 						<md-button
 							style="color: white"
 							v-if="!item.followerByCurrentUser.followed == true"
@@ -104,6 +105,7 @@
 					</div>
 					<div v-else>
 						<md-button
+							v-if="!admin"
 							style="color: white"
 							@click="
 								noOfFollowers++;
@@ -114,7 +116,7 @@
 						>
 					</div>
 
-					<div v-if="item.questionFeedbackByCurrentUser">
+					<div v-if="item.questionFeedbackByCurrentUser && !admin">
 						<md-button
 							v-bind:id="{ questionId }"
 							v-if="item.questionFeedbackByCurrentUser.liked == true"
@@ -142,6 +144,7 @@
 					</div>
 					<div v-else>
 						<md-button
+							v-if="!admin"
 							@click="
 								noOfLikes++;
 								likeQuestion({ questionId });
@@ -229,28 +232,31 @@
 								{{ item.answerDesc }}
 							</div>
 						</div>
+
 						<div
-							class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
-							style="padding-right: 2.5%"
+							v-if="admin && item.answerFeedbackByCurrentUser"
+							class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
 						>
-							<div v-if="item.answerFeedbackByCurrentUser">
-								<div
-									v-if="admin"
-									class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
-								>
-									<div
-										class="md-title"
-										style="
+							<div
+								class="md-title"
+								style="
 									float: left;
 									text-align: left;
 									font-size: 120%;
 									padding-left: 2.5%;
 									padding-top: 1.5%;
 									"
-									>
-										{{ item.answerFeedbackByCurrentUser.reportDesc }}
-									</div>
-								</div>
+							>
+								Reported for :
+								{{ item.answerFeedbackByCurrentUser.reportDesc }}
+							</div>
+						</div>
+
+						<div
+							class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
+							style="padding-right: 2.5%"
+						>
+							<div v-if="item.answerFeedbackByCurrentUser">
 								<div
 									style="width: 70%; float: left; padding-left: 1.5%;padding-top:1.5%;padding-bottom:1%"
 								>
@@ -445,9 +451,7 @@ export default {
 	}),
 	methods: {
 		getFormattedDate(dateString) {
-			console.log(dateString);
 			var date = dateString.split("-");
-			console.log(parseInt(date[1]));
 			return (
 				properties.months[parseInt(date[1])] + " " + date[2] + ", " + date[0]
 			);
