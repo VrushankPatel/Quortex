@@ -234,24 +234,39 @@
 						</div>
 
 						<div
-							v-if="admin && item.answerFeedbackByCurrentUser"
 							class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
 						>
 							<div
+								v-if="admin"
 								class="md-title"
-								style="
-									float: left;
+								style="float: left;
 									text-align: left;
 									font-size: 120%;
 									padding-left: 2.5%;
-									padding-top: 1.5%;
-									"
+									padding-top:2%;
+									color:darkred;font-size:20px;"
 							>
-								Reported for :
-								{{ item.answerFeedbackByCurrentUser.reportDesc }}
+								Reported by :
 							</div>
 						</div>
 
+						<div
+							v-for="feedback in item.answerFeedbackList"
+							:key="feedback.feedbackId"
+							class="md-layout-item md-large-size-95 md-medium-size-95 md-small-size-50 md-xsmall-size-100"
+						>
+							<div
+								v-if="admin"
+								class="md-title"
+								style="float: left;
+									text-align: left;
+									font-size: 120%;
+									padding-left: 2.5%;"
+							>
+								<span style="font-weight:bold">{{ feedback.nickName }} </span>:
+								{{ feedback.reportDesc }}
+							</div>
+						</div>
 						<div
 							class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
 							style="padding-right: 2.5%"
@@ -471,7 +486,6 @@ export default {
 
 			axios(config)
 				.then((response) => {
-					console.log(JSON.stringify(response));
 					var result = actions.successQuestionPost(
 						response.data.code,
 						response.data.status

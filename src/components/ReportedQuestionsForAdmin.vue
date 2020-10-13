@@ -73,7 +73,7 @@ export default {
 						this.dataNotFound = false;
 					}
 					this.questions = response.data;
-					console.log(response.data);
+					console.log("response is " + JSON.stringify(response.data));
 					this.showLoader = false;
 				})
 				.catch((error) => {
