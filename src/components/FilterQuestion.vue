@@ -58,7 +58,6 @@
                 <span class="md-error">The Subject is required</span>
               </md-field>
             </div>
-
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('topic')">
                 <label for="topic">Topic</label>
@@ -70,6 +69,26 @@
                   >Invalid topic.</span
                 >
               </md-field>
+            </div>
+          </div>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-small-size-100">
+              <div class="md-layout-item md-small-size-100">
+                <md-field :class="getValidationClass('topic')">
+                  <label for="Question">Question</label>
+                  <md-input
+                    name="question"
+                    id="question"
+                    v-model="form.questionDesc"
+                  />
+                  <span class="md-error" v-if="!$v.form.topic.required"
+                    >The question is required</span
+                  >
+                  <span class="md-error" v-else-if="!$v.form.topic.minlength"
+                    >Invalid question.</span
+                  >
+                </md-field>
+              </div>
             </div>
           </div>
         </md-card-content>
@@ -101,8 +120,9 @@ export default {
     position: "left",
     filters: false,
     form: {
-      subject: null,
-      topic: null,
+      subject: "",
+      topic: "",
+      questionDesc: "",
     },
   }),
   validations: {

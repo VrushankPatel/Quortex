@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 // var CryptoJS = require("crypto-js");
 import CryptoJS from "crypto-js";
 
@@ -9,6 +11,11 @@ export default {
 		const encValue = localStorage.getItem(this.getEncrypted(key));
 		if (encValue == "" || encValue == null) {
 			router.push("/signin");
+			Swal.fire({
+				icon: "info",
+				title: "Logged out",
+				text: "You're logged out of questa, please login to continue.",
+			});
 		}
 		return this.getDecrypted(encValue);
 	},

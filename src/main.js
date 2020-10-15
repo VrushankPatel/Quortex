@@ -21,16 +21,17 @@ new Vue({
 	router,
 	render: (h) => h(App),
 	created() {
+		console.log("here 1");
 		if (
-			!actions.checkSignedIn(this.$router) &&
+			this.$route.name.toLowerCase() != "signup" &&
 			this.$route.name.toLowerCase() != "signin" &&
 			this.$route.name.toLowerCase() != "home" &&
-			this.$route.name.toLowerCase() != "welcome"
+			!actions.checkSignedIn(this.$router)
 		) {
 			actions.fireLoggedOut(this.$swal, this.$router);
 		} else if (
-			actions.checkSignedIn() &&
-			this.$route.name.toLowerCase() == "signin"
+			this.$route.name.toLowerCase() == "signin" &&
+			actions.checkSignedIn()
 		) {
 			router.push("/home");
 		}
