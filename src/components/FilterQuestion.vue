@@ -110,7 +110,7 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-import { required } from "vuelidate/lib/validators";
+// import { required } from "vuelidate/lib/validators";
 import actions from "@/common/actions.js";
 
 export default {
@@ -127,9 +127,7 @@ export default {
   }),
   validations: {
     form: {
-      subject: {
-        required,
-      },
+      subject: {},
       topic: {},
     },
   },
