@@ -178,7 +178,9 @@
               </md-field>
             </div>
             <md-dialog-actions>
-              <md-button class="md-primary">Close</md-button>
+              <md-button class="md-primary" @click="closeReport()"
+                >Close</md-button
+              >
               <md-button class="md-primary" @click="postReport(reportDesc)"
                 >Post</md-button
               >
@@ -487,6 +489,9 @@ export default {
       return (
         properties.months[parseInt(date[1])] + " " + date[2] + ", " + date[0]
       );
+    },
+    closeReport() {
+      this.showReportDialog = false;
     },
     postReport(reportDesc) {
       var config = {
