@@ -310,7 +310,9 @@
                     class="md-title"
                     style="float: left; cursor: pointer"
                   >
-                    <md-icon class="deletebtn">delete</md-icon>
+                    <md-button @click="deleteQuestion(item.answerId)"
+                      ><md-icon class="deletebtn">delete</md-icon></md-button
+                    >
                   </div>
                 </md-card-actions>
                 <md-card-actions v-else>
@@ -378,7 +380,9 @@
                     class="md-title"
                     style="float: left; cursor: pointer"
                   >
-                    <md-icon class="deletebtn">delete</md-icon>
+                    <md-button @click="deleteQuestion(item.answerId)"
+                      ><md-icon class="deletebtn">delete</md-icon></md-button
+                    >
                   </div>
                 </md-card-actions>
                 <md-card-actions v-else>
@@ -489,6 +493,27 @@ export default {
     currentAnswerId: 0,
   }),
   methods: {
+    deleteQuestion(answerId) {
+      var config = {
+        method: "post",
+        url: properties.baseUrl() + "/deleteanswer",
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: {
+          answerId: answerId,
+        },
+      };
+      console.log(config);
+
+      axios(config)
+        .then((response) => {
+          console.log(JSON.stringify(response));
+          location.reload();
+        })
+        .catch((error) => {
+          console.log(JSON.stringify(error));
+          alert("unable to delete answer..");
+        });
+    },
     getFormattedDate(dateString) {
       var date = dateString.split("-");
       return (

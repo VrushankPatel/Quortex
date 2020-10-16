@@ -133,7 +133,7 @@ export default {
   },
   methods: {
     clearFilters() {
-      this.$emit("clearFilter");
+      location.reload();
       this.filters = false;
     },
     getValidationClass(fieldName) {

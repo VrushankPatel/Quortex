@@ -102,12 +102,6 @@ export default {
     openFilterDialog() {
       this.showFilterCard = !this.showFilterCard;
     },
-    clearFilter() {
-      this.filtered = false;
-      this.nonfiltered = true;
-      this.showLoader = true;
-      this.getData();
-    },
     getData() {
       var config = {
         method: "post",
