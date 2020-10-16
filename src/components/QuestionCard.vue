@@ -60,9 +60,14 @@
               style="color: white; float: left"
               @click="toggleAnswers()"
             >
-              <md-badge class="md-primary" :md-content="noOfAnswers">
-                <span style="padding-top: 9%">Show Comments......</span>
+              <md-badge
+                class="md-primary"
+                :md-content="noOfAnswers"
+                v-if="!admin"
+              >
+                <span style="padding-top: 9%">Show Comments.......</span>
               </md-badge>
+              <span v-else style="padding-top: 9%">Show Comments</span>
             </md-button>
           </div>
           <div style="width: 100%; float: left; padding-left: 1.5%">
