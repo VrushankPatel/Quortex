@@ -39,4 +39,7 @@ export default {
 		12: "December",
 	},
 	logger: true,
+	getTextColor() {
+		return "lightgrey";
+	},
 };

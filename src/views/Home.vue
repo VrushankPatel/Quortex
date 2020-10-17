@@ -122,11 +122,11 @@
         >
       </md-app-toolbar>
 
-      <md-app-drawer v-if="!admin" :md-active.sync="menuVisible">
+      <!-- <md-app-drawer v-if="!admin" :md-active.sync="menuVisible">
         <HomePageDrawer v-on:editprofile="EditProfileDialog()" />
-      </md-app-drawer>
+      </md-app-drawer> -->
 
-      <md-app-content v-if="!admin">
+      <md-app-content style="background-color: #edf9f6" v-if="!admin">
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
         <AnsweredByUser v-if="ifAnsweredByUser" />
@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import HomePageDrawer from "@/components/HomePageDrawer.vue";
+// import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
 import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import EditProfileField from "@/components/EditProfileField.vue";
@@ -182,7 +182,7 @@ export default {
   components: {
     LevelProgressBar,
     ReportedQuestionsForAdmin,
-    HomePageDrawer,
+    // HomePageDrawer,
     HomePage,
     Following,
     AnsweredByUser,
