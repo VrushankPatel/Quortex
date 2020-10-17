@@ -18,42 +18,11 @@
                   v-model="form.subject"
                   md-dense
                 >
-                  <md-option value="1"
-                    >Literature and Writing (9th grade))</md-option
-                  >
-                  <md-option value="2"
-                    >World Literature and Writing (10th grade)
-                  </md-option>
-                  <md-option value="3"
-                    >American Literature and Writing (Regular and Honors)
-                  </md-option>
-                  <md-option value="4">Algebra 1 </md-option>
-                  <md-option value="5"
-                    >Geometry (Regular and Enriched)
-                  </md-option>
-                  <md-option value="6"
-                    >Algebra 2 (With or without trigonometry)
-                  </md-option>
-                  <md-option value="7"
-                    >Pre-Calculus (Regular and Honors)
-                  </md-option>
-                  <md-option value="8">AP®️ Calculus AB </md-option>
-                  <md-option value="9">AP®️ Calculus BC </md-option>
-                  <md-option value="10">AP®️ Statistics</md-option>
-                  <md-option value="11">Economics</md-option>
-                  <md-option value="12">Spanish 1 </md-option>
-                  <md-option value="13">Spanish 2 </md-option>
-                  <md-option value="14">Spanish 3 </md-option>
-                  <md-option value="15">Biology </md-option>
-                  <md-option value="16"
-                    >Chemistry (Regular and Honors)
-                  </md-option>
-                  <md-option value="17">AP®️ Physics I </md-option>
-                  <md-option value="18"
-                    >World Core History (10th grade)
-                  </md-option>
-                  <md-option value="19">AP®️ World History </md-option>
-                  <md-option value="20">AP®️ US History</md-option>
+                  <div v-for="item in subjectKeys" :key="item">
+                    <md-option v-bind:value="item">{{
+                      subjects[item]
+                    }}</md-option>
+                  </div>
                 </md-select>
                 <span class="md-error">The Subject is required</span>
               </md-field>
@@ -112,7 +81,7 @@
 import { validationMixin } from "vuelidate";
 // import { required } from "vuelidate/lib/validators";
 import actions from "@/common/actions.js";
-
+import properties from "@/common/properties.js";
 export default {
   name: "FormValidation",
   mixins: [validationMixin],
@@ -124,6 +93,8 @@ export default {
       topic: "",
       questionDesc: "",
     },
+    subjects: properties.subjectByCodes,
+    subjectKeys: Object.keys(properties.subjectByCodes),
   }),
   validations: {
     form: {
@@ -146,7 +117,7 @@ export default {
     },
     actionPostQuestion() {
       const formValues = this.form;
-      console.log(JSON.stringify(formValues));
+      // console.log(JSON.stringify(formValues));
       if (formValues["topic"] == null) {
         formValues["topic"] = "";
       }
