@@ -9,18 +9,16 @@
         }"
       >
         <div class="md-toolbar-row">
-          <div class="mdl-grid" style="width: 100%">
+          <div class="mdl-grid" style="width: 100%; padding-left: 10px">
             <div class="mdl-cell mdl-cell--7-col">
               <div class="md-toolbar-section-start">
-                <md-button
-                  class="md-icon-button"
-                  @click="menuVisible = !menuVisible"
-                  v-if="!admin"
-                >
-                  <md-icon :style="{ color: textColor }">menu</md-icon>
-                </md-button>
-
-                <span class="md-title" :style="{ color: textColor }"
+                <span
+                  class="md-title"
+                  :style="{
+                    color: textColor,
+                    'padding-top': '20px',
+                    'font-size': '30px',
+                  }"
                   >Questa <span v-if="admin">Admin</span></span
                 >
               </div>
