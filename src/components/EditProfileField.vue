@@ -212,7 +212,37 @@ export default {
         this.formData["password"] = password;
       }
       this.formData["userId"] = utilities.getUserId(this.$router);
-      console.log(JSON.stringify(this.formData));
+      this.changeProfile(this.formData);
+    },
+    async changeProfile(formData) {
+      var config = {
+        method: "post",
+        url: properties.baseUrl() + "/updateuserprofile",
+        headers: utilities.getAuthJSONHeader(),
+        data: formData,
+      };
+      console.log(config);
+      this.showLoader = true;
+      await axios(config)
+        .then((response) => {
+          console.log(response);
+          this.showLoader = false;
+          this.$swal.fire({
+            icon: "success",
+            title: "Success",
+            text: "Your profile updated successfully.",
+          });
+          this.$emit("closeEditProfile");
+        })
+        .catch((error) => {
+          console.log(error);
+          this.showLoader = false;
+          this.$swal.fire({
+            icon: "error",
+            title: "Unknown error occured",
+            text: "Unable to change data, please try again later.",
+          });
+        });
     },
     togglePasswordFields() {
       delete this.formData["password"];

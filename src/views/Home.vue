@@ -93,7 +93,7 @@
       </md-app-content>
     </md-app>
     <md-dialog :md-active.sync="showProfileDialog">
-      <EditProfileField v-on:editProfile="EditProfileDialog()" />
+      <EditProfileField v-on:closeEditProfile="closeEditProfile" />
     </md-dialog>
   </div>
 </template>
@@ -143,6 +143,9 @@ export default {
     EditProfileField,
   },
   methods: {
+    closeEditProfile() {
+      this.showProfileDialog = false;
+    },
     moveToHomePage() {
       this.ifHome = true;
       this.ifFollowing = false;
