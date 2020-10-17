@@ -1,20 +1,35 @@
 <template>
   <div class="page-container">
     <md-app md-waterfall md-mode="fixed-last">
-      <md-app-toolbar class="md-large md-dense md-primary">
+      <md-app-toolbar
+        class="md-large md-dense"
+        :style="{
+          'background-image': 'url(https://getmdl.io/assets/header.jpg)',
+          color: textColor,
+        }"
+      >
         <div class="md-toolbar-row">
-          <div class="md-toolbar-section-start">
-            <md-button
-              class="md-icon-button"
-              @click="menuVisible = !menuVisible"
-              v-if="!admin"
-            >
-              <md-icon>menu</md-icon>
-            </md-button>
+          <div class="mdl-grid" style="width: 100%">
+            <div class="mdl-cell mdl-cell--7-col">
+              <div class="md-toolbar-section-start">
+                <md-button
+                  class="md-icon-button"
+                  @click="menuVisible = !menuVisible"
+                  v-if="!admin"
+                >
+                  <md-icon :style="{ color: textColor }">menu</md-icon>
+                </md-button>
 
-            <span class="md-title">Questa <span v-if="admin">Admin</span></span>
+                <span class="md-title" :style="{ color: textColor }"
+                  >Questa <span v-if="admin">Admin</span></span
+                >
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--5-col">
+              <h6 style="float: left; padding-right: 3%">Level 1</h6>
+              <div style="padding: 1.5%"><LevelProgressBar /></div>
+            </div>
           </div>
-
           <!-- <div class="md-toolbar-section-end">
 						<md-menu md-direction="bottom-start">
 							<md-button class="vert_btn" md-menu-trigger>
@@ -32,30 +47,57 @@
 
         <!-- reported questions window  -->
         <div v-if="admin" style="padding-left: 2%">
-          <md-button style="border-bottom: 3px solid white">
+          <md-button
+            style="border-bottom: 3px solid white"
+            :style="{ color: textColor }"
+          >
             Reported
           </md-button>
         </div>
         <!--  -->
         <div v-else style="padding-left: 2%">
-          <md-button style="border-bottom: 3px solid white" v-if="ifHome"
+          <md-button
+            style="border-bottom: 3px solid white"
+            v-if="ifHome"
+            :style="{ color: textColor }"
             >Home</md-button
           >
-          <md-button v-else @click="moveToHomePage()">Home</md-button>
-
-          <md-button style="border-bottom: 3px solid white" v-if="ifFollowing"
-            >Following</md-button
+          <md-button
+            :style="{ color: textColor }"
+            v-else
+            @click="moveToHomePage()"
+            >Home</md-button
           >
-          <md-button v-else @click="moveToFollowingPage()">Following</md-button>
 
           <md-button
+            :style="{ color: textColor }"
+            style="border-bottom: 3px solid white"
+            v-if="ifFollowing"
+            >Following</md-button
+          >
+          <md-button
+            :style="{ color: textColor }"
+            v-else
+            @click="moveToFollowingPage()"
+            >Following</md-button
+          >
+
+          <md-button
+            :style="{ color: textColor }"
             style="border-bottom: 3px solid white"
             v-if="ifAnsweredByUser"
             >Commented</md-button
           >
-          <md-button v-else @click="moveToAnswersPage()">Commented</md-button>
+          <md-button
+            :style="{ color: textColor }"
+            v-else
+            @click="moveToAnswersPage()"
+            >Commented</md-button
+          >
 
-          <md-button @click="EditProfileDialog()">Edit Profile</md-button>
+          <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
+            >Edit Profile</md-button
+          >
 
           <!-- <md-tabs class="md-primary">
 						<md-tab
@@ -75,7 +117,9 @@
 						></md-tab>
 					</md-tabs> -->
         </div>
-        <md-button @click="logout()">Sign out</md-button>
+        <md-button :style="{ color: textColor }" @click="logout()"
+          >Sign out</md-button
+        >
       </md-app-toolbar>
 
       <md-app-drawer v-if="!admin" :md-active.sync="menuVisible">
@@ -101,6 +145,7 @@
 <script>
 import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
+import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import EditProfileField from "@/components/EditProfileField.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
@@ -115,6 +160,7 @@ export default {
     this.admin = utilities.getUserType(this.$router, this.$swal) == "ADMIN";
   },
   data: () => ({
+    textColor: "white",
     admin: false, //  true for admin.
     menuVisible: false,
     ifHome: true,
@@ -134,6 +180,7 @@ export default {
     lastUser: null,
   }),
   components: {
+    LevelProgressBar,
     ReportedQuestionsForAdmin,
     HomePageDrawer,
     HomePage,
