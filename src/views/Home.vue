@@ -124,7 +124,7 @@
         <HomePageDrawer v-on:editprofile="EditProfileDialog()" />
       </md-app-drawer> -->
 
-      <md-app-content style="background-color: #edf9f6" v-if="!admin">
+      <md-app-content v-if="!admin">
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
         <AnsweredByUser v-if="ifAnsweredByUser" />

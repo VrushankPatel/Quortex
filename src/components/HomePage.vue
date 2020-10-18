@@ -6,10 +6,13 @@
         v-if="!dataNotFound"
         class="questtext"
         @click="openAskQuestionDialog()"
+        style="background-color: #3b3b3b; color: white"
       >
         Ask your question
-        <md-icon v-if="!showAskQuestionDialog">arrow_drop_down</md-icon>
-        <md-icon v-else>arrow_drop_up</md-icon>
+        <md-icon style="color: white" v-if="!showAskQuestionDialog"
+          >arrow_drop_down</md-icon
+        >
+        <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
       </div>
     </md-card>
     <AskQuestionCard
@@ -18,10 +21,17 @@
       disabled
     />
     <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
-      <div v-if="!dataNotFound" class="questtext" @click="openFilterDialog()">
+      <div
+        v-if="!dataNotFound"
+        class="questtext"
+        @click="openFilterDialog()"
+        style="background-color: #3b3b3b; color: white"
+      >
         Apply filters here
-        <md-icon v-if="!showFilterCard">arrow_drop_down</md-icon>
-        <md-icon v-else>arrow_drop_up</md-icon>
+        <md-icon style="color: white" v-if="!showFilterCard"
+          >arrow_drop_down</md-icon
+        >
+        <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
       </div>
     </md-card>
     <FilterQuestion

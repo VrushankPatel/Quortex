@@ -1,7 +1,8 @@
 <template>
   <div style="padding-top: 1%">
     <md-card class="qacard" style="border: none">
-      <div style="color: white; background-color: #778ca3">
+      <div style="color: white; background-color: #3d3d3d">
+        <!-- #4b4b4b try this for above background color-->
         <md-card-header style="width: 100%; float: left">
           <div class="md-layout md-gutter md-alignment-center">
             <div
