@@ -125,7 +125,7 @@ export default {
           parseFloat(document.documentElement.scrollHeight) -
             parseFloat(window.innerHeight);
         if (bottomOfWindow) {
-          alert("end");
+          console.log("end detected");
           this.scrolledToBottom = true; // replace it with your code
         }
       };
