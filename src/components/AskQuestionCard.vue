@@ -3,9 +3,7 @@
     <form novalidate @submit.prevent="validateUser">
       <md-card class="md-layout-item md-size-95 md-small-size-95">
         <md-card-header>
-          <div class="md-title">
-            Didn't find your question? ask your question here..
-          </div>
+          <div class="md-title">Didn't find your answer? Ask here.</div>
         </md-card-header>
         <md-card-content>
           <div class="md-layout md-gutter">

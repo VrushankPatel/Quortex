@@ -5,6 +5,25 @@
       <div
         v-if="!dataNotFound"
         class="questtext"
+        @click="openFilterDialog()"
+        style="background-color: #3b3b3b; color: white"
+      >
+        Search
+        <md-icon style="color: white" v-if="!showFilterCard"
+          >arrow_drop_down</md-icon
+        >
+        <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+      </div>
+    </md-card>
+    <FilterQuestion
+      v-if="!dataNotFound && showFilterCard"
+      v-on:doFilter="doFilter"
+      v-on:clearFilter="clearFilter"
+    />
+    <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
+      <div
+        v-if="!dataNotFound"
+        class="questtext"
         @click="openAskQuestionDialog()"
         style="background-color: #3b3b3b; color: white"
       >
@@ -19,25 +38,6 @@
       v-if="showAskQuestionDialog"
       v-on:actionReload="getData"
       disabled
-    />
-    <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
-      <div
-        v-if="!dataNotFound"
-        class="questtext"
-        @click="openFilterDialog()"
-        style="background-color: #3b3b3b; color: white"
-      >
-        Apply filters here
-        <md-icon style="color: white" v-if="!showFilterCard"
-          >arrow_drop_down</md-icon
-        >
-        <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
-      </div>
-    </md-card>
-    <FilterQuestion
-      v-if="!dataNotFound && showFilterCard"
-      v-on:doFilter="doFilter"
-      v-on:clearFilter="clearFilter"
     />
     <div v-if="nonfiltered">
       <div v-for="item in questions" :key="item.questionId">
@@ -108,7 +108,28 @@ export default {
   beforeMount() {
     this.getData();
   },
+  mounted() {
+    this.scroll();
+  },
   methods: {
+    scroll() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          Math.ceil(
+            Math.max(
+              window.pageYOffset,
+              document.documentElement.scrollTop,
+              document.body.scrollTop
+            )
+          ) ===
+          parseFloat(document.documentElement.scrollHeight) -
+            parseFloat(window.innerHeight);
+        if (bottomOfWindow) {
+          alert("end");
+          this.scrolledToBottom = true; // replace it with your code
+        }
+      };
+    },
     openFilterDialog() {
       this.showFilterCard = !this.showFilterCard;
     },
@@ -155,6 +176,7 @@ export default {
       };
       axios(config)
         .then((response) => {
+          console.log("filtered res is : " + JSON.stringify(response));
           this.questions = response.data;
           this.showLoader = false;
         })
@@ -180,7 +202,7 @@ export default {
     nonfiltered: true,
     filtered: false,
     showAskQuestionDialog: false,
-    showFilterCard: false,
+    showFilterCard: true,
     dataNotFound: false,
   }),
 };

@@ -4,7 +4,8 @@
       <md-card class="md-layout-item md-size-95 md-small-size-95">
         <md-card-header>
           <div class="md-title">
-            <md-icon>filter_list</md-icon> Apply filters
+            <md-icon>filter_list</md-icon> Apply filters here
+            <!-- Search -->
           </div>
         </md-card-header>
         <md-card-content>
