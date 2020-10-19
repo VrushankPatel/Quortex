@@ -12,6 +12,6 @@ export default {
 		10: "10",
 		11: "11",
 		12: "12",
-		above: "Above",
+		100: "above",
 	},
 };
