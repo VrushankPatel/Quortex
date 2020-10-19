@@ -48,7 +48,7 @@
           >
             <div
               class="md-title"
-              style="float: left; text-align: left; font-size: 120%"
+              style="float: left; text-align: left; font-size: 120%;padding-left:2%"
             >
               {{ questionDesc }}
             </div>

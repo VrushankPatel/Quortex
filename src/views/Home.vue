@@ -12,7 +12,12 @@
           <div class="mdl-grid" style="width: 100%; padding-left: 10px">
             <div class="mdl-cell mdl-cell--7-col">
               <div class="md-toolbar-section-start">
-                <span
+                <img
+                  src="@/assets/images/questa.png"
+                  width="170"
+                  alt="Questa"
+                />
+                <!-- <span
                   class="md-title"
                   :style="{
                     color: textColor,
@@ -20,7 +25,7 @@
                     'font-size': '30px',
                   }"
                   >Questa <span v-if="admin">Admin</span></span
-                >
+                > -->
               </div>
             </div>
             <div class="mdl-cell mdl-cell--5-col">
