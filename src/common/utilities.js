@@ -14,6 +14,7 @@ export default {
 	getAuthJSONHeader(router, swal) {
 		if (actions.checkSignedIn()) {
 			return {
+				"Access-Control-Allow-Origin": "*",
 				Authorization: "Bearer " + cryptoUtil.getItem("questatoken", router),
 				"Content-Type": "application/json",
 			};
