@@ -16,8 +16,9 @@
             >
               <div class="md-title" style="float: left">
                 <span class="topicAndSubject"
-                  ><md-icon style="color: white">person</md-icon>
-                  {{ nickName }}</span
+                  ><md-icon style="color: white">person</md-icon> @{{
+                    nickName
+                  }}</span
                 >
               </div>
             </div>
@@ -37,7 +38,7 @@
               class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
             >
               <div class="md-title" style="float: right; font-size: 115%">
-                Posted on : {{ getFormattedDate(dateOfPosted) }}
+                {{ getFormattedDate(dateOfPosted) }}
               </div>
             </div>
           </div>
@@ -48,7 +49,12 @@
           >
             <div
               class="md-title"
-              style="float: left; text-align: left; font-size: 120%;padding-left:2%"
+              style="
+                float: left;
+                text-align: left;
+                font-size: 120%;
+                padding-left: 2%;
+              "
             >
               {{ questionDesc }}
             </div>
@@ -220,7 +226,7 @@
                 font-size: 115%;
               "
             >
-              Posted on : {{ getFormattedDate(item.createDate) }}
+              {{ getFormattedDate(item.createDate) }}
             </div>
           </div>
           <div class="md-layout md-gutter md-alignment-center">
@@ -321,8 +327,6 @@
                     v-if="item.answerFeedbackByCurrentUser.liked == false"
                     @click="
                       item.answerFeedbackByCurrentUser.liked = true;
-                      item.noOfLikes++;
-                      item.noOfDislikes--;
                       likeAnswer(item.answerId);
                     "
                   >
@@ -338,8 +342,6 @@
                     v-if="item.answerFeedbackByCurrentUser.liked == true"
                     @click="
                       item.answerFeedbackByCurrentUser.liked = false;
-                      item.noOfLikes--;
-                      item.noOfDislikes++;
                       dislikeAnswer(item.answerId);
                     "
                   >
@@ -393,8 +395,6 @@
                         liked: true,
                         unliked: false,
                       };
-                      item.noOfLikes++;
-                      item.noOfDislikes--;
                       likeAnswer(item.answerId);
                     "
                   >
@@ -406,8 +406,6 @@
                         liked: false,
                         unliked: true,
                       };
-                      item.noOfLikes--;
-                      item.noOfDislikes++;
                       dislikeAnswer(item.answerId);
                     "
                   >
