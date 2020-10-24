@@ -4,14 +4,24 @@
       <div class="notfound">
         <div class="notfound-404">
           <!-- <h1>Oops!</h1> -->
-          <h2>{{ message }}</h2>
+          <h2
+            v-bind:style="{
+              backgroundColor: this.backgroundColor,
+            }"
+          >
+            {{ message }}
+          </h2>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import properties from "@/common/properties.js";
 export default {
+  data: () => ({
+    backgroundColor: properties.getGeneralBackgroundColor(),
+  }),
   props: {
     message: String,
   },

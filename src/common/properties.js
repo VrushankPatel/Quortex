@@ -42,4 +42,7 @@ export default {
 	getTextColor() {
 		return "lightgrey";
 	},
+	getGeneralBackgroundColor() {
+		return "#edf9f6";
+	},
 };

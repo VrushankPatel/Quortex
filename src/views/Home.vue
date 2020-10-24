@@ -129,7 +129,12 @@
         <HomePageDrawer v-on:editprofile="EditProfileDialog()" />
       </md-app-drawer> -->
 
-      <md-app-content v-if="!admin" style="background-color: #edf9f6">
+      <md-app-content
+        v-if="!admin"
+        v-bind:style="{
+          backgroundColor: this.backgroundColor,
+        }"
+      >
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
         <AnsweredByUser v-if="ifAnsweredByUser" />
@@ -156,6 +161,7 @@ import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vu
 // import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import properties from "@/common/properties.js";
 export default {
   name: "Home",
   beforeMount() {
@@ -163,6 +169,7 @@ export default {
     this.admin = utilities.getUserType(this.$router, this.$swal) == "ADMIN";
   },
   data: () => ({
+    backgroundColor: properties.getGeneralBackgroundColor(),
     textColor: "white",
     admin: false, //  true for admin.
     menuVisible: false,

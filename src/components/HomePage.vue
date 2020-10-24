@@ -1,7 +1,10 @@
 <template>
   <div style="min-height: 650px">
     <Loader v-if="showLoader" />
-    <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
+    <md-card
+      class="md-layout-item md-size-95 md-small-size-95 customcard"
+      v-if="!dataNotFound"
+    >
       <div
         v-if="!dataNotFound"
         class="questtext"
@@ -20,7 +23,10 @@
       v-on:doFilter="doFilter"
       v-on:clearFilter="clearFilter"
     />
-    <md-card class="md-layout-item md-size-95 md-small-size-95 customcard">
+    <md-card
+      class="md-layout-item md-size-95 md-small-size-95 customcard"
+      v-if="!dataNotFound"
+    >
       <div
         v-if="!dataNotFound"
         class="questtext"
