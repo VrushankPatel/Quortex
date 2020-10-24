@@ -145,7 +145,7 @@ export default {
     baseUrl: properties.baseUrl(),
     countries: countriesNames.countries,
     grades: grades.grades,
-    key: "6Lchy9IZAAAAAF_8V-SRBrpDZThPpjP8wqr-bQ7B",
+    key: "6LfE_NoZAAAAAHkMclVflpdbA8UceSVI6ENhRTzu",
     signupEnable: false,
   }),
   methods: {
