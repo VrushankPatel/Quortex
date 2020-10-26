@@ -327,6 +327,8 @@
                     v-if="item.answerFeedbackByCurrentUser.liked == false"
                     @click="
                       item.answerFeedbackByCurrentUser.liked = true;
+                      item.noOfLikes++;
+                      item.noOfDislikes--;
                       likeAnswer(item.answerId);
                     "
                   >
@@ -342,6 +344,8 @@
                     v-if="item.answerFeedbackByCurrentUser.liked == true"
                     @click="
                       item.answerFeedbackByCurrentUser.liked = false;
+                      item.noOfLikes--;
+                      item.noOfDislikes++;
                       dislikeAnswer(item.answerId);
                     "
                   >
@@ -395,6 +399,7 @@
                         liked: true,
                         unliked: false,
                       };
+                      item.noOfLikes++;
                       likeAnswer(item.answerId);
                     "
                   >
@@ -406,6 +411,7 @@
                         liked: false,
                         unliked: true,
                       };
+                      item.noOfDislikes++;
                       dislikeAnswer(item.answerId);
                     "
                   >
