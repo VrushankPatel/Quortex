@@ -33,7 +33,6 @@ export default {
 	},
 	getUserType(router, swal) {
 		var userType = cryptoUtil.getItem("questausertype", router);
-		console.log("usertype = " + (userType == ""));
 
 		if (userType != "") {
 			return userType;

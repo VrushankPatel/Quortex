@@ -53,7 +53,7 @@ export default {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data.role);
+          console.log(JSON.stringify(response.data));
           this.showLoader = false;
           cryptoUtil.setItem("questauserId", response.data.userId);
           cryptoUtil.setItem("questatoken", response.data.token);
