@@ -89,13 +89,13 @@
             :style="{ color: textColor }"
             style="border-bottom: 3px solid white"
             v-if="ifAnsweredByUser"
-            >Commented</md-button
+            >Answered</md-button
           >
           <md-button
             :style="{ color: textColor }"
             v-else
             @click="moveToAnswersPage()"
-            >Commented</md-button
+            >Answered</md-button
           >
 
           <md-button :style="{ color: textColor }" @click="EditProfileDialog()"

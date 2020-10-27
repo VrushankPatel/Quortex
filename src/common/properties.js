@@ -23,6 +23,8 @@ export default {
 		15: "History ",
 		16: "AP®️ World History ",
 		17: "AP®️ US History",
+		18: "General/Life Advice",
+		19: "College Admissions",
 	},
 	months: {
 		1: "January",
