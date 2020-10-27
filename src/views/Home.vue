@@ -94,8 +94,21 @@
           <md-button
             :style="{ color: textColor }"
             v-else
-            @click="moveToAnswersPage()"
+            @click="moveToAnsweredPage()"
             >Answered</md-button
+          >
+
+          <md-button
+            :style="{ color: textColor }"
+            style="border-bottom: 3px solid white"
+            v-if="ifAnswerByUser"
+            >Answer</md-button
+          >
+          <md-button
+            :style="{ color: textColor }"
+            v-else
+            @click="moveToAnswerPage()"
+            >Answer</md-button
           >
 
           <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
@@ -116,7 +129,7 @@
 						<md-tab
 							id="tab-answers"
 							md-label="Answers"
-							@click="moveToAnswersPage()"
+							@click="moveToAnsweredPage()"
 						></md-tab>
 					</md-tabs> -->
         </div>
@@ -137,8 +150,7 @@
       >
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
-        <AnsweredByUser v-if="ifAnsweredByUser" />
-        <!-- <Questions v-if="ifQuestions" /> -->
+        <AnsweredByUser v-if="ifAnsweredByUser || ifAnswerByUser" />
       </md-app-content>
       <md-app-content v-else>
         <ReportedQuestionsForAdmin />
@@ -176,6 +188,7 @@ export default {
     ifHome: true,
     ifFollowing: false,
     ifAnsweredByUser: false,
+    ifAnswerByUser: true,
     // ifQuestions: false,
     showProfileDialog: false,
     form: {
@@ -207,16 +220,25 @@ export default {
       this.ifHome = true;
       this.ifFollowing = false;
       this.ifAnsweredByUser = false;
+      this.ifAnswerByUser = false;
     },
     moveToFollowingPage() {
       this.ifHome = false;
       this.ifFollowing = true;
       this.ifAnsweredByUser = false;
+      this.ifAnswerByUser = false;
     },
-    moveToAnswersPage() {
+    moveToAnsweredPage() {
       this.ifHome = false;
       this.ifFollowing = false;
       this.ifAnsweredByUser = true;
+      this.ifAnswerByUser = false;
+    },
+    moveToAnswerPage() {
+      this.ifHome = false;
+      this.ifFollowing = false;
+      this.ifAnsweredByUser = false;
+      this.ifAnswerByUser = true;
     },
     logout() {
       actions.fireLoggedOut(this.$swal, this.$router);
