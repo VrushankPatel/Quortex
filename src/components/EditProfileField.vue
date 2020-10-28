@@ -1,100 +1,109 @@
 <template>
   <div class="signup-form">
-    <Loader v-if="showLoader" />
     <FormulateForm @submit="editProfile" class="login-form">
-      <h2>Questa</h2>
-      <!-- <p>{{ formData }}</p> -->
-      <center>
-        <u>
-          <p style="font-size: 120%; color: grey">Edit Profile</p>
-        </u>
+      <div v-if="dataNotFound">
+        <DataNotFound message="Unable to fetch data, please try again later." />
+      </div>
+      <center v-if="showLoader">
+        <div>
+          <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+          <h4>Loading Data</h4>
+        </div>
       </center>
-      <div class="double-wide">
-        <FormulateInput
-          v-model="formData.firstName"
-          name="firstname"
-          type="text"
-          label="firstname"
-          placeholder="Your Firstname"
-          validation="required"
-          autocomplete="off"
-        />
-        <FormulateInput
-          id="lastname"
-          v-model="formData.lastName"
-          name="lastname"
-          type="text"
-          label="lastname"
-          placeholder="Your Lastname"
-          validation="required"
-          autocomplete="off"
-        />
-      </div>
-      <div class="double-wide">
-        <FormulateInput
-          v-model="formData.nickName"
-          name="nickName"
-          type="text"
-          label="Nick Name"
-          placeholder="Your Nickname"
-          validation="required"
-          autocomplete="off"
-        />
-        <FormulateInput
-          v-model="formData.email"
-          name="email"
-          type="email"
-          label="Email address"
-          placeholder="Email address"
-          validation="email"
-          autocomplete="off"
-        />
-      </div>
-      <!-- validation="required|after:2019-01-01"
+      <div v-if="!showLoader && !dataNotFound">
+        <h2>Questa</h2>
+        <!-- <p>{{ formData }}</p> -->
+        <center>
+          <u>
+            <p style="font-size: 120%; color: grey">Edit Profile</p>
+          </u>
+        </center>
+        <div class="double-wide">
+          <FormulateInput
+            v-model="formData.firstName"
+            name="firstname"
+            type="text"
+            label="firstname"
+            placeholder="Your Firstname"
+            validation="required"
+            autocomplete="off"
+          />
+          <FormulateInput
+            id="lastname"
+            v-model="formData.lastName"
+            name="lastname"
+            type="text"
+            label="lastname"
+            placeholder="Your Lastname"
+            validation="required"
+            autocomplete="off"
+          />
+        </div>
+        <div class="double-wide">
+          <FormulateInput
+            v-model="formData.nickName"
+            name="nickName"
+            type="text"
+            label="Nick Name"
+            placeholder="Your Nickname"
+            validation="required"
+            autocomplete="off"
+          />
+          <FormulateInput
+            v-model="formData.email"
+            name="email"
+            type="email"
+            label="Email address"
+            placeholder="Email address"
+            validation="email"
+            autocomplete="off"
+          />
+        </div>
+        <!-- validation="required|after:2019-01-01"
         min="2018-12-01"
       max="2021-01-01"-->
-      <div class="double-wide">
-        <FormulateInput
-          v-model="formData.birthdate"
-          type="date"
-          name="DOB"
-          label="Date of birth"
-          placeholder="Date of birth"
-          validation="required"
-          autocomplete="off"
-        />
-        <FormulateInput
-          v-model="formData.grade"
-          name="Grade"
-          type="select"
-          label="Grade"
-          placeholder="Grade"
-          validation="required"
-          autocomplete="off"
-          :options="grades"
-        />
-      </div>
-      <div class="double-wide">
-        <FormulateInput
-          v-model="formData.school"
-          name="School"
-          type="text"
-          label="School"
-          placeholder="School"
-          validation="required"
-        />
-        <FormulateInput
-          v-model="formData.country"
-          name="Country"
-          type="select"
-          label="Country"
-          placeholder="Choose your country"
-          validation="required"
-          autocomplete="off"
-          :options="countries"
-        />
-      </div>
-      <!-- <FormulateInput
+        <div class="double-wide">
+          <FormulateInput
+            v-model="formData.birthdate"
+            type="date"
+            name="DOB"
+            label="Date of birth"
+            placeholder="Date of birth"
+            validation="required"
+            autocomplete="off"
+          />
+          <FormulateInput
+            v-model="formData.grade"
+            name="Grade"
+            type="select"
+            label="Grade"
+            placeholder="Grade"
+            validation="required"
+            autocomplete="off"
+            :options="grades"
+          />
+        </div>
+        <div class="double-wide">
+          <FormulateInput
+            v-model="formData.school"
+            name="School"
+            type="text"
+            label="School"
+            placeholder="School"
+            validation="required"
+          />
+          <FormulateInput
+            v-model="formData.country"
+            name="Country"
+            type="select"
+            label="Country"
+            placeholder="Choose your country"
+            validation="required"
+            autocomplete="off"
+            :options="countries"
+          />
+        </div>
+        <!-- <FormulateInput
         v-model="formData.country"
         name="Country"
         type="text"
@@ -102,47 +111,48 @@
         placeholder="Country"
         validation="required"
       /> -->
-      <div class="double-wide" v-if="changePassword">
-        <FormulateInput
-          name="password"
-          id="passwordConf"
-          type="password"
-          label="Password"
-          placeholder="Your password"
-          validation
-        />
-        <FormulateInput
-          name="password_confirm"
-          type="password"
-          label="Confirm your password"
-          placeholder="Confirm password"
-          validation="confirm"
-          validation-name="Confirmation"
-        />
-      </div>
-      <div class="double-wide">
-        <FormulateInput
-          v-if="toggler"
-          type="button"
-          @click="togglePasswordFields()"
-          label="Change your password"
-        />
-        <FormulateInput
-          v-else
-          type="button"
-          @click="togglePasswordFields()"
-          label="Keep password as it is"
-        />
-        <div>
-          <FormulateInput type="submit" label="Apply" />
+        <div class="double-wide" v-if="changePassword">
+          <FormulateInput
+            name="password"
+            id="passwordConf"
+            type="password"
+            label="Password"
+            placeholder="Your password"
+            validation
+          />
+          <FormulateInput
+            name="password_confirm"
+            type="password"
+            label="Confirm your password"
+            placeholder="Confirm password"
+            validation="confirm"
+            validation-name="Confirmation"
+          />
         </div>
-      </div>
-      <div
-        class="restoredefault"
-        title="Restore Defaults"
-        @click="restoreFormDefaults()"
-      >
-        <md-icon>restore</md-icon>
+        <div class="double-wide">
+          <FormulateInput
+            v-if="toggler"
+            type="button"
+            @click="togglePasswordFields()"
+            label="Change your password"
+          />
+          <FormulateInput
+            v-else
+            type="button"
+            @click="togglePasswordFields()"
+            label="Keep password as it is"
+          />
+          <div>
+            <FormulateInput type="submit" label="Apply" />
+          </div>
+        </div>
+        <div
+          class="restoredefault"
+          title="Restore Defaults"
+          @click="restoreFormDefaults()"
+        >
+          <md-icon>restore</md-icon>
+        </div>
       </div>
     </FormulateForm>
   </div>
@@ -151,17 +161,19 @@
 <script>
 import properties from "@/common/properties.js";
 import axios from "axios";
-import actions from "@/common/actions.js";
+// import actions from "@/common/actions.js";
+import DataNotFound from "@/components/DataNotFound.vue";
 import countriesNames from "@/common/countriesNames.js";
 import utilities from "@/common/utilities.js";
 import grades from "@/common/grades.js";
-import Loader from "@/components/Loader.vue";
 export default {
   name: "EditProfileField",
   components: {
-    Loader,
+    DataNotFound,
+    // Loader,
   },
   data: () => ({
+    dataNotFound: false,
     formData: {
       firstName: "",
       lastName: "",
@@ -269,7 +281,8 @@ export default {
         .catch((error) => {
           console.log(error);
           this.showLoader = false;
-          actions.fireLoggedOut(this.$swal, this.$router);
+          this.dataNotFound = true;
+          // actions.fireLoggedOut(this.$swal, this.$router);
         });
     },
   },

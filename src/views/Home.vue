@@ -150,7 +150,8 @@
       >
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
-        <AnsweredByUser v-if="ifAnsweredByUser || ifAnswerByUser" />
+        <AnsweredByUser v-if="ifAnsweredByUser" />
+        <AnswerByUser v-if="ifAnswerByUser" />
       </md-app-content>
       <md-app-content v-else>
         <ReportedQuestionsForAdmin />
@@ -169,6 +170,7 @@ import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import EditProfileField from "@/components/EditProfileField.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
+import AnswerByUser from "@/components/AnswerByUser.vue";
 import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vue";
 // import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
@@ -188,7 +190,7 @@ export default {
     ifHome: true,
     ifFollowing: false,
     ifAnsweredByUser: false,
-    ifAnswerByUser: true,
+    ifAnswerByUser: false,
     // ifQuestions: false,
     showProfileDialog: false,
     form: {
@@ -203,6 +205,7 @@ export default {
     lastUser: null,
   }),
   components: {
+    AnswerByUser,
     LevelProgressBar,
     ReportedQuestionsForAdmin,
     // HomePageDrawer,

@@ -1,50 +1,51 @@
 <template>
   <div style="min-height: 650px">
-    <Loader v-if="showLoader" />
-    <md-card
-      class="md-layout-item md-size-95 md-small-size-95 customcard"
-      v-if="!dataNotFound"
-    >
-      <div
+    <div v-if="!showLoader">
+      <md-card
+        class="md-layout-item md-size-95 md-small-size-95 customcard"
         v-if="!dataNotFound"
-        class="questtext"
-        @click="openFilterDialog()"
-        style="background-color: #3b3b3b; color: white"
       >
-        Search
-        <md-icon style="color: white" v-if="!showFilterCard"
-          >arrow_drop_down</md-icon
+        <div
+          v-if="!dataNotFound"
+          class="questtext"
+          @click="openFilterDialog()"
+          style="background-color: #3b3b3b; color: white"
         >
-        <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
-      </div>
-    </md-card>
-    <FilterQuestion
-      v-if="!dataNotFound && showFilterCard"
-      v-on:doFilter="doFilter"
-      v-on:clearFilter="clearFilter"
-    />
-    <md-card
-      class="md-layout-item md-size-95 md-small-size-95 customcard"
-      v-if="!dataNotFound"
-    >
-      <div
+          Search
+          <md-icon style="color: white" v-if="!showFilterCard"
+            >arrow_drop_down</md-icon
+          >
+          <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+        </div>
+      </md-card>
+      <FilterQuestion
+        v-if="!dataNotFound && showFilterCard"
+        v-on:doFilter="doFilter"
+        v-on:clearFilter="clearFilter"
+      />
+      <md-card
+        class="md-layout-item md-size-95 md-small-size-95 customcard"
         v-if="!dataNotFound"
-        class="questtext"
-        @click="openAskQuestionDialog()"
-        style="background-color: #3b3b3b; color: white"
       >
-        Ask your question
-        <md-icon style="color: white" v-if="!showAskQuestionDialog"
-          >arrow_drop_down</md-icon
+        <div
+          v-if="!dataNotFound"
+          class="questtext"
+          @click="openAskQuestionDialog()"
+          style="background-color: #3b3b3b; color: white"
         >
-        <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
-      </div>
-    </md-card>
-    <AskQuestionCard
-      v-if="showAskQuestionDialog"
-      v-on:actionReload="getData"
-      disabled
-    />
+          Ask your question
+          <md-icon style="color: white" v-if="!showAskQuestionDialog"
+            >arrow_drop_down</md-icon
+          >
+          <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+        </div>
+      </md-card>
+      <AskQuestionCard
+        v-if="showAskQuestionDialog"
+        v-on:actionReload="getData"
+        disabled
+      />
+    </div>
     <div v-if="nonfiltered">
       <div v-for="item in questions" :key="item.questionId">
         <QuestionCard
@@ -85,7 +86,10 @@
       </div>
     </div>
 
-    <Loader v-if="showLoader" />
+    <div v-if="showLoader">
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+      <h4>Loading Data</h4>
+    </div>
     <div v-if="dataNotFound">
       <DataNotFound message="Unable to fetch data, please try again later." />
     </div>
@@ -93,7 +97,7 @@
 </template>
 
 <script>
-import Loader from "@/components/Loader.vue";
+// import Loader from "@/components/Loader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import AskQuestionCard from "@/components/AskQuestionCard.vue";
@@ -106,7 +110,7 @@ export default {
   name: "HomePage",
   components: {
     QuestionCard,
-    Loader,
+    // Loader,
     FilterQuestion,
     AskQuestionCard,
     DataNotFound,

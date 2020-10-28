@@ -6,7 +6,7 @@
           <!-- <h1>Oops!</h1> -->
           <h2
             v-bind:style="{
-              backgroundColor: this.backgroundColor,
+              backgroundColor: 'transparent',
             }"
           >
             {{ message }}
@@ -42,7 +42,7 @@ body {
 
 #notfound {
   position: relative;
-  height: 100vh;
+  height: 50vh;
 }
 
 #notfound .notfound {
