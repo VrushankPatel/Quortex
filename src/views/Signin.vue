@@ -53,11 +53,15 @@ export default {
       };
       axios(config)
         .then((response) => {
-          console.log(JSON.stringify(response.data));
+          console.log(JSON.stringify(response.data.userProgressLevel));
           this.showLoader = false;
           cryptoUtil.setItem("questauserId", response.data.userId);
           cryptoUtil.setItem("questatoken", response.data.token);
           cryptoUtil.setItem("questausertype", response.data.role);
+          cryptoUtil.setItem(
+            "userProgressLevel",
+            JSON.stringify(response.data.userProgressLevel)
+          );
           actions.successSignin(
             swal,
             response.data.code,

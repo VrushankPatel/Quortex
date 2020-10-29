@@ -28,9 +28,13 @@
                 > -->
               </div>
             </div>
-            <div class="mdl-cell mdl-cell--5-col">
-              <h6 style="float: left; padding-right: 3%">Level 1</h6>
-              <div style="padding: 1.5%"><LevelProgressBar /></div>
+            <div class="mdl-cell mdl-cell--5-col" v-if="!admin">
+              <h6 style="float: left; padding-right: 3%">
+                Level {{ this.userProgressLevel.level }}
+              </h6>
+              <div style="padding: 1.5%">
+                <LevelProgressBar :level="this.progressLevelInPercentage" />
+              </div>
             </div>
           </div>
           <!-- <div class="md-toolbar-section-end">
@@ -175,12 +179,19 @@ import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vu
 // import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
+import cryptoUtil from "@/common/cryptoUtil.js";
 import properties from "@/common/properties.js";
 export default {
   name: "Home",
   beforeMount() {
-    document.body.style.backgroundColor = "white";
+    // document.body.style.backgroundColor = "white";
     this.admin = utilities.getUserType(this.$router, this.$swal) == "ADMIN";
+    this.userProgressLevel = JSON.parse(
+      cryptoUtil.getItem("userProgressLevel", this.$router)
+    );
+    this.progressLevelInPercentage =
+      (this.userProgressLevel.currentLevelTime * 100) /
+      this.userProgressLevel.currentTotalLevelTime;
   },
   data: () => ({
     backgroundColor: properties.getGeneralBackgroundColor(),

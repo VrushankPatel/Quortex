@@ -3,16 +3,16 @@
     <md-progress-bar
       class="md-accent"
       md-mode="determinate"
-      :md-value="amount"
+      :md-value="level"
     ></md-progress-bar>
   </div>
 </template>
 <script>
 export default {
   name: "ProgressBarDeterminate",
-  data: () => ({
-    amount: 20,
-  }),
+  props: {
+    level: String,
+  },
 };
 </script>
 <style lang="scss" scoped>
