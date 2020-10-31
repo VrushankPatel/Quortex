@@ -1,6 +1,6 @@
 <template>
   <div style="min-height: 650px">
-    <div v-if="!showLoader">
+    <div>
       <md-card
         class="md-layout-item md-size-95 md-small-size-95 customcard"
         v-if="!dataNotFound"
@@ -46,6 +46,10 @@
         disabled
       />
     </div>
+    <div v-if="showLoader">
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+      <h4>Loading Data</h4>
+    </div>
     <div v-if="nonfiltered">
       <div v-for="item in questions" :key="item.questionId">
         <QuestionCard
@@ -86,10 +90,6 @@
       </div>
     </div>
 
-    <div v-if="showLoader">
-      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
-      <h4>Loading Data</h4>
-    </div>
     <div v-if="dataNotFound">
       <DataNotFound message="Unable to fetch data, please try again later." />
     </div>
@@ -170,13 +170,13 @@ export default {
         });
     },
     doFilter(data) {
+      this.nonfiltered = false;
+      this.questions = null;
+      this.showLoader = true;
+      this.filtered = true;
       data = JSON.parse(data);
       data.userId = utilities.getUserId(this.$router);
       data = JSON.stringify(data);
-      console.log(data);
-      this.showLoader = true;
-      this.filtered = true;
-      this.nonfiltered = false;
       var config = {
         method: "post",
         url: properties.baseUrl() + "/findallbysubjecttopic",
@@ -185,7 +185,6 @@ export default {
       };
       axios(config)
         .then((response) => {
-          console.log("filtered res is : " + JSON.stringify(response));
           this.questions = response.data;
           this.showLoader = false;
         })

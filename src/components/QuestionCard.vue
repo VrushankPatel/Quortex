@@ -194,7 +194,7 @@
                 >Close</md-button
               >
               <md-button class="md-primary" @click="postReport(reportDesc)"
-                >Post</md-button
+                >Report</md-button
               >
             </md-dialog-actions>
           </md-dialog>
