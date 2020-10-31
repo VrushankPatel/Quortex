@@ -33,7 +33,8 @@
                 <span class="topicAndSubject">{{ topic }}</span>
               </div>
             </div>
-
+          </div>
+          <div class="md-layout md-gutter md-alignment-center">
             <div
               class="md-layout-item md-large-size-100 md-medium-size-100 md-small-size-100 md-xsmall-size-100"
             >
