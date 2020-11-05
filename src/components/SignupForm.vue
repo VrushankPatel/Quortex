@@ -50,7 +50,7 @@
         type="date"
         name="DOB"
         label="Date of birth"
-        placeholder="Date of birth"
+        placeholder="mm-dd-YYYY"
         validation="required"
         autocomplete="off"
       />
