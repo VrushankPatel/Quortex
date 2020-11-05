@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
 	devServer: {
 		// proxy: "http://localhost:9090",
 		// proxy: "http://questaapp.herokuapp.com",
@@ -10,3 +10,4 @@ module.exports = {
 	// outputDir: "target/dist",
 	// assetsDir: "static",
 };
+*/
