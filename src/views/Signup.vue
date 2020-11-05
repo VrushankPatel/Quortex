@@ -41,7 +41,7 @@ export default {
       axios(config)
         .then((response) => {
           this.showLoader = false;
-          actions.successSignup(
+          actions.actionSignup(
             swal,
             response.data.code,
             response.data.status,
@@ -51,10 +51,11 @@ export default {
         .catch((error) => {
           console.log(JSON.stringify(error));
           this.showLoader = false;
-          actions.errorSignup(
+          actions.actionSignup(
             swal,
             error.response.data.code,
-            error.response.data.status
+            error.response.data.status,
+            router
           );
         });
     },

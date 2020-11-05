@@ -53,7 +53,7 @@ export default {
       };
       axios(config)
         .then((response) => {
-          console.log(JSON.stringify(response.data.userProgressLevel));
+          console.log(JSON.stringify(response));
           this.showLoader = false;
           cryptoUtil.setItem("questauserId", response.data.userId);
           cryptoUtil.setItem("questatoken", response.data.token);
@@ -62,7 +62,7 @@ export default {
             "userProgressLevel",
             JSON.stringify(response.data.userProgressLevel)
           );
-          actions.successSignin(
+          actions.actionSignin(
             swal,
             response.data.code,
             response.data.status,
@@ -70,11 +70,13 @@ export default {
           );
         })
         .catch((error) => {
+          console.log("errored");
           this.showLoader = false;
-          actions.errorSignin(
+          actions.actionSignin(
             swal,
             error.response.data.code,
-            error.response.data.status
+            error.response.data.status,
+            router
           );
         });
     },

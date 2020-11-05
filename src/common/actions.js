@@ -1,6 +1,6 @@
 import cryptoUtil from "@/common/cryptoUtil.js";
 export default {
-	successSignup(swal, code, status, router) {
+	actionSignup(swal, code, status, router) {
 		if (status == true && code == 200) {
 			swal.fire({
 				icon: "success",
@@ -9,13 +9,6 @@ export default {
 			});
 			router.push("/Signin");
 		}
-	},
-	successSignin(swal, code, status, router) {
-		if (status == true && code == 200) {
-			router.push("/home");
-		}
-	},
-	errorSignup(swal, code, status) {
 		if (status == false && code == 531) {
 			swal.fire({
 				icon: "error",
@@ -24,7 +17,29 @@ export default {
 			});
 		}
 	},
-	errorSignin(swal, code, status) {
+	// successSignup(swal, code, status, router) {
+	// 	if (status == true && code == 200) {
+	// 		swal.fire({
+	// 			icon: "success",
+	// 			title: "Success",
+	// 			text: "Account successfully created, \nPlease signin to continue.",
+	// 		});
+	// 		router.push("/Signin");
+	// 	}
+	// },
+	// errorSignup(swal, code, status) {
+	// 	if (status == false && code == 531) {
+	// 		swal.fire({
+	// 			icon: "error",
+	// 			title: "Oops..",
+	// 			text: "Email Id already exists, please try again with different email.",
+	// 		});
+	// 	}
+	// },
+	actionSignin(swal, code, status, router) {
+		if (status == true && code == 200) {
+			router.push("/home");
+		}
 		if (status == false && code == 532) {
 			swal.fire({
 				icon: "error",
@@ -33,6 +48,20 @@ export default {
 			});
 		}
 	},
+	// successSignin(swal, code, status, router) {
+	// 	if (status == true && code == 200) {
+	// 		router.push("/home");
+	// 	}
+	// },
+	// errorSignin(swal, code, status) {
+	// 	if (status == false && code == 532) {
+	// 		swal.fire({
+	// 			icon: "error",
+	// 			title: "Oops..",
+	// 			text: "Incorrect username or password, please try again.",
+	// 		});
+	// 	}
+	// },
 	successQuestionPost(code, status) {
 		if (status == true && code == 200) {
 			return true;
