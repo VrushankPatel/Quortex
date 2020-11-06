@@ -247,12 +247,12 @@ export default {
           this.$emit("closeEditProfile");
         })
         .catch((error) => {
-          console.log(error);
+          console.log(JSON.stringify(error));
           this.showLoader = false;
           this.$swal.fire({
             icon: "error",
-            title: "Unknown error occured",
-            text: "Unable to change data, please try again later.",
+            title: "Email already exists.",
+            text: "An Account with provided email already exists.",
           });
         });
     },
