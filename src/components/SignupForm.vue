@@ -72,7 +72,7 @@
         name="School"
         type="text"
         label="School"
-        placeholder="School"
+        placeholder="Enter full name of school"
         validation="required"
       />
       <FormulateInput
