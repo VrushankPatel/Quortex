@@ -70,7 +70,7 @@ export default {
           );
         })
         .catch((error) => {
-          console.log("errored");
+          console.log("errored" + JSON.stringify(error));
           this.showLoader = false;
           actions.actionSignin(
             swal,
@@ -103,6 +103,11 @@ export default {
         })
         .catch((error) => {
           console.log(error);
+          this.$swal.fire({
+            icon: "error",
+            title: "User not found",
+            text: "There is no account registered with this mail id.",
+          });
           this.showLoader = false;
         });
     },

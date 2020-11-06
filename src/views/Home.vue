@@ -188,6 +188,14 @@ export default {
     this.admin = utilities.getUserType(this.$router, this.$swal) == "ADMIN";
     this.userProgressLevel = JSON.parse(
       cryptoUtil.getItem("userProgressLevel", this.$router)
+    ) || {
+      level: 1,
+      currentLevelTime: 0,
+      currentTotalLevelTime: 0,
+      totalSpendTimeByUser: 0,
+    };
+    console.log(
+      "userprogresslevelis : " + JSON.stringify(this.userProgressLevel)
     );
     this.progressLevelInPercentage =
       (this.userProgressLevel.currentLevelTime * 100) /
