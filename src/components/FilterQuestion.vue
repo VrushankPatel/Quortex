@@ -97,16 +97,16 @@
 
 <script>
 import { validationMixin } from "vuelidate";
-// import { required } from "vuelidate/lib/validators";
 import actions from "@/common/actions.js";
 import properties from "@/common/properties.js";
+import cryptoUtil from "@/common/cryptoUtil.js";
 export default {
   name: "FormValidation",
   mixins: [validationMixin],
   data: () => ({
     position: "left",
     filters: false,
-    form: {
+    form: JSON.parse(cryptoUtil.getItem("FilterData")) || {
       subject: "",
       topic: "",
       questionDesc: "",
@@ -123,7 +123,14 @@ export default {
       topic: {},
     },
   },
+  beforeDestroy() {
+    // console.log(JSON.stringify(this.form));
+    this.callSaveFilter();
+  },
   methods: {
+    callSaveFilter() {
+      cryptoUtil.setItem("FilterData", JSON.stringify(this.form));
+    },
     clearFilters() {
       location.reload();
       this.filters = false;

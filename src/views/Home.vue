@@ -61,7 +61,6 @@
             Reported
           </md-button>
         </div>
-        <!--  -->
         <div v-else style="padding-left: 2%">
           <md-button
             style="border-bottom: 3px solid white"
@@ -75,7 +74,6 @@
             @click="moveToHomePage()"
             >Home</md-button
           >
-
           <md-button
             :style="{ color: textColor }"
             style="border-bottom: 3px solid white"

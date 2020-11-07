@@ -62,6 +62,15 @@ export default {
             "userProgressLevel",
             JSON.stringify(response.data.userProgressLevel)
           );
+          cryptoUtil.setItem(
+            "FilterData",
+            JSON.stringify({
+              subject: "",
+              topic: "",
+              questionDesc: "",
+              searchType: properties.searchTypes[1][1],
+            })
+          );
           actions.actionSignin(
             swal,
             response.data.code,
