@@ -43,22 +43,39 @@
           </div>
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
-              <div class="md-layout-item md-small-size-100">
-                <md-field :class="getValidationClass('topic')">
-                  <label for="Question">Question</label>
-                  <md-input
-                    name="question"
-                    id="question"
-                    v-model="form.questionDesc"
-                  />
-                  <span class="md-error" v-if="!$v.form.topic.required"
-                    >The question is required</span
-                  >
-                  <span class="md-error" v-else-if="!$v.form.topic.minlength"
-                    >Invalid question.</span
-                  >
-                </md-field>
-              </div>
+              <md-field :class="getValidationClass('topic')">
+                <label for="Question">Question</label>
+                <md-input
+                  name="question"
+                  id="question"
+                  v-model="form.questionDesc"
+                />
+                <span class="md-error" v-if="!$v.form.topic.required"
+                  >The question is required</span
+                >
+                <span class="md-error" v-else-if="!$v.form.topic.minlength"
+                  >Invalid question.</span
+                >
+              </md-field>
+            </div>
+            <div class="md-layout-item md-small-size-100">
+              <md-field :class="getValidationClass('subject')">
+                <label for="Search Type">All Qusetions</label>
+                <md-select
+                  name="searchType"
+                  id="searchType"
+                  value="1"
+                  v-model="form.searchType"
+                  md-dense
+                >
+                  <div v-for="item in searchTypesKeys" :key="item">
+                    <md-option v-bind:value="searchType[item][1]">{{
+                      searchType[item][0]
+                    }}</md-option>
+                  </div>
+                </md-select>
+                <span class="md-error">The SearchType is required</span>
+              </md-field>
             </div>
           </div>
         </md-card-content>
@@ -93,9 +110,12 @@ export default {
       subject: "",
       topic: "",
       questionDesc: "",
+      searchType: properties.searchTypes[1][1],
     },
     subjects: properties.subjectByCodes,
+    searchType: properties.searchTypes,
     subjectKeys: Object.keys(properties.subjectByCodes),
+    searchTypesKeys: Object.keys(properties.searchTypes),
   }),
   validations: {
     form: {
@@ -118,7 +138,6 @@ export default {
     },
     actionPostQuestion() {
       const formValues = this.form;
-      // console.log(JSON.stringify(formValues));
       if (formValues["topic"] == null) {
         formValues["topic"] = "";
       }

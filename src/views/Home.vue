@@ -102,7 +102,7 @@
             >Answered</md-button
           >
 
-          <md-button
+          <!-- <md-button
             :style="{ color: textColor }"
             style="border-bottom: 3px solid white"
             v-if="ifAnswerByUser"
@@ -113,7 +113,7 @@
             v-else
             @click="moveToAnswerPage()"
             >Answer</md-button
-          >
+          > -->
 
           <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
             >Edit Profile</md-button

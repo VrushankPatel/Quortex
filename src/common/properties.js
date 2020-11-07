@@ -27,6 +27,11 @@ export default {
 		18: "General/Life Advice",
 		19: "College Admissions",
 	},
+	searchTypes: {
+		1: ["All questions", "ALL"],
+		2: ["Only with answers", "WITHANSWER"],
+		3: ["Unanswered", "WITHOUTANSWER"],
+	},
 	months: {
 		1: "January",
 		2: "Febuary",
