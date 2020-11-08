@@ -2,15 +2,15 @@ export default {
 	baseUrl() {
 		// return "http://localhost:9090";
 		// return "http://localhost:3000";
-		return "http://winterfell.ml:3000";
-		// return "";
+		// return "http://winterfell.ml:3000";
+		return "http://app.questa.tech:6138";
 		// return "https://questaapp.herokuapp.com";
 	},
 	subjectByCodes: {
 		1: "English",
 		2: "English Honors",
 		3: "Algebra 1",
-		4: "Geometry ",
+		4: "Geometry",
 		5: "Algebra 2",
 		6: "Pre-Calculus",
 		7: "AP®️ Calculus AB",

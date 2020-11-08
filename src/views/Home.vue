@@ -87,18 +87,22 @@
             >Following</md-button
           >
 
-          <md-button
-            :style="{ color: textColor }"
-            style="border-bottom: 3px solid white"
-            v-if="ifAnsweredByUser"
-            >Answered</md-button
+          <span
+            title="Click here to see questions that you’ve already answered."
           >
-          <md-button
-            :style="{ color: textColor }"
-            v-else
-            @click="moveToAnsweredPage()"
-            >Answered</md-button
-          >
+            <md-button
+              :style="{ color: textColor }"
+              style="border-bottom: 3px solid white"
+              v-if="ifAnsweredByUser"
+              >Answered</md-button
+            >
+            <md-button
+              :style="{ color: textColor }"
+              v-else
+              @click="moveToAnsweredPage()"
+              >Answered</md-button
+            >
+          </span>
 
           <!-- <md-button
             :style="{ color: textColor }"
@@ -192,9 +196,7 @@ export default {
       currentTotalLevelTime: 0,
       totalSpendTimeByUser: 0,
     };
-    console.log(
-      "userprogresslevelis : " + JSON.stringify(this.userProgressLevel)
-    );
+    // console.log("userprogresslevelis : " + JSON.stringify(this.userProgressLevel));
     this.progressLevelInPercentage =
       (this.userProgressLevel.currentLevelTime * 100) /
       this.userProgressLevel.currentTotalLevelTime;

@@ -60,11 +60,11 @@
             </div>
             <div class="md-layout-item md-small-size-100">
               <md-field :class="getValidationClass('subject')">
-                <label for="Search Type">All Qusetions</label>
+                <label for="Search Type">Search Type</label>
                 <md-select
                   name="searchType"
                   id="searchType"
-                  value="1"
+                  value="All questions"
                   v-model="form.searchType"
                   md-dense
                 >
@@ -80,12 +80,10 @@
           </div>
         </md-card-content>
 
+        <!-- for down -->
+        <!-- v-if="filters" -->
         <md-card-actions>
-          <md-button
-            type="button"
-            class="md-primary"
-            @click="clearFilters()"
-            v-if="filters"
+          <md-button type="button" class="md-primary" @click="clearFilters()"
             >Clear filters</md-button
           >
           <md-button type="submit" class="md-primary">Search</md-button>
@@ -110,7 +108,7 @@ export default {
       subject: "",
       topic: "",
       questionDesc: "",
-      searchType: properties.searchTypes[1][1],
+      searchType: "ALL",
     },
     subjects: properties.subjectByCodes,
     searchType: properties.searchTypes,
@@ -129,9 +127,19 @@ export default {
   },
   methods: {
     callSaveFilter() {
+      console.log(JSON.stringify(this.form));
       cryptoUtil.setItem("FilterData", JSON.stringify(this.form));
     },
     clearFilters() {
+      cryptoUtil.setItem(
+        "FilterData",
+        JSON.stringify({
+          subject: "",
+          topic: "",
+          questionDesc: "",
+          searchType: "ALL",
+        })
+      );
       location.reload();
       this.filters = false;
     },
