@@ -3,7 +3,8 @@ export default {
 		// return "http://localhost:9090";
 		// return "http://localhost:3000";
 		// return "http://winterfell.ml:3000";
-		return "http://app.questa.tech:6138";
+		// return "https://app.questa.tech:6138";
+		return "http://ec2-52-27-175-128.us-west-2.compute.amazonaws.com:6138";
 		// return "https://questaapp.herokuapp.com";
 	},
 	subjectByCodes: {

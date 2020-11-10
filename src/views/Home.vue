@@ -87,9 +87,8 @@
             >Following</md-button
           >
 
-          <span
-            title="Click here to see questions that you’ve already answered."
-          >
+          <!-- title="Click here to see questions that you’ve already answered." -->
+          <span>
             <md-button
               :style="{ color: textColor }"
               style="border-bottom: 3px solid white"
