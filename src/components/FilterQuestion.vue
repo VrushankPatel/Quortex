@@ -140,7 +140,8 @@ export default {
           searchType: "ALL",
         })
       );
-      location.reload();
+      this.$emit("clearFilter");
+      // location.reload();
       this.filters = false;
     },
     getValidationClass(fieldName) {

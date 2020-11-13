@@ -22,6 +22,7 @@
         v-if="!dataNotFound && showFilterCard"
         v-on:doFilter="doFilter"
         v-on:clearFilter="clearFilter"
+        defaultSelection="WITHANSWER"
       />
       <md-card
         class="md-layout-item md-size-95 md-small-size-95 customcard"
@@ -118,11 +119,11 @@ export default {
   beforeMount() {
     this.getData();
   },
-  mounted() {
+  /* mounted() {
     this.scroll();
-  },
+  }, */
   methods: {
-    scroll() {
+    /*scroll() {
       window.onscroll = () => {
         let bottomOfWindow =
           Math.ceil(
@@ -139,6 +140,11 @@ export default {
           this.scrolledToBottom = true; // replace it with your code
         }
       };
+    },*/
+    clearFilter() {
+      this.showLoader = true;
+      this.questions = {};
+      this.getData();
     },
     openFilterDialog() {
       this.showFilterCard = !this.showFilterCard;

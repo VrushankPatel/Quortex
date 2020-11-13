@@ -142,16 +142,23 @@
             @click="togglePasswordFields()"
             label="Keep password as it is"
           />
-          <div>
-            <FormulateInput type="submit" label="Apply" />
-          </div>
+
+          <FormulateInput class="applybtn" type="submit" label="Apply" />
         </div>
+
         <div
           class="restoredefault"
           title="Restore Defaults"
           @click="restoreFormDefaults()"
         >
           <md-icon>restore</md-icon>
+        </div>
+        <div
+          class="spendTime"
+          title="Restore Defaults"
+          @click="restoreFormDefaults()"
+        >
+          Total time spend : {{ this.totalTimespendByUser }}
         </div>
       </div>
     </FormulateForm>
@@ -161,10 +168,10 @@
 <script>
 import properties from "@/common/properties.js";
 import axios from "axios";
-// import actions from "@/common/actions.js";
 import DataNotFound from "@/components/DataNotFound.vue";
 import countriesNames from "@/common/countriesNames.js";
 import utilities from "@/common/utilities.js";
+import cryptoUtil from "@/common/cryptoUtil.js";
 import grades from "@/common/grades.js";
 export default {
   name: "EditProfileField",
@@ -173,6 +180,9 @@ export default {
     // Loader,
   },
   data: () => ({
+    totalTimespendByUser: utilities.secondsToHms(
+      JSON.parse(cryptoUtil.getItem("userProgressLevel")).totalSpendTimeByUser
+    ),
     dataNotFound: false,
     formData: {
       firstName: "",
@@ -335,5 +345,13 @@ export default {
 }
 .restoredefault {
   cursor: pointer;
+}
+
+.spendTime {
+  float: right;
+}
+.applybtn {
+  float: right;
+  padding-left: 34.5%;
 }
 </style>

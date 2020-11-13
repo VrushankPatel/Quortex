@@ -1,83 +1,147 @@
 <template>
   <div style="min-height: 650px">
+    <div>
+      <md-card
+        class="md-layout-item md-size-95 md-small-size-95 customcard"
+        v-if="!dataNotFound"
+      >
+        <div
+          v-if="!dataNotFound"
+          class="questtext"
+          @click="openFilterDialog()"
+          style="background-color: #3b3b3b; color: white"
+        >
+          Search
+          <md-icon style="color: white" v-if="!showFilterCard"
+            >arrow_drop_down</md-icon
+          >
+          <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+        </div>
+      </md-card>
+      <FilterQuestion
+        v-if="!dataNotFound && showFilterCard"
+        v-on:doFilter="doFilter"
+        v-on:clearFilter="clearFilter"
+      />
+    </div>
     <div v-if="showLoader">
       <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
       <h4>Loading Data</h4>
     </div>
+    <div v-if="nonfiltered">
+      <div v-for="item in questions" :key="item.questionId">
+        <QuestionCard
+          :item="item"
+          :subject="item.subject"
+          :topic="item.topic"
+          :nickName="item.nickName"
+          :dateOfPosted="item.createDate"
+          :questionDesc="item.questionDesc"
+          :answerList="item.answerList"
+          :questionId="item.questionId"
+          :noOfAnswers="item.noOfAnswers"
+          :noOfLikes="item.noOfLikes"
+          :noOfFollowers="item.noOfFollowers"
+          v-on:actionReload="getData"
+          disabled
+        />
+      </div>
+    </div>
 
-    <div v-for="item in questions" :key="item.questionId">
-      <QuestionCard
-        :item="item"
-        :subject="item.subject"
-        :topic="item.topic"
-        :nickName="item.nickName"
-        :dateOfPosted="item.createDate"
-        :questionDesc="item.questionDesc"
-        :answerList="item.answerList"
-        :questionId="item.questionId"
-        :noOfAnswers="item.noOfAnswers"
-        :noOfLikes="item.noOfLikes"
-        :noOfFollowers="item.noOfFollowers"
-        v-on:actionReload="getData"
-        disabled
-      />
+    <div v-if="filtered">
+      <div v-for="item in questions" :key="item.questionId">
+        <QuestionCard
+          :item="item"
+          :subject="item.subject"
+          :topic="item.topic"
+          :nickName="item.nickName"
+          :dateOfPosted="item.createDate"
+          :questionDesc="item.questionDesc"
+          :answerList="item.answerList"
+          :questionId="item.questionId"
+          :noOfAnswers="item.noOfAnswers"
+          :noOfLikes="item.noOfLikes"
+          :noOfFollowers="item.noOfFollowers"
+          v-on:actionReload="getData"
+          disabled
+        />
+      </div>
     </div>
 
     <div v-if="dataNotFound">
-      <DataNotFound message="You have not commented any question." />
-    </div>
-
-    <div v-if="unableToFetchData">
       <DataNotFound message="Unable to fetch data, please try again later." />
     </div>
   </div>
 </template>
 
 <script>
+// import Loader from "@/components/Loader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
+import FilterQuestion from "@/components/FilterQuestion.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import properties from "@/common/properties.js";
 export default {
-  name: "AnsweredByUser",
+  name: "HomePage",
   components: {
     QuestionCard,
+    FilterQuestion,
     DataNotFound,
   },
   beforeMount() {
     this.getData();
   },
+  /*mounted() {
+    this.scroll();
+  },*/
   methods: {
+    /* scroll() {
+      window.onscroll = () => {
+        let bottomOfWindow =
+          Math.ceil(
+            Math.max(
+              window.pageYOffset,
+              document.documentElement.scrollTop,
+              document.body.scrollTop
+            )
+          ) ===
+          parseFloat(document.documentElement.scrollHeight) -
+            parseFloat(window.innerHeight);
+        if (bottomOfWindow) {
+          console.log("end detected");
+          this.scrolledToBottom = true; // replace it with your code
+        }
+      };
+    },*/
     clearFilter() {
-      this.filtered = false;
-      this.nonfiltered = true;
       this.showLoader = true;
+      this.questions = {};
       this.getData();
+    },
+    openFilterDialog() {
+      this.showFilterCard = !this.showFilterCard;
     },
     getData() {
       var config = {
         method: "post",
-        url:
-          properties.baseUrl() +
-          "/findallbyanswer/" +
-          utilities.getUserId(this.$router),
+        url: properties.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: {
+          subject: "",
+          topic: "",
+          questionDesc: "",
+          searchType: "WITHOUTANSWER",
+        },
       };
+      console.log("config : " + JSON.stringify(config));
       axios(config)
         .then((response) => {
-          if (!response.data.length) {
-            this.dataNotFound = true;
-          } else {
-            this.dataNotFound = false;
-          }
           this.questions = response.data;
           this.showLoader = false;
         })
         .catch((error) => {
-          this.showLoader = false;
-          this.unableToFetchData = true;
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -85,15 +149,68 @@ export default {
             actions.fireLoggedOut(this.$swal, this.$router);
             return;
           }
+          this.showLoader = false;
+          this.dataNotFound = true;
         });
+    },
+    doFilter(data) {
+      this.nonfiltered = false;
+      this.questions = null;
+      this.showLoader = true;
+      this.filtered = true;
+      data = JSON.parse(data);
+      data.userId = utilities.getUserId(this.$router);
+      data = JSON.stringify(data);
+      var config = {
+        method: "post",
+        url: properties.baseUrl() + "/findallbysubjecttopic",
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+        data: data,
+      };
+      axios(config)
+        .then((response) => {
+          this.questions = response.data;
+          this.showLoader = false;
+        })
+        .catch((error) => {
+          window.setTimeout(() => {
+            this.sending = false;
+          }, 1500);
+          actions.errorQuestionPost(
+            error.response.data.code,
+            error.response.data.status,
+            this.$router,
+            this.$swal
+          );
+        });
+    },
+    openAskQuestionDialog() {
+      this.showAskQuestionDialog = !this.showAskQuestionDialog;
     },
   },
   data: () => ({
     questions: null,
     showLoader: true,
-    unableToFetchData: false,
+    nonfiltered: true,
+    filtered: false,
+    showAskQuestionDialog: false,
+    showFilterCard: true,
+    dataNotFound: false,
   }),
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.questtext {
+  padding: 10px;
+}
+.md-dialog ::v-deep .md-dialog-container {
+  width: 40%;
+}
+.questtext {
+  cursor: pointer;
+}
+.customcard {
+  border: 1px solid lightgrey;
+}
+</style>

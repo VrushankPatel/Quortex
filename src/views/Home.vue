@@ -87,8 +87,9 @@
             >Following</md-button
           >
 
-          <!-- title="Click here to see questions that you’ve already answered." -->
-          <span>
+          <span
+            title="Click here to see questions that you’ve already answered."
+          >
             <md-button
               :style="{ color: textColor }"
               style="border-bottom: 3px solid white"
@@ -103,7 +104,7 @@
             >
           </span>
 
-          <!-- <md-button
+          <md-button
             :style="{ color: textColor }"
             style="border-bottom: 3px solid white"
             v-if="ifAnswerByUser"
@@ -114,7 +115,7 @@
             v-else
             @click="moveToAnswerPage()"
             >Answer</md-button
-          > -->
+          >
 
           <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
             >Edit Profile</md-button
@@ -260,6 +261,15 @@ export default {
       this.ifFollowing = false;
       this.ifAnsweredByUser = false;
       this.ifAnswerByUser = true;
+      cryptoUtil.setItem(
+        "FilterData",
+        JSON.stringify({
+          subject: "",
+          topic: "",
+          questionDesc: "",
+          searchType: properties.searchTypes[3][1],
+        })
+      );
     },
     logout() {
       actions.fireLoggedOut(this.$swal, this.$router);
