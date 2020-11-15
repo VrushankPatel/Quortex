@@ -42,6 +42,7 @@ export default {
 		}
 	},
 	secondsToHms(d) {
+		if (d === 0) return "0 second";
 		d = Number(d);
 		var h = Math.floor(d / 3600);
 		var m = Math.floor((d % 3600) / 60);

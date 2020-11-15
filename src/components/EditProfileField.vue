@@ -204,6 +204,10 @@ export default {
     defaults: {},
   }),
   beforeMount() {
+    console.log(
+      "time spend : " +
+        JSON.parse(cryptoUtil.getItem("userProgressLevel")).totalSpendTimeByUser
+    );
     this.getUserData();
   },
 
@@ -243,11 +247,9 @@ export default {
         headers: utilities.getAuthJSONHeader(),
         data: formData,
       };
-      console.log(config);
       this.showLoader = true;
       await axios(config)
-        .then((response) => {
-          console.log(response);
+        .then((/*response*/) => {
           this.showLoader = false;
           this.$swal.fire({
             icon: "success",

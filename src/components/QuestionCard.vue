@@ -476,6 +476,7 @@
 
 <script>
 import axios from "axios";
+import cryptoUtil from "@/common/cryptoUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import properties from "@/common/properties.js";
@@ -662,10 +663,12 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      console.log(data);
       axios(config)
         .then((response) => {
-          console.log(JSON.stringify(response));
+          cryptoUtil.setItem(
+            "userProgressLevel",
+            JSON.stringify(response.data.userProgressLevel)
+          );
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
