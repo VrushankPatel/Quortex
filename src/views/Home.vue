@@ -117,6 +117,19 @@
             >Answer</md-button
           >
 
+          <md-button
+            :style="{ color: textColor }"
+            style="border-bottom: 3px solid white"
+            v-if="ifChallenge"
+            >Challenge</md-button
+          >
+          <md-button
+            :style="{ color: textColor }"
+            v-else
+            @click="moveToChallengePage()"
+            >Challenge</md-button
+          >
+
           <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
             >Edit Profile</md-button
           >
@@ -158,6 +171,7 @@
         <Following v-if="ifFollowing" />
         <AnsweredByUser v-if="ifAnsweredByUser" />
         <AnswerByUser v-if="ifAnswerByUser" />
+        <ChallengePage v-if="ifChallenge" />
       </md-app-content>
       <md-app-content v-else>
         <ReportedQuestionsForAdmin />
@@ -177,6 +191,7 @@ import EditProfileField from "@/components/EditProfileField.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
 import AnswerByUser from "@/components/AnswerByUser.vue";
+import ChallengePage from "@/components/ChallengePage.vue";
 import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vue";
 // import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
@@ -210,6 +225,7 @@ export default {
     ifFollowing: false,
     ifAnsweredByUser: false,
     ifAnswerByUser: false,
+    ifChallenge: false,
     // ifQuestions: false,
     showProfileDialog: false,
     form: {
@@ -224,10 +240,11 @@ export default {
     lastUser: null,
   }),
   components: {
+    ChallengePage,
     AnswerByUser,
     LevelProgressBar,
     ReportedQuestionsForAdmin,
-    // HomePageDrawer,
+
     HomePage,
     Following,
     AnsweredByUser,
@@ -243,24 +260,28 @@ export default {
       this.ifFollowing = false;
       this.ifAnsweredByUser = false;
       this.ifAnswerByUser = false;
+      this.ifChallenge = false;
     },
     moveToFollowingPage() {
       this.ifHome = false;
       this.ifFollowing = true;
       this.ifAnsweredByUser = false;
       this.ifAnswerByUser = false;
+      this.ifChallenge = false;
     },
     moveToAnsweredPage() {
       this.ifHome = false;
       this.ifFollowing = false;
       this.ifAnsweredByUser = true;
       this.ifAnswerByUser = false;
+      this.ifChallenge = false;
     },
     moveToAnswerPage() {
       this.ifHome = false;
       this.ifFollowing = false;
       this.ifAnsweredByUser = false;
       this.ifAnswerByUser = true;
+      this.ifChallenge = false;
       cryptoUtil.setItem(
         "FilterData",
         JSON.stringify({
@@ -270,6 +291,13 @@ export default {
           searchType: properties.searchTypes[3][1],
         })
       );
+    },
+    moveToChallengePage() {
+      this.ifHome = false;
+      this.ifFollowing = false;
+      this.ifAnsweredByUser = false;
+      this.ifAnswerByUser = false;
+      this.ifChallenge = true;
     },
     logout() {
       actions.fireLoggedOut(this.$swal, this.$router);

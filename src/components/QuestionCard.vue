@@ -89,7 +89,7 @@
           <md-button
             v-if="!admin"
             style="color: white"
-            @click="answerTheQuestion({ questionId })"
+            @click="answerTheQuestion({ questionId }, { answerList })"
             >Comment</md-button
           >
           <div v-if="item.followerByCurrentUser && !admin">
@@ -630,9 +630,14 @@ export default {
     actionLike() {
       this.$emit("actionLike");
     },
-    answerTheQuestion(questionId) {
+    answerTheQuestion(questionId, answerList) {
+      // var answers = answerList["answerList"];
+      // answers = answers.filter((answer) => {
+      //   return answer.userId == 302;
+      // });
+      // this.answer = answers.length == 1 ? answers[0]["answerDesc"] : "";
+      console.log(answerList);
       this.answer = "";
-      console.log(questionId);
       questionId = questionId["questionId"];
       this.showDialog = true;
     },
