@@ -34,7 +34,7 @@
       <h4>Loading Data</h4>
     </div>
     <div v-if="dataNotFound">
-      <DataNotFound message="Seems like competition is tied up." />
+      <DataNotFound message="Data is not available." />
     </div>
   </div>
 </template>
@@ -65,11 +65,16 @@ export default {
       };
       axios(config)
         .then((response) => {
-          console.log(response.data);
+          if (response.data.status == 404) {
+            this.showLoader = false;
+            this.dataNotFound = true;
+            return;
+          }
           this.users = response.data;
           this.showLoader = false;
         })
         .catch((error) => {
+          console.log("error aayi");
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
