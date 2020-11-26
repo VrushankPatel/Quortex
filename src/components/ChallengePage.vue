@@ -74,7 +74,6 @@ export default {
           this.showLoader = false;
         })
         .catch((error) => {
-          console.log("error aayi");
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
