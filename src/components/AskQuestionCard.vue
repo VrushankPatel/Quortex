@@ -132,10 +132,6 @@ export default {
     this.getData();
   },
   methods: {
-    getData: function () {
-      //Here write a code to get data
-      console.log("get data");
-    },
     getValidationClass(fieldName) {
       const field = this.$v.form[fieldName];
       if (field) {

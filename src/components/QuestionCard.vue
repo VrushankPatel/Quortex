@@ -57,7 +57,9 @@
                 padding-left: 2%;
               "
             >
-              {{ questionDesc }}
+              <div v-for="item in questionDesc.split('\n')" :key="item">
+                {{ item }}
+              </div>
             </div>
           </div>
         </div>
@@ -244,7 +246,9 @@
                   padding-top: 1.5%;
                 "
               >
-                {{ item.answerDesc }}
+                <div v-for="line in item.answerDesc.split('\n')" :key="line">
+                  {{ line }}
+                </div>
               </div>
             </div>
 
