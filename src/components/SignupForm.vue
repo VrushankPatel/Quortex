@@ -45,7 +45,7 @@
           autocomplete="off"
         />
       </div>
-      <FormulateInput
+      <!-- <FormulateInput
         v-model="formData.birthdate"
         type="date"
         name="DOB"
@@ -53,7 +53,39 @@
         placeholder="mm-dd-YYYY"
         validation="required"
         autocomplete="off"
-      />
+      /> -->
+      <div class="double-wide">
+        <FormulateInput
+          v-model="date.year"
+          name="Year"
+          type="number"
+          label="Year"
+          placeholder="Year"
+          validation="required|number|max:2020|min:1950"
+          @change="getDays"
+          autocomplete="off"
+        />
+        <FormulateInput
+          v-model="date.month"
+          name="Months"
+          type="select"
+          label="Month"
+          validation="required"
+          autocomplete="off"
+          @change="getDays"
+          :options="months"
+        />
+        <FormulateInput
+          v-model="date.day"
+          name="day"
+          type="number"
+          label="Day"
+          placeholder="Day"
+          :validation="daysvalidation"
+          autocomplete="off"
+          :options="days"
+        />
+      </div>
       <!-- validation="required|after:2019-01-01"
         min="2018-12-01"
       max="2021-01-01"-->
@@ -131,6 +163,7 @@
 import properties from "@/common/properties.js";
 import countriesNames from "@/common/countriesNames.js";
 import grades from "@/common/grades.js";
+
 import VueRecaptcha from "vue-recaptcha";
 
 export default {
@@ -142,13 +175,23 @@ export default {
     formData: {
       role: "USER",
     },
+    date: {
+      year: 2010,
+      month: 1,
+      day: 1,
+    },
+    daysvalidation: "required|number|max:31|min:1",
     baseUrl: properties.baseUrl(),
     countries: countriesNames.countries,
     grades: grades.grades,
+    months: properties.months,
     key: "6LfE_NoZAAAAAHkMclVflpdbA8UceSVI6ENhRTzu",
     signupEnable: false,
   }),
   methods: {
+    daysInMonth(month, year) {
+      return new Date(year, month, 0).getDate();
+    },
     onVerify(response) {
       this.signupEnable = true;
       this.user.recaptcha = response;
@@ -156,6 +199,13 @@ export default {
     onCaptchaExpired: function () {
       this.signupEnable = false;
       this.$refs.recaptcha.reset();
+    },
+    getDays() {
+      this.date.day = 1;
+      this.daysvalidation =
+        "required|number|max:" +
+        this.daysInMonth(this.date.month, this.date.year) +
+        "|min:1";
     },
     signUp() {
       let pwdRegEx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
@@ -169,9 +219,13 @@ export default {
         });
         return;
       }
-
+      this.formData.birthdate =
+        this.date.year +
+        "-" +
+        (this.date.month < 10 ? "0" + this.date.month : this.date.month) +
+        "-" +
+        (this.date.day < 10 ? "0" + this.date.day : this.date.day);
       this.formData["password"] = password;
-      // console.log(this.formData);
       this.$emit("actionSignUp", this.formData, this.$swal, this.$router);
     },
   },

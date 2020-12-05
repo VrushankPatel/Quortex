@@ -38,8 +38,6 @@
             validation="required"
             autocomplete="off"
           />
-        </div>
-        <div class="double-wide">
           <FormulateInput
             v-model="formData.nickName"
             name="nickName"
@@ -49,6 +47,8 @@
             validation="required"
             autocomplete="off"
           />
+        </div>
+        <div class="double-wide">
           <FormulateInput
             v-model="formData.email"
             name="email"
@@ -56,20 +56,6 @@
             label="Email address"
             placeholder="Email address"
             validation="email"
-            autocomplete="off"
-          />
-        </div>
-        <!-- validation="required|after:2019-01-01"
-        min="2018-12-01"
-      max="2021-01-01"-->
-        <div class="double-wide">
-          <FormulateInput
-            v-model="formData.birthdate"
-            type="date"
-            name="DOB"
-            label="Date of birth"
-            placeholder="Date of birth"
-            validation="required"
             autocomplete="off"
           />
           <FormulateInput
@@ -82,6 +68,43 @@
             autocomplete="off"
             :options="grades"
           />
+        </div>
+        <!-- validation="required|after:2019-01-01"
+        min="2018-12-01"
+      max="2021-01-01"-->
+        <div class="double-wide">
+          <div class="double-wide">
+            <FormulateInput
+              v-model="date.year"
+              name="Year"
+              type="number"
+              label="Year"
+              placeholder="Year"
+              validation="required|number|max:2020|min:1950"
+              @change="getDays"
+              autocomplete="off"
+            />
+            <FormulateInput
+              v-model="date.month"
+              name="Months"
+              type="select"
+              label="Month"
+              validation="required"
+              autocomplete="off"
+              @change="getDays"
+              :options="months"
+            />
+            <FormulateInput
+              v-model="date.day"
+              name="day"
+              type="number"
+              label="Day"
+              placeholder="Day"
+              :validation="daysvalidation"
+              autocomplete="off"
+              :options="days"
+            />
+          </div>
         </div>
         <div class="double-wide">
           <FormulateInput
@@ -155,10 +178,9 @@
         </div>
         <div
           class="spendTime"
-          title="Restore Defaults"
-          @click="restoreFormDefaults()"
+          title="User's contributed time for answering questions."
         >
-          Total time spend : {{ this.totalTimespendByUser }}
+          Total time spent : {{ this.totalTimespendByUser }}
         </div>
       </div>
     </FormulateForm>
@@ -183,6 +205,7 @@ export default {
     totalTimespendByUser: utilities.secondsToHms(
       JSON.parse(cryptoUtil.getItem("userProgressLevel")).totalSpendTimeByUser
     ),
+    daysvalidation: "required|number|max:31|min:1",
     dataNotFound: false,
     formData: {
       firstName: "",
@@ -195,6 +218,12 @@ export default {
       country: "",
       role: "USER",
     },
+    months: properties.months,
+    date: {
+      year: 2010,
+      month: 1,
+      day: 1,
+    },
     grades: grades.grades,
     showLoader: true,
     changePassword: false,
@@ -204,23 +233,32 @@ export default {
     defaults: {},
   }),
   beforeMount() {
-    console.log(
-      "time spend : " +
-        JSON.parse(cryptoUtil.getItem("userProgressLevel")).totalSpendTimeByUser
-    );
     this.getUserData();
   },
 
   methods: {
+    daysInMonth(month, year) {
+      return new Date(year, month, 0).getDate();
+    },
     restoreFormDefaults() {
       this.formData["firstName"] = this.defaults.firstName;
       this.formData["lastName"] = this.defaults.lastName;
       this.formData["nickName"] = this.defaults.nickName;
       this.formData["email"] = this.defaults.email;
-      this.formData["birthdate"] = this.defaults.birthdate;
+      var dateArray = this.defaults.birthdate.split("-");
+      this.date["year"] = dateArray[0];
+      this.date["month"] = parseInt(dateArray[1]);
+      this.date["day"] = dateArray[2];
       this.formData["grade"] = this.defaults.grade;
       this.formData["school"] = this.defaults.school;
       this.formData["country"] = this.defaults.country;
+    },
+    getDays() {
+      this.date.day = 1;
+      this.daysvalidation =
+        "required|number|max:" +
+        this.daysInMonth(this.date.month, this.date.year) +
+        "|min:1";
     },
     editProfile() {
       if (this.changePassword == true) {
@@ -238,6 +276,12 @@ export default {
         this.formData["password"] = password;
       }
       this.formData["userId"] = utilities.getUserId(this.$router);
+      this.formData.birthdate =
+        this.date.year +
+        "-" +
+        (this.date.month < 10 ? "0" + this.date.month : this.date.month) +
+        "-" +
+        (this.date.day < 10 ? "0" + this.date.day : this.date.day);
       this.changeProfile(this.formData);
     },
     async changeProfile(formData) {
@@ -286,6 +330,11 @@ export default {
       axios(config)
         .then((response) => {
           console.log(response.data);
+          var dateArray = response.data.birthdate.split("-");
+          this.date["year"] = dateArray[0];
+          this.date["month"] = parseInt(dateArray[1]);
+          this.date["day"] = dateArray[2];
+          console.log(JSON.stringify(this.date));
           this.showLoader = false;
           this.defaults = response.data;
           this.restoreFormDefaults();
@@ -294,7 +343,6 @@ export default {
           console.log(error);
           this.showLoader = false;
           this.dataNotFound = true;
-          // actions.fireLoggedOut(this.$swal, this.$router);
         });
     },
   },

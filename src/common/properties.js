@@ -1,6 +1,5 @@
 export default {
 	baseUrl() {
-		// return "http://localhost:9090";
 		// return "http://localhost:3000";
 		// return "http://winterfell.ml:3000";
 		return "https://app.questa.tech/api";

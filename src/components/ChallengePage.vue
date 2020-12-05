@@ -9,7 +9,6 @@
         <h4 style="float: left; font-weight: bolder; padding-left: 2%">
           @{{ item.nickName }}
         </h4>
-
         <div
           style="float: right"
           class="mdl-cell mdl-cell--5-col"
@@ -25,6 +24,13 @@
                 item.userProgressLevel.currentTotalLevelTime
               "
             />
+          </div>
+          <div
+            style="float: right; padding-right: 7%"
+            title="User's contributed time for answering questions."
+          >
+            Total time spent :
+            {{ getTimeSpent(item.userProgressLevel.totalSpendTimeByUser) }}
           </div>
         </div>
       </md-card>
@@ -57,6 +63,9 @@ export default {
     this.getData();
   },
   methods: {
+    getTimeSpent(timeSpent) {
+      return utilities.secondsToHms(timeSpent);
+    },
     getData() {
       var config = {
         method: "post",
@@ -70,6 +79,7 @@ export default {
             this.dataNotFound = true;
             return;
           }
+          console.log(JSON.stringify(response.data));
           this.users = response.data;
           this.showLoader = false;
         })
