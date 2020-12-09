@@ -15,7 +15,7 @@ export default {
 		if (actions.checkSignedIn()) {
 			return {
 				"Access-Control-Allow-Origin": "*",
-				Authorization: "Bearer " + cryptoUtil.getItem("questatoken", router),
+				Authorization: "Bearer " + cryptoUtil.getItem("quortextoken", router),
 				"Content-Type": "application/json",
 			};
 		} else {
@@ -24,7 +24,7 @@ export default {
 		}
 	},
 	getUserId(router) {
-		var userId = cryptoUtil.getItem("questauserId", router);
+		var userId = cryptoUtil.getItem("quortexuserId", router);
 		if (userId != null) {
 			return userId;
 		} else {
@@ -32,7 +32,7 @@ export default {
 		}
 	},
 	getUserType(router, swal) {
-		var userType = cryptoUtil.getItem("questausertype", router);
+		var userType = cryptoUtil.getItem("quortexusertype", router);
 
 		if (userType != "") {
 			return userType;

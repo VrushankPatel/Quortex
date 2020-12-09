@@ -14,7 +14,7 @@ export default {
 			Swal.fire({
 				icon: "info",
 				title: "Logged out",
-				text: "You're logged out of questa, please login to continue.",
+				text: "You're logged out of quortex, please login to continue.",
 			});
 		}
 		return this.getDecrypted(encValue);

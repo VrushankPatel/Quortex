@@ -2,8 +2,8 @@ export default {
 	baseUrl() {
 		// return "http://localhost:3000";
 		// return "http://winterfell.ml:3000";
-		return "https://app.questa.tech/api";
-		// return "https://questaapp.herokuapp.com";
+		return "";
+		// return "https://quortexapp.herokuapp.com";
 	},
 	subjectByCodes: {
 		1: "English",

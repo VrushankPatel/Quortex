@@ -75,7 +75,7 @@ export default {
 			swal.fire({
 				icon: "info",
 				title: "Logged out",
-				text: "You're logged out of questa, please login to continue.",
+				text: "You're logged out of quortex, please login to continue.",
 			});
 			router.push("/signin");
 			return;
@@ -101,13 +101,13 @@ export default {
 		localStorage.clear();
 	},
 	checkSignedIn(router) {
-		var token = cryptoUtil.getItem("questatoken", router);
-		var questauserId = cryptoUtil.getItem("questauserId", router);
+		var token = cryptoUtil.getItem("quortextoken", router);
+		var quortexuserId = cryptoUtil.getItem("quortexuserId", router);
 		if (
 			token != null &&
 			token.length != 0 &&
-			questauserId != null &&
-			questauserId.length != 0
+			quortexuserId != null &&
+			quortexuserId.length != 0
 		) {
 			return true;
 		}
@@ -118,7 +118,7 @@ export default {
 		swal.fire({
 			icon: "info",
 			title: "Logged out",
-			text: "You're logged out of questa, please login to continue.",
+			text: "You're logged out of quortex, please login to continue.",
 		});
 		router.push("/signin");
 	},
