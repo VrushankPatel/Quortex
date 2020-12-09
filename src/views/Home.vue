@@ -15,7 +15,7 @@
 								<img
 									src="@/assets/images/quortex.png"
 									width="170"
-									alt="quortex"
+									alt="Quortex"
 								/>
 								<!-- <span
                   class="md-title"

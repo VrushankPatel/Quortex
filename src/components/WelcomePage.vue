@@ -98,7 +98,7 @@
 import Vue from "vue";
 export default {
 	name: "WelcomePage",
-	mounted: function () {
+	mounted: function() {
 		Vue.loadScript("https://code.getmdl.io/1.3.0/material.min.js")
 			.then(() => {
 				console.log("added gmdl");
