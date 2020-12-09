@@ -191,10 +191,9 @@
 import properties from "@/common/properties.js";
 import axios from "axios";
 import DataNotFound from "@/components/DataNotFound.vue";
-import countriesNames from "@/common/countriesNames.js";
+import ConstantUtil from "@/common/ConstantUtil.js";
 import utilities from "@/common/utilities.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
-import grades from "@/common/grades.js";
 export default {
 	name: "EditProfileField",
 	components: {
@@ -224,12 +223,12 @@ export default {
 			month: 1,
 			day: 1,
 		},
-		grades: grades.grades,
+		grades: ConstantUtil.grades,
 		showLoader: true,
 		changePassword: false,
 		baseUrl: properties.baseUrl(),
 		toggler: true,
-		countries: countriesNames.countries,
+		countries: ConstantUtil.countries,
 		defaults: {},
 	}),
 	beforeMount() {

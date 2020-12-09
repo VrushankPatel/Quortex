@@ -161,8 +161,7 @@
 
 <script>
 import properties from "@/common/properties.js";
-import countriesNames from "@/common/countriesNames.js";
-import grades from "@/common/grades.js";
+import ConstantUtil from "@/common/ConstantUtil.js";
 
 import VueRecaptcha from "vue-recaptcha";
 
@@ -182,8 +181,8 @@ export default {
 		},
 		daysvalidation: "required|number|max:31|min:1",
 		baseUrl: properties.baseUrl(),
-		countries: countriesNames.countries,
-		grades: grades.grades,
+		countries: ConstantUtil.countries,
+		grades: ConstantUtil.grades,
 		months: properties.months,
 		key: "6LfE_NoZAAAAAHkMclVflpdbA8UceSVI6ENhRTzu",
 		signupEnable: false,
