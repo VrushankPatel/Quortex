@@ -75,14 +75,13 @@
 </template>
 
 <script>
-// import Loader from "@/components/Loader.vue";
+import ConstantUtil from "@/common/ConstantUtil.js";
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import FilterQuestion from "@/components/FilterQuestion.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
-import properties from "@/common/properties.js";
 export default {
   name: "HomePage",
   components: {
@@ -126,7 +125,7 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: properties.baseUrl() + "/findallbysubjecttopic",
+        url: ConstantUtil.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           subject: "",
@@ -163,7 +162,7 @@ export default {
       data = JSON.stringify(data);
       var config = {
         method: "post",
-        url: properties.baseUrl() + "/findallbysubjecttopic",
+        url: ConstantUtil.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };

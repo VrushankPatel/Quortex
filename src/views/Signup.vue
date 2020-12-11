@@ -8,7 +8,7 @@
 <script>
 import SignupForm from "@/components/SignupForm.vue";
 import axios from "axios";
-import properties from "@/common/properties.js";
+import ConstantUtil from "@/common/ConstantUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import Loader from "@/components/Loader.vue";
@@ -23,7 +23,7 @@ export default {
     Loader,
   },
   data: () => ({
-    baseUrl: properties.baseUrl(),
+    baseUrl: ConstantUtil.baseUrl(),
     showLoader: false,
   }),
   methods: {

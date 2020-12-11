@@ -17,10 +17,10 @@
   </div>
 </template>
 <script>
-import properties from "@/common/properties.js";
+import ConstantUtil from "@/common/ConstantUtil.js";
 export default {
   data: () => ({
-    backgroundColor: properties.getGeneralBackgroundColor(),
+    backgroundColor: ConstantUtil.getGeneralBackgroundColor(),
   }),
   props: {
     message: String,
