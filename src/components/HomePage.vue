@@ -119,28 +119,7 @@ export default {
   beforeMount() {
     this.getData();
   },
-  /* mounted() {
-    this.scroll();
-  }, */
   methods: {
-    /*scroll() {
-      window.onscroll = () => {
-        let bottomOfWindow =
-          Math.ceil(
-            Math.max(
-              window.pageYOffset,
-              document.documentElement.scrollTop,
-              document.body.scrollTop
-            )
-          ) ===
-          parseFloat(document.documentElement.scrollHeight) -
-            parseFloat(window.innerHeight);
-        if (bottomOfWindow) {
-          console.log("end detected");
-          this.scrolledToBottom = true; // replace it with your code
-        }
-      };
-    },*/
     clearFilter() {
       this.showLoader = true;
       this.questions = {};
