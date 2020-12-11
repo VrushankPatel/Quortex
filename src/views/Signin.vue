@@ -19,7 +19,7 @@
 import SigninForm from "@/components/SigninForm.vue";
 import ForgotPasswordField from "@/components/ForgotPasswordField.vue";
 import axios from "axios";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
@@ -36,7 +36,7 @@ export default {
     ForgotPasswordField,
   },
   data: () => ({
-    baseUrl: ConstantUtil.baseUrl(),
+    baseUrl: constantUtil.baseUrl(),
     showLoader: false,
     signin: true,
   }),
@@ -68,7 +68,7 @@ export default {
               subject: "",
               topic: "",
               questionDesc: "",
-              searchType: ConstantUtil.searchTypes[1][1],
+              searchType: constantUtil.searchTypes[1][1],
             })
           );
           actions.actionSignin(
@@ -95,7 +95,7 @@ export default {
       const data = JSON.stringify(trimmedFormValues);
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/resetpassword",
+        url: constantUtil.baseUrl() + "/resetpassword",
         headers: utilities.getPlainJSONHeader(),
         data: data,
       };

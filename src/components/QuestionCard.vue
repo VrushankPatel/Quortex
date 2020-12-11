@@ -483,7 +483,7 @@ import axios from "axios";
 import cryptoUtil from "@/common/cryptoUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 
 export default {
   data: () => ({
@@ -497,7 +497,7 @@ export default {
     showInvalidBar: false,
     showAnswers: false,
     showReportFailureSnackBar: false,
-    subjectByCodes: ConstantUtil.subjectByCodes,
+    subjectByCodes: constantUtil.subjectByCodes,
     startingTime: 0,
     endingTime: 0,
     admin: utilities.getUserType() == "ADMIN",
@@ -507,7 +507,7 @@ export default {
     deleteQuestion(answerId) {
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/deleteanswer",
+        url: constantUtil.baseUrl() + "/deleteanswer",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           answerId: answerId,
@@ -528,7 +528,7 @@ export default {
     getFormattedDate(dateString) {
       var date = dateString.split("-");
       return (
-        ConstantUtil.months[parseInt(date[1])] + " " + date[2] + ", " + date[0]
+        constantUtil.months[parseInt(date[1])] + " " + date[2] + ", " + date[0]
       );
     },
     closeReport() {
@@ -537,7 +537,7 @@ export default {
     postReport(reportDesc) {
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/createfeedback",
+        url: constantUtil.baseUrl() + "/createfeedback",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           userId: utilities.getUserId(this.$router),
@@ -594,7 +594,7 @@ export default {
     likeDislikeAnswer(like, answerId) {
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/createfeedback",
+        url: constantUtil.baseUrl() + "/createfeedback",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           userId: utilities.getUserId(this.$router),
@@ -668,7 +668,7 @@ export default {
       };
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/createanswer",
+        url: constantUtil.baseUrl() + "/createanswer",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
@@ -721,7 +721,7 @@ export default {
       };
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/createfollower",
+        url: constantUtil.baseUrl() + "/createfollower",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
@@ -748,7 +748,7 @@ export default {
       };
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/createquestionfeedback",
+        url: constantUtil.baseUrl() + "/createquestionfeedback",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };

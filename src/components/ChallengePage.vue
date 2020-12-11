@@ -52,7 +52,7 @@ import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 export default {
   name: "HomePage",
   components: {
@@ -69,7 +69,7 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/findtoptenusers",
+        url: constantUtil.baseUrl() + "/findtoptenusers",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
       axios(config)

@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import FilterQuestion from "@/components/FilterQuestion.vue";
@@ -125,7 +125,7 @@ export default {
     getData() {
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/findallbysubjecttopic",
+        url: constantUtil.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: {
           subject: "",
@@ -162,7 +162,7 @@ export default {
       data = JSON.stringify(data);
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/findallbysubjecttopic",
+        url: constantUtil.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };

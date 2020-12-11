@@ -160,7 +160,7 @@
 </template>
 
 <script>
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 
 import VueRecaptcha from "vue-recaptcha";
 
@@ -179,10 +179,10 @@ export default {
       day: 1,
     },
     daysvalidation: "required|number|max:31|min:1",
-    baseUrl: ConstantUtil.baseUrl(),
-    countries: ConstantUtil.countries,
-    grades: ConstantUtil.grades,
-    months: ConstantUtil.months,
+    baseUrl: constantUtil.baseUrl(),
+    countries: constantUtil.countries,
+    grades: constantUtil.grades,
+    months: constantUtil.months,
     key: "6LfE_NoZAAAAAHkMclVflpdbA8UceSVI6ENhRTzu",
     signupEnable: false,
   }),

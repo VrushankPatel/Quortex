@@ -190,7 +190,7 @@
 <script>
 import axios from "axios";
 import DataNotFound from "@/components/DataNotFound.vue";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 import utilities from "@/common/utilities.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
 export default {
@@ -216,18 +216,18 @@ export default {
       country: "",
       role: "USER",
     },
-    months: ConstantUtil.months,
+    months: constantUtil.months,
     date: {
       year: 2010,
       month: 1,
       day: 1,
     },
-    grades: ConstantUtil.grades,
+    grades: constantUtil.grades,
     showLoader: true,
     changePassword: false,
-    baseUrl: ConstantUtil.baseUrl(),
+    baseUrl: constantUtil.baseUrl(),
     toggler: true,
-    countries: ConstantUtil.countries,
+    countries: constantUtil.countries,
     defaults: {},
   }),
   beforeMount() {
@@ -285,7 +285,7 @@ export default {
     async changeProfile(formData) {
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/updateuserprofile",
+        url: constantUtil.baseUrl() + "/updateuserprofile",
         headers: utilities.getAuthJSONHeader(),
         data: formData,
       };
@@ -319,7 +319,7 @@ export default {
       var config = {
         method: "post",
         url:
-          ConstantUtil.baseUrl() +
+          constantUtil.baseUrl() +
           "/getuser/" +
           utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(),

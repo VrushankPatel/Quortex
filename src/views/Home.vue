@@ -197,7 +197,7 @@ import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vu
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 export default {
   name: "Home",
   beforeMount() {
@@ -217,7 +217,7 @@ export default {
       this.userProgressLevel.currentTotalLevelTime;
   },
   data: () => ({
-    backgroundColor: ConstantUtil.getGeneralBackgroundColor(),
+    backgroundColor: constantUtil.getGeneralBackgroundColor(),
     textColor: "white",
     admin: false, //  true for admin.
     menuVisible: false,
@@ -288,7 +288,7 @@ export default {
           subject: "",
           topic: "",
           questionDesc: "",
-          searchType: ConstantUtil.searchTypes[3][1],
+          searchType: constantUtil.searchTypes[3][1],
         })
       );
     },

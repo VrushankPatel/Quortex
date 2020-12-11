@@ -39,7 +39,7 @@ import DataNotFound from "@/components/DataNotFound.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 
 export default {
   name: "AnsweredByUser",
@@ -61,7 +61,7 @@ export default {
       var config = {
         method: "post",
         url:
-          ConstantUtil.baseUrl() +
+          constantUtil.baseUrl() +
           "/findallbyanswer/" +
           utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),

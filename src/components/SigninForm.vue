@@ -37,12 +37,12 @@
 </template>
 
 <script>
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 export default {
   name: "SigninForm",
   data: () => ({
     formValues: {},
-    baseUrl: ConstantUtil.baseUrl(),
+    baseUrl: constantUtil.baseUrl(),
     showForgotDialog: false,
   }),
   methods: {

@@ -96,7 +96,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import actions from "@/common/actions.js";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
 export default {
   name: "FormValidation",
@@ -110,10 +110,10 @@ export default {
       questionDesc: "",
       searchType: "ALL",
     },
-    subjects: ConstantUtil.subjectByCodes,
-    searchType: ConstantUtil.searchTypes,
-    subjectKeys: Object.keys(ConstantUtil.subjectByCodes),
-    searchTypesKeys: Object.keys(ConstantUtil.searchTypes),
+    subjects: constantUtil.subjectByCodes,
+    searchType: constantUtil.searchTypes,
+    subjectKeys: Object.keys(constantUtil.subjectByCodes),
+    searchTypesKeys: Object.keys(constantUtil.searchTypes),
   }),
   validations: {
     form: {

@@ -106,7 +106,7 @@ import FilterQuestion from "@/components/FilterQuestion.vue";
 import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 export default {
   name: "HomePage",
   components: {
@@ -132,7 +132,7 @@ export default {
       var config = {
         method: "post",
         url:
-          ConstantUtil.baseUrl() +
+          constantUtil.baseUrl() +
           "/findallquestions/" +
           utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
@@ -164,7 +164,7 @@ export default {
       data = JSON.stringify(data);
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/findallbysubjecttopic",
+        url: constantUtil.baseUrl() + "/findallbysubjecttopic",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };

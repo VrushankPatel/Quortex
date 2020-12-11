@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 export default {
   name: "ForgotPasswordField",
   data: () => ({
     formData: {
       email: "",
     },
-    baseUrl: ConstantUtil.baseUrl(),
+    baseUrl: constantUtil.baseUrl(),
   }),
   methods: {
     forgotPassword() {

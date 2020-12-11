@@ -88,7 +88,7 @@
 import { validationMixin } from "vuelidate";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
 import axios from "axios";
-import ConstantUtil from "@/common/ConstantUtil.js";
+import constantUtil from "@/common/constantUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 
@@ -107,10 +107,10 @@ export default {
     showSuccessSnackBar: false,
     showFailureSnackBar: false,
     sending: false,
-    baseUrl: ConstantUtil.baseUrl(),
+    baseUrl: constantUtil.baseUrl(),
     lastUser: null,
-    subjects: ConstantUtil.subjectByCodes,
-    subjectKeys: Object.keys(ConstantUtil.subjectByCodes),
+    subjects: constantUtil.subjectByCodes,
+    subjectKeys: Object.keys(constantUtil.subjectByCodes),
   }),
   validations: {
     form: {
@@ -168,7 +168,7 @@ export default {
       const data = JSON.stringify(trimmedFormValues);
       var config = {
         method: "post",
-        url: ConstantUtil.baseUrl() + "/createquestion",
+        url: constantUtil.baseUrl() + "/createquestion",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
