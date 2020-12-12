@@ -272,10 +272,7 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		// return "http://localhost:3000";
-		// return "http://winterfell.ml:3000";
 		return "";
-		// return "https://quortexapp.herokuapp.com";
 	},
 	subjectByCodes: {
 		1: "English",
