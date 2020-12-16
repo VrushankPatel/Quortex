@@ -272,7 +272,8 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		return "";
+		// return "";
+		return "http://winterfell.ml:1111/api";
 	},
 	subjectByCodes: {
 		1: "English",
