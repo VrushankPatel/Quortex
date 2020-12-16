@@ -273,7 +273,7 @@ export default {
 	},
 	baseUrl() {
 		// return "";
-		return "http://winterfell.ml:1111/api";
+		return "https://quortex-api-gateway.herokuapp.com/api";
 	},
 	subjectByCodes: {
 		1: "English",
