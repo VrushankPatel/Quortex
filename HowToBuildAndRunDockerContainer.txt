@@ -1,0 +1,5 @@
+# build docker image
+docker build -t dockervue .
+
+# run docker image on 8000
+docker run -p 8000:80  -it --name dockervue dockervue
