@@ -4,8 +4,6 @@
 	"private": true,
 	"scripts": {
 		"start": "serve -s dist -p $PORT",
-		"deploy-windows": "npm run build && git add * && git commit -m \"'%npm_config_message%'\" && git push origin master",
-		"deploy-linux": "npm run build && git add * && git commit -m \"'${npm_config_message}'\" && git push origin master",
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint"
