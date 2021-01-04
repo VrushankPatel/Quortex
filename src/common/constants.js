@@ -272,7 +272,7 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		// return "";
+		// return "/api";
 		return "https://quortex-api-gateway.herokuapp.com/api";
 	},
 	subjectByCodes: {
