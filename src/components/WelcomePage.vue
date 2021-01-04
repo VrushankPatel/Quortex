@@ -79,9 +79,11 @@
 
 <script>
 import Vue from "vue";
+import utilities from "@/common/utilities.js";
 export default {
   name: "WelcomePage",
   mounted: function () {
+    utilities.awakeAPIGatewayAndBackEndHeroku();
     Vue.loadScript("https://code.getmdl.io/1.3.0/material.min.js")
       .then(() => {
         console.log("added gmdl");
