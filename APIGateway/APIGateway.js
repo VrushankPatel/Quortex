@@ -4,6 +4,7 @@ var cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 var beautify = require("json-beautify");
+// const port = process.env.PORT || 9090;
 const port = 9090;
 const serviceUrl = "https://quortex-server.herokuapp.com";
 
@@ -58,6 +59,6 @@ forwardRequestTo = (reqdata, authToken, requrl) => {
 // in below line process.env.PORT will take port from environment, because
 // if we use heroku, then it uses the env var to bind the port.
 // so, our specified port can not be used for that.
-app.listen(process.env.PORT || port, () => {
+app.listen(port, () => {
 	console.log("API Gateway (Reverse proxy) is ready to serve on : " + port);
 });

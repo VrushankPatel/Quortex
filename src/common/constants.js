@@ -273,7 +273,8 @@ export default {
 	},
 	baseUrl() {
 		// return "/api";
-		return "https://quortex-api-gateway.herokuapp.com/api";
+		return "https://quortex.herokuapp.com/";
+		// return "https://quortex-api-gateway.herokuapp.com/api";
 	},
 	subjectByCodes: {
 		1: "English",
