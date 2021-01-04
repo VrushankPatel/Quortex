@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
-		"start": "./RunAll.sh",
+		"start": "node APIGateway/APIGateway.js & serve -s dist -p $PORT",
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
 		"lint": "vue-cli-service lint"
@@ -12,6 +12,10 @@
 		"@braid/vue-formulate": "^2.4.3",
 		"axios": "^0.20.0",
 		"core-js": "^3.6.5",
+		"cors": "^2.8.5",
+		"express": "^4.17.1",
+		"http": "0.0.1-security",
+		"json-beautify": "^1.1.1",
 		"crypto-js": "^4.0.0",
 		"jquery": "^3.5.1",
 		"moment": "^2.28.0",
