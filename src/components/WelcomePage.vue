@@ -79,7 +79,6 @@
 
 <script>
 import Vue from "vue";
-import utilities from "@/common/utilities.js";
 export default {
   name: "WelcomePage",
   mounted: function () {
