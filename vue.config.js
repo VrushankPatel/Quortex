@@ -11,5 +11,7 @@
 // };
 
 module.exports = {
-	outputDir: "docs/dist",
+	outputDir: "docs",
+	publicPath:
+		process.env.NODE_ENV === "production" ? "/Quortex-web-client/" : "/",
 };
