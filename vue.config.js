@@ -9,3 +9,7 @@
 // 	// outputDir: "target/dist",
 // 	// assetsDir: "static",
 // };
+
+module.exports = {
+	outputDir: "docs/dist",
+};
