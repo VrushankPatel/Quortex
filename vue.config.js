@@ -9,9 +9,3 @@
 // 	// outputDir: "target/dist",
 // 	// assetsDir: "static",
 // };
-
-module.exports = {
-	outputDir: "docs",
-	publicPath:
-		process.env.NODE_ENV === "production" ? "/Quortex-web-client/" : "/",
-};
