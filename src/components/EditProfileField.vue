@@ -300,8 +300,8 @@ export default {
           });
           this.$emit("closeEditProfile");
         })
-        .catch((error) => {
-          console.log(JSON.stringify(error));
+        .catch((/*error*/) => {
+          // console.log(JSON.stringify(error));
           this.showLoader = false;
           this.$swal.fire({
             icon: "error",
@@ -325,18 +325,16 @@ export default {
 
       axios(config)
         .then((response) => {
-          console.log(response.data);
           var dateArray = response.data.birthdate.split("-");
           this.date["year"] = dateArray[0];
           this.date["month"] = parseInt(dateArray[1]);
           this.date["day"] = dateArray[2];
-          console.log(JSON.stringify(this.date));
           this.showLoader = false;
           this.defaults = response.data;
           this.restoreFormDefaults();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((/*error*/) => {
+          // console.log(error);
           this.showLoader = false;
           this.dataNotFound = true;
         });

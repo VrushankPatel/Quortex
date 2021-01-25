@@ -513,15 +513,14 @@ export default {
           answerId: answerId,
         },
       };
-      console.log(config);
 
       axios(config)
-        .then((response) => {
-          console.log(JSON.stringify(response));
+        .then((/*response */) => {
+          // console.log(JSON.stringify(response));
           location.reload();
         })
-        .catch((error) => {
-          console.log(JSON.stringify(error));
+        .catch((/*error*/) => {
+          // console.log(JSON.stringify(error));
           alert("unable to delete answer..");
         });
     },
@@ -545,7 +544,6 @@ export default {
           reportDesc: reportDesc,
         },
       };
-      console.log(config.data);
 
       axios(config)
         .then((response) => {
@@ -558,20 +556,20 @@ export default {
               this.showReportSuccessSnackBar = true;
             }, 1500);
           } else {
-            console.log(JSON.stringify(response));
             window.setTimeout(() => {
               this.showReportFailureSnackBar = true;
             }, 1500);
           }
           this.showReportDialog = false;
         })
-        .catch((error) => {
-          console.log(JSON.stringify(error));
+        .catch((/*error */) => {
+          /*
           var result = actions.successQuestionPost(
             error.data.code,
             error.data.status
           );
           console.log(result);
+          */
         });
       this.reportDesc = "";
     },
@@ -605,21 +603,23 @@ export default {
       };
 
       axios(config)
-        .then((response) => {
-          console.log(JSON.stringify(response));
+        .then((/*response */) => {
+          /*          
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
           );
           console.log(result);
+          */
         })
-        .catch((error) => {
-          console.log(JSON.stringify(error));
+        .catch((/*error */) => {
+          /*            
           var result = actions.successQuestionPost(
             error.data.code,
             error.data.status
           );
           console.log(result);
+          */
         });
     },
     likeQuestion(questionId) {
@@ -640,7 +640,7 @@ export default {
       //   return answer.userId == 302;
       // });
       // this.answer = answers.length == 1 ? answers[0]["answerDesc"] : "";
-      console.log(answerList);
+      answerList;
       this.answer = "";
       questionId = questionId["questionId"];
       this.showDialog = true;
@@ -688,14 +688,12 @@ export default {
             }, 1500);
             this.$emit("actionReload");
           } else {
-            console.log(JSON.stringify(response));
             window.setTimeout(() => {
               this.showFailureSnackBar = true;
             }, 1500);
           }
         })
         .catch((error) => {
-          console.log(JSON.stringify(error));
           window.setTimeout(() => {
             this.showFailureSnackBar = true;
           }, 1500);
@@ -725,16 +723,16 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      console.log(config);
-      console.log(data);
+
       axios(config)
         .then((response) => {
-          console.log(JSON.stringify(response));
+          response;
+          // console.log(JSON.stringify(response));
         })
         .catch((error) => {
-          console.log(error);
+          error;
           window.setTimeout(() => {
-            console.log("failure");
+            // console.log("failure");
           }, 1500);
         });
     },
@@ -752,17 +750,13 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      console.log(config);
-      console.log(data);
       axios(config)
         .then((response) => {
-          console.log(JSON.stringify(response));
+          response;
         })
         .catch((error) => {
-          console.log(error);
-          window.setTimeout(() => {
-            console.log("failure");
-          }, 1500);
+          error;
+          window.setTimeout(() => {}, 1500);
         });
     },
   },

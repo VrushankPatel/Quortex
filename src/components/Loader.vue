@@ -30,12 +30,9 @@ export default {
       this.isLoading = true;
       setTimeout(() => {
         this.isLoading = false;
-        console.log("Connecting to server failed");
       }, 5000);
     },
-    onCancel() {
-      console.log("User cancelled the loader.");
-    },
+    onCancel() {},
   },
 };
 </script> 

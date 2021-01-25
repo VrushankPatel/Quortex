@@ -127,7 +127,6 @@ export default {
   },
   methods: {
     callSaveFilter() {
-      console.log(JSON.stringify(this.form));
       cryptoUtil.setItem("FilterData", JSON.stringify(this.form));
     },
     clearFilters() {

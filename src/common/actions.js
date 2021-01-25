@@ -1,4 +1,5 @@
 import cryptoUtil from "@/common/cryptoUtil.js";
+import constants from "@/common/constants.js";
 export default {
 	actionSignup(swal, code, status, router) {
 		if (status == true && code == 200) {
@@ -101,8 +102,18 @@ export default {
 		localStorage.clear();
 	},
 	checkSignedIn(router) {
-		var token = cryptoUtil.getItem("quortextoken", router);
-		var quortexuserId = cryptoUtil.getItem("quortexuserId", router);
+		if (
+			(new Date() - new Date(cryptoUtil.getItem(constants.getSignedInDate()))) /
+				1000 >
+			21600
+		) {
+			return false;
+		}
+		var token = cryptoUtil.getItem(constants.getQuortexToken(), router);
+		var quortexuserId = cryptoUtil.getItem(
+			constants.getQuortexUserId(),
+			router
+		);
 		if (
 			token != null &&
 			token.length != 0 &&

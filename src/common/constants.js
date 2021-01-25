@@ -322,4 +322,16 @@ export default {
 	getGeneralBackgroundColor() {
 		return "#edf9f6";
 	},
+	getQuortexUserId() {
+		return "quortexuserId";
+	},
+	getQuortexToken() {
+		return "quortextoken";
+	},
+	getQuortexUserType() {
+		return "quortexusertype";
+	},
+	getSignedInDate() {
+		return "signedInDate";
+	},
 };
