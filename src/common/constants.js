@@ -279,10 +279,10 @@ export default {
 			.split(":")[0];
 		if (gmtTime < 12) {
 			console.log("calling server 2");
-			return "https://quortex-api-gateway-2.herokuapp.com/";
+			return "https://quortex-api-gateway-2.herokuapp.com/api";
 		} else {
 			console.log("calling server 1");
-			return "https://quortex-api-gateway.herokuapp.com/";
+			return "https://quortex-api-gateway.herokuapp.com/api";
 		}
 	},
 	subjectByCodes: {
