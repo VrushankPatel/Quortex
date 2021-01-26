@@ -272,8 +272,18 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		// return "/api";
-		return "https://quortex-api-gateway.herokuapp.com/api";
+		console.log("baseUrl called");
+		let gmtTime = new Date()
+			.toGMTString()
+			.split(" ")[4]
+			.split(":")[0];
+		if (gmtTime < 12) {
+			console.log("calling server 2");
+			return "https://quortex-api-gateway-2.herokuapp.com/";
+		} else {
+			console.log("calling server 1");
+			return "https://quortex-api-gateway.herokuapp.com/";
+		}
 	},
 	subjectByCodes: {
 		1: "English",
