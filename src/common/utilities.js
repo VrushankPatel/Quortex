@@ -1,6 +1,6 @@
 import actions from "@/common/actions.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
-
+import axios from "axios";
 export default {
 	trimFormData(formData) {
 		Object.keys(formData).map((k) => (formData[k] = formData[k].trim()));
