@@ -53,4 +53,14 @@ export default {
 		var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
 		return hDisplay + mDisplay + sDisplay;
 	},
+	awakeAPIGatewayAndBackEndHeroku() {
+		axios({
+			method: "get",
+			url: "https://quortex-api-gateway.herokuapp.com/",
+		}).then(/*(response) => {console.log(response);}*/);
+		axios({
+			method: "get",
+			url: "https://quortex-server.herokuapp.com/",
+		}).then(/*(response) => {console.log(response);}*/);
+	},
 };
