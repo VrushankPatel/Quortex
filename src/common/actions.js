@@ -107,6 +107,7 @@ export default {
 				1000 >
 			21600
 		) {
+			localStorage.clear();
 			return false;
 		}
 		var token = cryptoUtil.getItem(constants.getQuortexToken(), router);
