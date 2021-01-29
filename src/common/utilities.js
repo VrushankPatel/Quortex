@@ -52,15 +52,5 @@ export default {
 		var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
 		var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
 		return hDisplay + mDisplay + sDisplay;
-	},
-	awakeAPIGatewayAndBackEndHeroku() {
-		axios({
-			method: "get",
-			url: "https://quortex-api-gateway.herokuapp.com/",
-		}).then(/*(response) => {console.log(response);}*/);
-		axios({
-			method: "get",
-			url: "https://quortex-server.herokuapp.com/",
-		}).then(/*(response) => {console.log(response);}*/);
-	},
+	}
 };
