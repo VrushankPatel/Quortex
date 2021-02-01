@@ -1,51 +1,53 @@
 <template>
   <div style="min-height: 650px">
-    <div>
-      <md-card
-        class="md-layout-item md-size-95 md-small-size-95 customcard"
-        v-if="!dataNotFound"
-      >
-        <div
-          v-if="!dataNotFound"
-          class="questtext"
-          @click="openFilterDialog()"
-          style="background-color: #3b3b3b; color: white"
-        >
-          Search
-          <md-icon style="color: white" v-if="!showFilterCard"
-            >arrow_drop_down</md-icon
+    <div v-if="!dataNotFound">
+      <div class="md-layout">
+        <div class="md-layout-item">
+          <md-card
+            class="md-layout-item md-size-95 md-small-size-95 customcard"
           >
-          <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+            <div
+              class="questtext"
+              @click="openFilterDialog()"
+              style="background-color: #3b3b3b; color: white"
+            >
+              Search
+              <md-icon style="color: white" v-if="!showFilterCard"
+                >arrow_drop_down</md-icon
+              >
+              <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+            </div>
+          </md-card>
+          <FilterQuestion
+            v-if="showFilterCard"
+            v-on:doFilter="doFilter"
+            v-on:clearFilter="clearFilter"
+            defaultSelection="WITHANSWER"
+          />
         </div>
-      </md-card>
-      <FilterQuestion
-        v-if="!dataNotFound && showFilterCard"
-        v-on:doFilter="doFilter"
-        v-on:clearFilter="clearFilter"
-        defaultSelection="WITHANSWER"
-      />
-      <md-card
-        class="md-layout-item md-size-95 md-small-size-95 customcard"
-        v-if="!dataNotFound"
-      >
-        <div
-          v-if="!dataNotFound"
-          class="questtext"
-          @click="openAskQuestionDialog()"
-          style="background-color: #3b3b3b; color: white"
-        >
-          Ask your question
-          <md-icon style="color: white" v-if="!showAskQuestionDialog"
-            >arrow_drop_down</md-icon
+        <div class="md-layout-item">
+          <md-card
+            class="md-layout-item md-size-95 md-small-size-95 customcard"
           >
-          <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+            <div
+              class="questtext"
+              @click="openAskQuestionDialog()"
+              style="background-color: #3b3b3b; color: white"
+            >
+              Ask your question
+              <md-icon style="color: white" v-if="!showAskQuestionDialog"
+                >arrow_drop_down</md-icon
+              >
+              <md-icon style="color: white" v-else>arrow_drop_up</md-icon>
+            </div>
+          </md-card>
+          <AskQuestionCard
+            v-if="showAskQuestionDialog"
+            v-on:actionReload="getData"
+            disabled
+          />
         </div>
-      </md-card>
-      <AskQuestionCard
-        v-if="showAskQuestionDialog"
-        v-on:actionReload="getData"
-        disabled
-      />
+      </div>
     </div>
     <div v-if="showLoader">
       <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
@@ -195,7 +197,7 @@ export default {
     nonfiltered: true,
     filtered: false,
     showAskQuestionDialog: false,
-    showFilterCard: true,
+    showFilterCard: false,
     dataNotFound: false,
   }),
 };
