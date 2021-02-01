@@ -4,7 +4,8 @@
       <md-app-toolbar
         class="md-large md-dense"
         :style="{
-          'background-image': 'url(https://getmdl.io/assets/header.jpg)',
+          'background-image':
+            'url(https://png.pngtree.com/thumb_back/fh260/background/20190221/ourmid/pngtree-texture-geometric-black-metal-gradient-image_17809.jpg)',
           color: textColor,
         }"
       >
@@ -37,19 +38,21 @@
               </div>
             </div>
           </div>
-          <!-- <div class="md-toolbar-section-end">
-						<md-menu md-direction="bottom-start">
-							<md-button class="vert_btn" md-menu-trigger>
-								<md-icon class="rotating_vert">more_vert</md-icon>
-							</md-button>
-							<md-menu-content>
-								<md-menu-item @click="EditProfileDialog()" v-if="!admin"
-									>Edit Profile</md-menu-item
-								>
-								<md-menu-item @click="logout()">Logout</md-menu-item>
-							</md-menu-content>
-						</md-menu>
-					</div> -->
+          <div class="md-toolbar-section-end">
+            <md-menu md-direction="bottom-start">
+              <md-button class="vert_btn" md-menu-trigger>
+                <md-icon style="color: white" class="rotating_vert"
+                  >more_vert</md-icon
+                >
+              </md-button>
+              <md-menu-content>
+                <md-menu-item @click="EditProfileDialog()" v-if="!admin"
+                  >Edit Profile</md-menu-item
+                >
+                <md-menu-item @click="logout()">Sign out</md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </div>
         </div>
 
         <!-- reported questions window  -->
@@ -104,7 +107,7 @@
             >
           </span>
 
-          <md-button
+          <!-- <md-button
             :style="{ color: textColor }"
             style="border-bottom: 3px solid white"
             v-if="ifAnswerByUser"
@@ -115,7 +118,7 @@
             v-else
             @click="moveToAnswerPage()"
             >Answer</md-button
-          >
+          > -->
 
           <md-button
             :style="{ color: textColor }"
@@ -130,9 +133,9 @@
             >Challenge</md-button
           >
 
-          <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
+          <!-- <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
             >Edit Profile</md-button
-          >
+          > -->
 
           <!-- <md-tabs class="md-primary">
 						<md-tab
@@ -152,9 +155,9 @@
 						></md-tab>
 					</md-tabs> -->
         </div>
-        <md-button :style="{ color: textColor }" @click="logout()"
+        <!-- <md-button :style="{ color: textColor }" @click="logout()"
           >Sign out</md-button
-        >
+        > -->
       </md-app-toolbar>
 
       <!-- <md-app-drawer v-if="!admin" :md-active.sync="menuVisible">
@@ -170,7 +173,7 @@
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
         <AnsweredByUser v-if="ifAnsweredByUser" />
-        <AnswerByUser v-if="ifAnswerByUser" />
+        <!-- <AnswerByUser v-if="ifAnswerByUser" /> -->
         <ChallengePage v-if="ifChallenge" />
       </md-app-content>
       <md-app-content v-else>
@@ -190,7 +193,7 @@ import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import EditProfileField from "@/components/EditProfileField.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
-import AnswerByUser from "@/components/AnswerByUser.vue";
+// import AnswerByUser from "@/components/AnswerByUser.vue";
 import ChallengePage from "@/components/ChallengePage.vue";
 import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vue";
 // import Questions from "@/components/Questions.vue";
@@ -240,7 +243,7 @@ export default {
   }),
   components: {
     ChallengePage,
-    AnswerByUser,
+    // AnswerByUser,
     LevelProgressBar,
     ReportedQuestionsForAdmin,
 
@@ -275,7 +278,7 @@ export default {
       this.ifAnswerByUser = false;
       this.ifChallenge = false;
     },
-    moveToAnswerPage() {
+    /* moveToAnswerPage() {
       this.ifHome = false;
       this.ifFollowing = false;
       this.ifAnsweredByUser = false;
@@ -290,7 +293,7 @@ export default {
           searchType: constants.searchTypes[3][1],
         })
       );
-    },
+    },*/
     moveToChallengePage() {
       this.ifHome = false;
       this.ifFollowing = false;
