@@ -195,7 +195,7 @@ export default {
     nonfiltered: true,
     filtered: false,
     showAskQuestionDialog: false,
-    showFilterCard: true,
+    showFilterCard: false,
     dataNotFound: false,
   }),
 };
