@@ -480,7 +480,7 @@
 
 <script>
 import axios from "axios";
-import cryptoUtil from "@/common/cryptoUtil.js";
+// import cryptoUtil from "@/common/cryptoUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import constants from "@/common/constants.js";
@@ -674,10 +674,10 @@ export default {
       };
       axios(config)
         .then((response) => {
-          cryptoUtil.setItem(
-            "userProgressLevel",
-            JSON.stringify(response.data.userProgressLevel)
-          );
+          // cryptoUtil.setItem(
+          //   "userProgressLevel",
+          //   JSON.stringify(response.data.userProgressLevel)
+          // );
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
