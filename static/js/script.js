@@ -23,7 +23,7 @@ async function getTimeStamp() {
 				$("#seconds").html("now");
 				deleteTimeStamp();
 				addTimeStamp();
-				// window.location.href = "https://quortex.herokuapp.com/";
+				window.location.href = "https://quortex.herokuapp.com/";
 			} else {
 				deleteTimeStamp();
 				addTimeStamp();
@@ -32,11 +32,11 @@ async function getTimeStamp() {
 				var secondsInterval = setInterval(() => {
 					$("#seconds").html(" in " + --counter + " seconds");
 					if (counter == 0) {
-						// window.location.href = "https://quortex.herokuapp.com/";
+						window.location.href = "https://quortex.herokuapp.com/";
 						clearInterval(secondsInterval);
 					}
 				}, 1000);
-				// window.location.href = "https://quortex.herokuapp.com/";
+				window.location.href = "https://quortex.herokuapp.com/";
 			}
 		}
 	);
