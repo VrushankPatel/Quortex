@@ -36,7 +36,7 @@ async function getTimeStamp() {
 						clearInterval(secondsInterval);
 					}
 				}, 1000);
-				window.location.href = "https://quortex.herokuapp.com/";
+				// window.location.href = "https://quortex.herokuapp.com/";
 			}
 		}
 	);
