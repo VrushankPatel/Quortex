@@ -5,7 +5,6 @@ function invokeServices() {
 		"https://quortex-server.herokuapp.com/",
 	];
 	urls.forEach((element) => {
-		console.log(element);
 		$.ajax({
 			url: element,
 		});
@@ -16,17 +15,13 @@ async function getTimeStamp() {
 		"https://simplerest-cfec7-default-rtdb.firebaseio.com/quortex.json",
 		{ async: false },
 		function (data, status) {
-			timeStamp = Math.ceil(
-				(new Date().getTime() - data[Object.keys(data)[0]]["TimeStamp"]) / 1000
-			);
+			timeStamp = Math.ceil((new Date().getTime() - data["TimeStamp"]) / 1000);
 			if (timeStamp <= 1790) {
 				$("#seconds").html("now");
-				deleteTimeStamp();
-				addTimeStamp();
+				updateTimeStamp();
 				window.location.href = "https://quortex.herokuapp.com/";
 			} else {
-				deleteTimeStamp();
-				addTimeStamp();
+				updateTimeStamp();
 				invokeServices();
 				var counter = 16;
 				var secondsInterval = setInterval(() => {
@@ -42,21 +37,11 @@ async function getTimeStamp() {
 	);
 }
 
-function deleteTimeStamp() {
-	jQuery.ajax({
-		accept: "application/json",
-		type: "DELETE",
-		async: false,
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		url: "https://simplerest-cfec7-default-rtdb.firebaseio.com/quortex.json",
-	});
-}
-function addTimeStamp() {
+function updateTimeStamp() {
 	var data = { TimeStamp: Math.round(new Date().getTime()).toString() };
 	jQuery.ajax({
 		accept: "application/json",
-		type: "POST",
+		type: "PUT",
 		contentType: "application/json; charset=utf-8",
 		dataType: "json",
 		url: "https://simplerest-cfec7-default-rtdb.firebaseio.com/quortex.json",
@@ -64,5 +49,3 @@ function addTimeStamp() {
 	});
 }
 getTimeStamp();
-// deleteTimeStamp();
-// addTimeStamp();
