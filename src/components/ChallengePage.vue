@@ -49,7 +49,6 @@
 // import Loader from "@/components/Loader.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import LevelProgressBar from "@/components/LevelProgressBar.vue";
-import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import constants from "@/common/constants.js";
@@ -72,8 +71,9 @@ export default {
         url: constants.baseUrl() + "/findtoptenusers",
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           if (response.data.status == 404) {
             this.showLoader = false;
             this.dataNotFound = true;
@@ -81,8 +81,8 @@ export default {
           }
           this.users = response.data;
           this.showLoader = false;
-        })
-        .catch((error) => {
+        },
+        (error) => {
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -92,7 +92,8 @@ export default {
           }
           this.showLoader = false;
           this.dataNotFound = true;
-        });
+        }
+      );
     },
   },
   data: () => ({

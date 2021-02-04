@@ -88,7 +88,6 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, minLength, maxLength } from "vuelidate/lib/validators";
-import axios from "axios";
 import constants from "@/common/constants.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
@@ -173,8 +172,9 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
@@ -192,8 +192,8 @@ export default {
               this.sending = false;
             }, 1500);
           }
-        })
-        .catch((error) => {
+        },
+        (error) => {
           window.setTimeout(() => {
             this.showFailureSnackBar = true;
             this.sending = false;
@@ -204,7 +204,8 @@ export default {
             this.$router,
             this.$swal
           );
-        });
+        }
+      );
     },
   },
 };

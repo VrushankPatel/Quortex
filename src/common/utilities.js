@@ -63,4 +63,17 @@ export default {
 			url: "https://quortex-server.herokuapp.com/",
 		}).then(/*(response) => {console.log(response);}*/);
 	},
+	updateFirebaseTimeStamp() {
+		axios({
+			method: "put",
+			url: "https://simplerest-cfec7-default-rtdb.firebaseio.com/quortex.json",
+			data: {
+				TimeStamp: Math.round(new Date().getTime()).toString(),
+			},
+		});
+	},
+	sendRequest(config, success, failure) {
+		axios(config).then(success).catch(failure);
+		this.updateFirebaseTimeStamp();
+	},
 };

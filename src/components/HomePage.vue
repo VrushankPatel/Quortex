@@ -103,7 +103,6 @@ import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import AskQuestionCard from "@/components/AskQuestionCard.vue";
 import FilterQuestion from "@/components/FilterQuestion.vue";
-import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import constants from "@/common/constants.js";
@@ -137,12 +136,13 @@ export default {
           utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           this.questions = response.data;
           this.showLoader = false;
-        })
-        .catch((error) => {
+        },
+        (error) => {
           if (
             error.response.data.code == 401 ||
             error.response.data.code == 555
@@ -152,7 +152,8 @@ export default {
           }
           this.showLoader = false;
           this.dataNotFound = true;
-        });
+        }
+      );
     },
     doFilter(data) {
       this.nonfiltered = false;
@@ -168,12 +169,13 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           this.questions = response.data;
           this.showLoader = false;
-        })
-        .catch((error) => {
+        },
+        (error) => {
           window.setTimeout(() => {
             this.sending = false;
           }, 1500);
@@ -183,7 +185,8 @@ export default {
             this.$router,
             this.$swal
           );
-        });
+        }
+      );
     },
     openAskQuestionDialog() {
       this.showAskQuestionDialog = !this.showAskQuestionDialog;

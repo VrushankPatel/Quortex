@@ -92,6 +92,7 @@ export default {
   },
   mounted: function () {
     utilities.awakeAPIGatewayAndBackEndHeroku();
+    utilities.updateFirebaseTimeStamp();
     Vue.loadScript("https://code.getmdl.io/1.3.0/material.min.js");
   },
 };

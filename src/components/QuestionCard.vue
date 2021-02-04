@@ -479,8 +479,6 @@
 </template>
 
 <script>
-import axios from "axios";
-// import cryptoUtil from "@/common/cryptoUtil.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import constants from "@/common/constants.js";
@@ -513,16 +511,17 @@ export default {
           answerId: answerId,
         },
       };
-
-      axios(config)
-        .then((/*response */) => {
+      utilities.sendRequest(
+        config,
+        (/*response */) => {
           // console.log(JSON.stringify(response));
           location.reload();
-        })
-        .catch((/*error*/) => {
+        },
+        (/*error*/) => {
           // console.log(JSON.stringify(error));
           alert("unable to delete answer..");
-        });
+        }
+      );
     },
     getFormattedDate(dateString) {
       var date = dateString.split("-");
@@ -544,9 +543,9 @@ export default {
           reportDesc: reportDesc,
         },
       };
-
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status
@@ -561,8 +560,8 @@ export default {
             }, 1500);
           }
           this.showReportDialog = false;
-        })
-        .catch((/*error */) => {
+        },
+        (/*error */) => {
           /*
           var result = actions.successQuestionPost(
             error.data.code,
@@ -570,7 +569,8 @@ export default {
           );
           console.log(result);
           */
-        });
+        }
+      );
       this.reportDesc = "";
     },
     openReportDialog(id) {
@@ -601,9 +601,9 @@ export default {
           unliked: !like,
         },
       };
-
-      axios(config)
-        .then((/*response */) => {
+      utilities.sendRequest(
+        config,
+        (/*response */) => {
           /*          
           var result = actions.successQuestionPost(
             response.data.code,
@@ -611,8 +611,8 @@ export default {
           );
           console.log(result);
           */
-        })
-        .catch((/*error */) => {
+        },
+        (/*error */) => {
           /*            
           var result = actions.successQuestionPost(
             error.data.code,
@@ -620,7 +620,8 @@ export default {
           );
           console.log(result);
           */
-        });
+        }
+      );
     },
     likeQuestion(questionId) {
       this.likeDislikeQuestion(questionId, true);
@@ -672,8 +673,9 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           // cryptoUtil.setItem(
           //   "userProgressLevel",
           //   JSON.stringify(response.data.userProgressLevel)
@@ -692,8 +694,8 @@ export default {
               this.showFailureSnackBar = true;
             }, 1500);
           }
-        })
-        .catch((error) => {
+        },
+        (error) => {
           window.setTimeout(() => {
             this.showFailureSnackBar = true;
           }, 1500);
@@ -703,7 +705,8 @@ export default {
             this.$router,
             this.$swal
           );
-        });
+        }
+      );
       this.showDialog = false;
     },
     cancelPostAnswer() {
@@ -723,18 +726,19 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           response;
           // console.log(JSON.stringify(response));
-        })
-        .catch((error) => {
+        },
+        (error) => {
           error;
           window.setTimeout(() => {
             // console.log("failure");
           }, 1500);
-        });
+        }
+      );
     },
     likeDislikeQuestion(questionId, like) {
       questionId = questionId["questionId"];
@@ -750,14 +754,16 @@ export default {
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
         data: data,
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           response;
-        })
-        .catch((error) => {
+        },
+        (error) => {
           error;
           window.setTimeout(() => {}, 1500);
-        });
+        }
+      );
     },
   },
   props: {
