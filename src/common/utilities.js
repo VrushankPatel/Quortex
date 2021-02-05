@@ -73,8 +73,9 @@ export default {
 		});
 	},
 	sendRequest(config, success, failure) {
-		axios(config).then(success).catch(failure);
-		this.updateFirebaseTimeStamp();
+		axios(config)
+			.then(success)
+			.catch(failure);
+		// this.updateFirebaseTimeStamp();
 	},
-	}
 };
