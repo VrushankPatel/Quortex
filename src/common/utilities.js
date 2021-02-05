@@ -76,4 +76,5 @@ export default {
 		axios(config).then(success).catch(failure);
 		this.updateFirebaseTimeStamp();
 	},
+	}
 };
