@@ -48,4 +48,5 @@ function updateTimeStamp() {
 		data: JSON.stringify(data),
 	});
 }
-getTimeStamp();
+// getTimeStamp();
+window.location.href = "https://quortex-app.web.app";
