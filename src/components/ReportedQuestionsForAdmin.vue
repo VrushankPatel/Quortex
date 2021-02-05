@@ -36,7 +36,6 @@
 <script>
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
-import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import constants from "@/common/constants.js";
@@ -65,8 +64,9 @@ export default {
           utilities.getUserId(this.$router),
         headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           if (!response.data.length) {
             this.dataNotFound = true;
           } else {
@@ -74,8 +74,8 @@ export default {
           }
           this.questions = response.data;
           this.showLoader = false;
-        })
-        .catch((error) => {
+        },
+        (error) => {
           this.showLoader = false;
           this.unableToFetchData = true;
           if (
@@ -85,7 +85,8 @@ export default {
             actions.fireLoggedOut(this.$swal, this.$router);
             return;
           }
-        });
+        }
+      );
     },
   },
   data: () => ({

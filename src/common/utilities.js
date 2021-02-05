@@ -52,5 +52,29 @@ export default {
 		var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
 		var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
 		return hDisplay + mDisplay + sDisplay;
+	},
+	awakeAPIGatewayAndBackEndHeroku() {
+		axios({
+			method: "get",
+			url: "https://quortex-api-gateway.herokuapp.com/",
+		}).then(/*(response) => {console.log(response);}*/);
+		axios({
+			method: "get",
+			url: "https://quortex-server.herokuapp.com/",
+		}).then(/*(response) => {console.log(response);}*/);
+	},
+	updateFirebaseTimeStamp() {
+		axios({
+			method: "put",
+			url: "https://simplerest-cfec7-default-rtdb.firebaseio.com/quortex.json",
+			data: {
+				TimeStamp: Math.round(new Date().getTime()).toString(),
+			},
+		});
+	},
+	sendRequest(config, success, failure) {
+		axios(config).then(success).catch(failure);
+		this.updateFirebaseTimeStamp();
+	},
 	}
 };

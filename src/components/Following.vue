@@ -1,115 +1,116 @@
 <template>
-	<div style="min-height: 650px">
-		<div v-if="showLoader">
-			<md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
-			<h4>Loading Data</h4>
-		</div>
+  <div style="min-height: 650px">
+    <div v-if="showLoader">
+      <md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
+      <h4>Loading Data</h4>
+    </div>
 
-		<div v-for="item in questions" :key="item.questionId">
-			<QuestionCard
-				:item="item"
-				:subject="item.subject"
-				:topic="item.topic"
-				:nickName="item.nickName"
-				:dateOfPosted="item.createDate"
-				:questionDesc="item.questionDesc"
-				:answerList="item.answerList"
-				:questionId="item.questionId"
-				:noOfAnswers="item.noOfAnswers"
-				:noOfLikes="item.noOfLikes"
-				:noOfFollowers="item.noOfFollowers"
-				v-on:actionReload="getData"
-				disabled
-			/>
-		</div>
+    <div v-for="item in questions" :key="item.questionId">
+      <QuestionCard
+        :item="item"
+        :subject="item.subject"
+        :topic="item.topic"
+        :nickName="item.nickName"
+        :dateOfPosted="item.createDate"
+        :questionDesc="item.questionDesc"
+        :answerList="item.answerList"
+        :questionId="item.questionId"
+        :noOfAnswers="item.noOfAnswers"
+        :noOfLikes="item.noOfLikes"
+        :noOfFollowers="item.noOfFollowers"
+        v-on:actionReload="getData"
+        disabled
+      />
+    </div>
 
-		<div v-if="dataNotFound">
-			<DataNotFound message="You have not followed any question." />
-		</div>
+    <div v-if="dataNotFound">
+      <DataNotFound message="You have not followed any question." />
+    </div>
 
-		<div v-if="unableToFetchData">
-			<DataNotFound message="Unable to fetch data, please try again later." />
-		</div>
-	</div>
+    <div v-if="unableToFetchData">
+      <DataNotFound message="Unable to fetch data, please try again later." />
+    </div>
+  </div>
 </template>
 
 <script>
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
-import axios from "axios";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import constants from "@/common/constants.js";
 export default {
-	name: "HomePage",
-	components: {
-		QuestionCard,
-		DataNotFound,
-	},
-	beforeMount() {
-		this.getData();
-	},
-	methods: {
-		getData() {
-			var config = {
-				method: "post",
-				url:
-					constants.baseUrl() +
-					"/findallbyfollower/" +
-					utilities.getUserId(this.$router),
-				headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
-			};
-			axios(config)
-				.then((response) => {
-					if (!response.data.length) {
-						this.dataNotFound = true;
-					} else {
-						this.dataNotFound = false;
-					}
-					this.questions = response.data;
-					this.showLoader = false;
-				})
-				.catch((error) => {
-					if (
-						error.response.data.code == 401 ||
-						error.response.data.code == 555
-					) {
-						actions.fireLoggedOut(this.$swal, this.$router);
-						return;
-					}
-					this.showLoader = false;
-					this.unableToFetchData = true;
-				});
-		},
-	},
-	data: () => ({
-		questions: null,
-		showLoader: true,
-		dataNotFound: false,
-		unableToFetchData: false,
-	}),
+  name: "HomePage",
+  components: {
+    QuestionCard,
+    DataNotFound,
+  },
+  beforeMount() {
+    this.getData();
+  },
+  methods: {
+    getData() {
+      var config = {
+        method: "post",
+        url:
+          constants.baseUrl() +
+          "/findallbyfollower/" +
+          utilities.getUserId(this.$router),
+        headers: utilities.getAuthJSONHeader(this.$router, this.$swal),
+      };
+      utilities.sendRequest(
+        config,
+        (response) => {
+          if (!response.data.length) {
+            this.dataNotFound = true;
+          } else {
+            this.dataNotFound = false;
+          }
+          this.questions = response.data;
+          this.showLoader = false;
+        },
+        (error) => {
+          if (
+            error.response.data.code == 401 ||
+            error.response.data.code == 555
+          ) {
+            actions.fireLoggedOut(this.$swal, this.$router);
+            return;
+          }
+          this.showLoader = false;
+          this.unableToFetchData = true;
+        }
+      );
+    },
+  },
+  data: () => ({
+    questions: null,
+    showLoader: true,
+    dataNotFound: false,
+    unableToFetchData: false,
+  }),
 };
 </script>
 
 <style scoped>
 .questtext {
-	padding: 10px;
+  padding: 10px;
 }
 .customcard {
-	cursor: pointer;
-	font-size: 14px;
-	transition-property: all;
-	transition-duration: 0.7s;
+  cursor: pointer;
+  font-size: 14px;
+  transition-property: all;
+  transition-duration: 0.7s;
 }
 .customcard:hover {
-	border-radius: 15px;
-	color: white;
-	background-color: #57606f;
-	font-size: 16px;
-	transition-property: all;
-	transition-duration: 0.7s;
+  border-radius: 15px;
+  color: white;
+  background-color: #57606f;
+  font-size: 16px;
+  transition-property: all;
+  transition-duration: 0.7s;
 }
 .md-dialog ::v-deep .md-dialog-container {
-	width: 40%;
+  width: 40%;
 }
 </style>

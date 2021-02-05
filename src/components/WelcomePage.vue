@@ -82,7 +82,17 @@ import Vue from "vue";
 import utilities from "@/common/utilities.js";
 export default {
   name: "WelcomePage",
+  beforeMount() {
+    this.$swal.fire({
+      icon: "info",
+      title: "Notice",
+      text:
+        "Quortex and it's services are hosted on free deployment dynos of heroku which usually sleep after 30 minutes of inactivity. So, first response might be slow because it'll take around 20 seconds to wake up all the services on heroku.",
+    });
+  },
   mounted: function () {
+    utilities.awakeAPIGatewayAndBackEndHeroku();
+    utilities.updateFirebaseTimeStamp();
     Vue.loadScript("https://code.getmdl.io/1.3.0/material.min.js");
   },
 };

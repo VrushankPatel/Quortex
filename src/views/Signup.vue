@@ -7,7 +7,6 @@
 
 <script>
 import SignupForm from "@/components/SignupForm.vue";
-import axios from "axios";
 import constants from "@/common/constants.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
@@ -37,8 +36,9 @@ export default {
         headers: utilities.getPlainJSONHeader(),
         data: data,
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           this.showLoader = false;
           actions.actionSignup(
             swal,
@@ -46,8 +46,8 @@ export default {
             response.data.status,
             router
           );
-        })
-        .catch((error) => {
+        },
+        (error) => {
           error;
           this.showLoader = false;
           actions.actionSignup(
@@ -56,7 +56,8 @@ export default {
             error.response.data.status,
             router
           );
-        });
+        }
+      );
     },
   },
 };

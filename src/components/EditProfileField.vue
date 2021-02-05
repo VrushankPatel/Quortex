@@ -188,7 +188,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import DataNotFound from "@/components/DataNotFound.vue";
 import constants from "@/common/constants.js";
 import utilities from "@/common/utilities.js";
@@ -290,8 +289,9 @@ export default {
         data: formData,
       };
       this.showLoader = true;
-      await axios(config)
-        .then((/*response*/) => {
+      utilities.sendRequest(
+        config,
+        (/*response*/) => {
           this.showLoader = false;
           this.$swal.fire({
             icon: "success",
@@ -299,8 +299,8 @@ export default {
             text: "Your profile updated successfully.",
           });
           this.$emit("closeEditProfile");
-        })
-        .catch((/*error*/) => {
+        },
+        (/*error*/) => {
           // console.log(JSON.stringify(error));
           this.showLoader = false;
           this.$swal.fire({
@@ -308,7 +308,8 @@ export default {
             title: "Email already exists.",
             text: "An Account with provided email already exists.",
           });
-        });
+        }
+      );
     },
     togglePasswordFields() {
       delete this.formData["password"];
@@ -323,8 +324,9 @@ export default {
         headers: utilities.getAuthJSONHeader(),
       };
 
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           var dateArray = response.data.birthdate.split("-");
           this.date["year"] = dateArray[0];
           this.date["month"] = parseInt(dateArray[1]);
@@ -332,12 +334,13 @@ export default {
           this.showLoader = false;
           this.defaults = response.data;
           this.restoreFormDefaults();
-        })
-        .catch((/*error*/) => {
+        },
+        (/*error*/) => {
           // console.log(error);
           this.showLoader = false;
           this.dataNotFound = true;
-        });
+        }
+      );
     },
   },
 };

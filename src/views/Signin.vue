@@ -15,10 +15,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import SigninForm from "@/components/SigninForm.vue";
 import ForgotPasswordField from "@/components/ForgotPasswordField.vue";
-import axios from "axios";
 import constants from "@/common/constants.js";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
@@ -51,8 +49,9 @@ export default {
         headers: utilities.getPlainJSONHeader(),
         data: data,
       };
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           this.showLoader = false;
           cryptoUtil.setItem(
             constants.getQuortexUserId(),
@@ -83,8 +82,8 @@ export default {
             response.data.status,
             router
           );
-        })
-        .catch((error) => {
+        },
+        (error) => {
           this.showLoader = false;
           actions.actionSignin(
             swal,
@@ -92,7 +91,8 @@ export default {
             error.response.data.status,
             router
           );
-        });
+        }
+      );
     },
     async actionForgotPassword(formData) {
       this.showLoader = true;
@@ -104,9 +104,9 @@ export default {
         headers: utilities.getPlainJSONHeader(),
         data: data,
       };
-
-      axios(config)
-        .then((response) => {
+      utilities.sendRequest(
+        config,
+        (response) => {
           this.showLoader = false;
           actions.successForgotPassword(
             this.$swal,
@@ -114,8 +114,8 @@ export default {
             response.data.status
           );
           this.toggleSigninForgotPwdWindows();
-        })
-        .catch((error) => {
+        },
+        (error) => {
           error;
           this.$swal.fire({
             icon: "error",
@@ -123,7 +123,8 @@ export default {
             text: "There is no account registered with this mail id.",
           });
           this.showLoader = false;
-        });
+        }
+      );
     },
     toggleSigninForgotPwdWindows() {
       this.signin = !this.signin;
