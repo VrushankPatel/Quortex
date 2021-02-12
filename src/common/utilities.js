@@ -12,7 +12,7 @@ export default {
 		};
 	},
 	getAuthJSONHeader(router, swal) {
-		if (actions.checkSignedIn()) {
+		if (actions.checkLoggedIn()) {
 			return {
 				"Access-Control-Allow-Origin": "*",
 				Authorization: "Bearer " + cryptoUtil.getItem("quortextoken", router),

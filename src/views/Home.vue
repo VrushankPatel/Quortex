@@ -90,9 +90,7 @@
             >Following</md-button
           >
 
-          <span
-            title="Click here to see questions that you’ve already answered."
-          >
+          <span>
             <md-button
               :style="{ color: textColor }"
               style="border-bottom: 3px solid white"
@@ -313,7 +311,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en";
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+@import "https://code.getmdl.io/1.3.0/material.min.css";
+@import "../styles/welcome.css";
 @import "../styles/questioncard.css";
 .md-app {
   max-height: 100%;

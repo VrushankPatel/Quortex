@@ -7,7 +7,7 @@
         :key="item"
       >
         <h4 style="float: left; font-weight: bolder; padding-left: 2%">
-          @{{ item.nickName }}
+          <md-icon>person</md-icon> {{ item.nickName }}
         </h4>
         <div
           style="float: right"

@@ -49,20 +49,6 @@ export default {
 			});
 		}
 	},
-	// successSignin(swal, code, status, router) {
-	// 	if (status == true && code == 200) {
-	// 		router.push("/home");
-	// 	}
-	// },
-	// errorSignin(swal, code, status) {
-	// 	if (status == false && code == 532) {
-	// 		swal.fire({
-	// 			icon: "error",
-	// 			title: "Oops..",
-	// 			text: "Incorrect username or password, please try again.",
-	// 		});
-	// 	}
-	// },
 	successQuestionPost(code, status) {
 		if (status == true && code == 200) {
 			return true;
@@ -70,8 +56,7 @@ export default {
 		return false;
 	},
 	errorQuestionPost(code, status, router, swal) {
-		// TO DO : error code for invalid token and invalid userId.
-		if (!this.checkSignedIn() || code == 555) {
+		if (!this.checkLoggedIn() || code == 555) {
 			this.invalidate();
 			swal.fire({
 				icon: "info",
@@ -101,7 +86,7 @@ export default {
 	invalidate() {
 		localStorage.clear();
 	},
-	checkSignedIn(router) {
+	checkLoggedIn(router) {
 		if (
 			(new Date() - new Date(cryptoUtil.getItem(constants.getSignedInDate()))) /
 				1000 >

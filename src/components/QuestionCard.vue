@@ -16,9 +16,8 @@
             >
               <div class="md-title" style="float: left">
                 <span class="topicAndSubject"
-                  ><md-icon style="color: white">person</md-icon> @{{
-                    nickName
-                  }}</span
+                  ><md-icon style="color: white">person</md-icon>
+                  {{ nickName }}</span
                 >
               </div>
             </div>

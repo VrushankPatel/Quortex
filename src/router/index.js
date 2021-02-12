@@ -3,15 +3,13 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
-import WelcomePage from "../components/WelcomePage.vue";
 
 Vue.use(VueRouter);
-
 const routes = [
 	{
 		path: "/",
-		name: "Welcome",
-		component: WelcomePage,
+		name: "Signin",
+		component: Signin,
 	},
 	{
 		path: "/signup",
