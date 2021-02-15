@@ -46,7 +46,7 @@
 								>
 							</md-button>
 							<md-menu-content>
-								<md-menu-item @click="EditProfileDialog()" v-if="!admin"
+								<md-menu-item @click="ModifyProfileDialog()" v-if="!admin"
 									>Modify Profile</md-menu-item
 								>
 								<md-menu-item @click="logout()">Sign out</md-menu-item>
@@ -105,19 +105,6 @@
 						>
 					</span>
 
-					<!-- <md-button
-            :style="{ color: textColor }"
-            style="border-bottom: 3px solid white"
-            v-if="ifAnswerByUser"
-            >Answer</md-button
-          >
-          <md-button
-            :style="{ color: textColor }"
-            v-else
-            @click="moveToAnswerPage()"
-            >Answer</md-button
-          > -->
-
 					<md-button
 						:style="{ color: textColor }"
 						style="border-bottom: 3px solid white"
@@ -130,37 +117,8 @@
 						@click="moveToChallengePage()"
 						>Challenge</md-button
 					>
-
-					<!-- <md-button :style="{ color: textColor }" @click="EditProfileDialog()"
-            >Edit Profile</md-button
-          > -->
-
-					<!-- <md-tabs class="md-primary">
-						<md-tab
-							id="tab-home"
-							md-label="Home"
-							@click="moveToHomePage()"
-						></md-tab>
-						<md-tab
-							id="tab-following"
-							md-label="Following"
-							@click="moveToFollowingPage()"
-						></md-tab>
-						<md-tab
-							id="tab-answers"
-							md-label="Answers"
-							@click="moveToAnsweredPage()"
-						></md-tab>
-					</md-tabs> -->
 				</div>
-				<!-- <md-button :style="{ color: textColor }" @click="logout()"
-          >Sign out</md-button
-        > -->
 			</md-app-toolbar>
-
-			<!-- <md-app-drawer v-if="!admin" :md-active.sync="menuVisible">
-        <HomePageDrawer v-on:editprofile="EditProfileDialog()" />
-      </md-app-drawer> -->
 
 			<md-app-content
 				v-if="!admin"
@@ -179,7 +137,7 @@
 			</md-app-content>
 		</md-app>
 		<md-dialog :md-active.sync="showProfileDialog">
-			<EditProfileField v-on:closeEditProfile="closeEditProfile" />
+			<ModifyProfile v-on:closeModifyProfile="closeModifyProfile" />
 		</md-dialog>
 	</div>
 </template>
@@ -188,7 +146,7 @@
 // import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
 import LevelProgressBar from "@/components/LevelProgressBar.vue";
-import EditProfileField from "@/components/EditProfileField.vue";
+import ModifyProfile from "@/components/ModifyProfile.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
 // import AnswerByUser from "@/components/AnswerByUser.vue";
@@ -249,10 +207,10 @@ export default {
 		Following,
 		AnsweredByUser,
 		// Questions,
-		EditProfileField,
+		ModifyProfile,
 	},
 	methods: {
-		closeEditProfile() {
+		closeModifyProfile() {
 			this.showProfileDialog = false;
 		},
 		moveToHomePage() {
@@ -302,7 +260,7 @@ export default {
 		logout() {
 			actions.fireLoggedOut(this.$swal, this.$router);
 		},
-		EditProfileDialog() {
+		ModifyProfileDialog() {
 			this.menuVisible = false;
 			this.showProfileDialog = true;
 		},
