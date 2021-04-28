@@ -2,21 +2,20 @@ import cryptoUtil from "@/common/cryptoUtil.js";
 import constants from "@/common/constants.js";
 export default {
 	actionSignup(swal, code, status, router) {
-		if (status == true && code == 200) {
-			swal.fire({
-				icon: "success",
-				title: "Success",
-				text: "Account successfully created, \nPlease signin to continue.",
-			});
-			router.push("/Signin");
-		}
 		if (status == false && code == 531) {
 			swal.fire({
 				icon: "error",
 				title: "Oops..",
 				text: "Email Id already exists, please try again with different email.",
 			});
+			return;
 		}
+		swal.fire({
+			icon: "success",
+			title: "Success",
+			text: "Account successfully created, \nPlease signin to continue.",
+		});
+		router.push("/Signin");
 	},
 	// successSignup(swal, code, status, router) {
 	// 	if (status == true && code == 200) {
@@ -72,8 +71,7 @@ export default {
 			swal.fire({
 				icon: "success",
 				title: "Success",
-				text:
-					"Password is successfully sent to your email Id, \nPlease signin to continue.",
+				text: "Password is successfully sent to your email Id, \nPlease signin to continue.",
 			});
 		} else if (status == true && code == 550) {
 			swal.fire({
@@ -89,7 +87,7 @@ export default {
 	checkLoggedIn(router) {
 		if (
 			(new Date() - new Date(cryptoUtil.getItem(constants.getSignedInDate()))) /
-				1000 >
+			1000 >
 			21600
 		) {
 			localStorage.clear();

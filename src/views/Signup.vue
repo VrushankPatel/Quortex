@@ -39,7 +39,7 @@ export default {
       utilities.sendRequest(
         config,
         (response) => {
-          this.showLoader = false;
+          this.showLoader = false;          
           actions.actionSignup(
             swal,
             response.data.code,
