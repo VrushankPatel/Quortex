@@ -1,3 +1,5 @@
+const URL1 = "https://quortex-api-gateway.herokuapp.com/api";
+const URL2 = "https://quortex-api-gateway2.herokuapp.com/api";
 export default {
 	grades: {
 		1: "1",
@@ -66,8 +68,7 @@ export default {
 		Colombia: "Colombia",
 		Comoros: "Comoros",
 		Congo: "Congo",
-		"Congo, the Democratic Republic of the":
-			"Congo, the Democratic Republic of the",
+		"Congo, the Democratic Republic of the": "Congo, the Democratic Republic of the",
 		"Cook Islands": "Cook Islands",
 		"Costa Rica": "Costa Rica",
 		"Côte d'Ivoire": "Côte d'Ivoire",
@@ -133,8 +134,7 @@ export default {
 		Kazakhstan: "Kazakhstan",
 		Kenya: "Kenya",
 		Kiribati: "Kiribati",
-		"Korea, Democratic People's Republic of":
-			"Korea, Democratic People's Republic of",
+		"Korea, Democratic People's Republic of": "Korea, Democratic People's Republic of",
 		"Korea, Republic of": "Korea, Republic of",
 		Kuwait: "Kuwait",
 		Kyrgyzstan: "Kyrgyzstan",
@@ -148,8 +148,7 @@ export default {
 		Lithuania: "Lithuania",
 		Luxembourg: "Luxembourg",
 		Macao: "Macao",
-		"Macedonia, the Former Yugoslav Republic of":
-			"Macedonia, the Former Yugoslav Republic of",
+		"Macedonia, the Former Yugoslav Republic of": "Macedonia, the Former Yugoslav Republic of",
 		Madagascar: "Madagascar",
 		Malawi: "Malawi",
 		Malaysia: "Malaysia",
@@ -203,8 +202,7 @@ export default {
 		"Russian Federation": "Russian Federation",
 		Rwanda: "Rwanda",
 		"Saint Barthélemy": "Saint Barthélemy",
-		"Saint Helena, Ascension and Tristan da Cunha":
-			"Saint Helena, Ascension and Tristan da Cunha",
+		"Saint Helena, Ascension and Tristan da Cunha": "Saint Helena, Ascension and Tristan da Cunha",
 		"Saint Kitts and Nevis": "Saint Kitts and Nevis",
 		"Saint Lucia": "Saint Lucia",
 		"Saint Martin (French part)": "Saint Martin (French part)",
@@ -225,8 +223,7 @@ export default {
 		"Solomon Islands": "Solomon Islands",
 		Somalia: "Somalia",
 		"South Africa": "South Africa",
-		"South Georgia and the South Sandwich Islands":
-			"South Georgia and the South Sandwich Islands",
+		"South Georgia and the South Sandwich Islands": "South Georgia and the South Sandwich Islands",
 		"South Sudan": "South Sudan",
 		Spain: "Spain",
 		"Sri Lanka": "Sri Lanka",
@@ -256,8 +253,7 @@ export default {
 		"United Arab Emirates": "United Arab Emirates",
 		"United Kingdom": "United Kingdom",
 		"United States": "United States",
-		"United States Minor Outlying Islands":
-			"United States Minor Outlying Islands",
+		"United States Minor Outlying Islands": "United States Minor Outlying Islands",
 		Uruguay: "Uruguay",
 		Uzbekistan: "Uzbekistan",
 		Vanuatu: "Vanuatu",
@@ -272,7 +268,11 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		return "https://quortex-api-gateway.herokuapp.com/api";
+		const gmtHour = new Date().toUTCString().split(" ")[4].split(":")[0];
+		if (gmtHour >= 7 && gmtHour <= 19) {
+			return URL1;
+		}
+		return URL2;
 	},
 	subjectByCodes: {
 		1: "English",
