@@ -163,7 +163,7 @@ export default {
       }
     },
     postQuestion(formValues) {
-      actions.checkSignedIn();
+      actions.checkLoggedIn();
       const trimmedFormValues = utilities.trimFormData(formValues);
       const data = JSON.stringify(trimmedFormValues);
       var config = {
