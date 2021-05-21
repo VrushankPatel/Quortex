@@ -156,7 +156,7 @@ export default {
       if (formValues["topic"] == null) {
         formValues["topic"] = "";
       }
-      actions.checkSignedIn();
+      actions.checkLoggedIn(this.$router);
       const data = JSON.stringify(formValues);
       this.$emit("doFilter", data);
     },

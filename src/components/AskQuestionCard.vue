@@ -163,7 +163,7 @@ export default {
       }
     },
     postQuestion(formValues) {
-      actions.checkLoggedIn();
+      actions.checkLoggedIn(this.$router);
       const trimmedFormValues = utilities.trimFormData(formValues);
       const data = JSON.stringify(trimmedFormValues);
       var config = {

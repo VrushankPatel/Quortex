@@ -55,7 +55,7 @@ export default {
 		return false;
 	},
 	errorQuestionPost(code, status, router, swal) {
-		if (!this.checkLoggedIn() || code == 555) {
+		if (!this.checkLoggedIn(router) || code == 555) {
 			this.invalidate();
 			swal.fire({
 				icon: "info",
