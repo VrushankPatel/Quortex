@@ -3,6 +3,7 @@
 2). How to build and run docker container for local machine or VM where you've installed docker already.
 
 1). How to build and run docker container on heroku.
+# clone the project and bring current dir or pwd to root of project.
 # install docker and heroku cli and login in both of them.
 >> heroku login
 >> docker login
@@ -30,7 +31,7 @@ ___________________________________
 
 # take a look at Dockerfile and DockerfileDev.
 # Dockerfile : It will copy the defaultTemplate.conf of nginx which containes the Template of PORT where actual port will be inserted by heroku via last command by CMD of Dockerfile's last line (check $PORT, that is where heroku will insert port).
-# Dockerfile : it'll copu the default.conf of nginx which will simply expose it self on 80 and we'll now run the image and pass the port to our desired one.
+# Dockerfile : it'll copy the default.conf of nginx which will simply expose it self on 80 and we'll now run the image and pass the port to our desired one.
 
 # below is how you can run the container, replace 8080 with your desired port.
 >> docker run -p 8080:80 quortex
