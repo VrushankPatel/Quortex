@@ -16,6 +16,7 @@ export default {
   name: "Signup",
   beforeMount() {
     document.body.style.backgroundColor = "rgb(99,115,138)";
+    utilities.awakeAPIGatewayAndBackEndHeroku();
   },
   components: {
     SignupForm,

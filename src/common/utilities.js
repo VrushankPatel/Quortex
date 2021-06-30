@@ -56,11 +56,11 @@ export default {
 	awakeAPIGatewayAndBackEndHeroku() {
 		axios({
 			method: "get",
-			url: "https://quortex-api-gateway.herokuapp.com/",
+			url: "https://quortex-api-gateway2.herokuapp.com/",
 		}).then(/*(response) => {console.log(response);}*/);
 		axios({
 			method: "get",
-			url: "https://quortex-server.herokuapp.com/",
+			url: "https://quortex-server2.herokuapp.com/",
 		}).then(/*(response) => {console.log(response);}*/);
 	},
 	updateFirebaseTimeStamp() {

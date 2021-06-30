@@ -27,6 +27,7 @@ export default {
   name: "Signin",
   beforeMount() {
     document.body.style.backgroundColor = "rgb(99,115,138)";
+    utilities.awakeAPIGatewayAndBackEndHeroku();
   },
   components: {
     SigninForm,

@@ -1,4 +1,4 @@
-const URL1 = "https://quortex-api-gateway.herokuapp.com/api";
+// const URL1 = "https://quortex-api-gateway.herokuapp.com/api";
 const URL2 = "https://quortex-api-gateway2.herokuapp.com/api";
 export default {
 	grades: {
@@ -268,8 +268,9 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		let date = Date().split(" ")[2];
-		return date < 15 ? URL1 : URL2;
+		// let date = Date().split(" ")[2];
+		// return date < 15 ? URL1 : URL2;
+		return URL2;
 	},
 	subjectByCodes: {
 		1: "English",
