@@ -268,11 +268,8 @@ export default {
 		Zimbabwe: "Zimbabwe",
 	},
 	baseUrl() {
-		const gmtHour = new Date().toUTCString().split(" ")[4].split(":")[0];
-		if (gmtHour >= 7 && gmtHour <= 19) {
-			return URL1;
-		}
-		return URL2;
+		let date = Date().split(" ")[2];
+		return date < 15 ? URL1 : URL2;
 	},
 	subjectByCodes: {
 		1: "English",
