@@ -43,8 +43,7 @@ export default {
 				title: "Logged out",
 				text: "You're logged out of quortex, please login to continue.",
 			});
-			router.push("/signin");
-			return;
+			router.push("/signin");			
 		}
 	},
 	successForgotPassword(swal, code, status) {

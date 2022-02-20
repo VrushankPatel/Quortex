@@ -2,8 +2,8 @@ import actions from "@/common/actions.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
 import axios from "axios";
 export default {
-	trimFormData(formData) {
-		Object.keys(formData).map((k) => (formData[k] = formData[k].trim()));
+	trimFormData(formData) {		
+		Object.keys(formData).forEach(element => (formData[element] = formData[element].trim()));
 		return formData;
 	},
 	getPlainJSONHeader() {
@@ -19,8 +19,7 @@ export default {
 				"Content-Type": "application/json",
 			};
 		} else {
-			actions.fireLoggedOut(swal, router);
-			return;
+			actions.fireLoggedOut(swal, router);			
 		}
 	},
 	getUserId(router) {
@@ -37,8 +36,7 @@ export default {
 		if (userType != "") {
 			return userType;
 		} else {
-			actions.fireLoggedOut(swal, router);
-			// router.push("/signin");
+			actions.fireLoggedOut(swal, router);			
 		}
 	},
 	secondsToHms(d) {
@@ -48,20 +46,20 @@ export default {
 		var m = Math.floor((d % 3600) / 60);
 		var s = Math.floor((d % 3600) % 60);
 
-		var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
-		var mDisplay = m > 0 ? m + (m == 1 ? " minute, " : " minutes, ") : "";
-		var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+		var hDisplay = h > 0 ? h + "hour(s), " : "";
+		var mDisplay = m > 0 ? m + "minute(s), " : "";		
+		var sDisplay = s > 0 ? s + "second(s), " : "";
 		return hDisplay + mDisplay + sDisplay;
 	},
 	awakeAPIGatewayAndBackEndHeroku() {
 		axios({
 			method: "get",
 			url: "https://quortex-api-gateway2.herokuapp.com/",
-		}).then(/*(response) => {console.log(response);}*/);
+		});
 		axios({
 			method: "get",
 			url: "https://quortex-server2.herokuapp.com/",
-		}).then(/*(response) => {console.log(response);}*/);
+		});
 	},
 	updateFirebaseTimeStamp() {
 		axios({
@@ -75,7 +73,6 @@ export default {
 	sendRequest(config, success, failure) {
 		axios(config)
 			.then(success)
-			.catch(failure);
-		// this.updateFirebaseTimeStamp();
+			.catch(failure);		
 	},
 };

@@ -1,6 +1,4 @@
 import Swal from "sweetalert2";
-
-// var CryptoJS = require("crypto-js");
 import CryptoJS from "crypto-js";
 
 export default {

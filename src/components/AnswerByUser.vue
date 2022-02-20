@@ -183,12 +183,10 @@ export default {
 <style scoped>
 .questtext {
   padding: 10px;
+  cursor: pointer;
 }
 .md-dialog ::v-deep .md-dialog-container {
   width: 40%;
-}
-.questtext {
-  cursor: pointer;
 }
 .customcard {
   border: 1px solid lightgrey;

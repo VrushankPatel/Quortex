@@ -116,8 +116,7 @@ export default {
           );
           this.toggleSigninForgotPwdWindows();
         },
-        (error) => {
-          error;
+        () => {          
           this.$swal.fire({
             icon: "error",
             title: "User not found",

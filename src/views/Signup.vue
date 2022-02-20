@@ -48,8 +48,7 @@ export default {
             router
           );
         },
-        (error) => {
-          error;
+        (error) => {          
           this.showLoader = false;
           actions.actionSignup(
             swal,
