@@ -13,8 +13,7 @@ export default {
 	},
 	getAuthJSONHeader(router, swal) {
 		if (actions.checkLoggedIn(router)) {
-			return {
-				"Access-Control-Allow-Origin": "*",
+			return {				
 				Authorization: "Bearer " + cryptoUtil.getItem("quortextoken", router),
 				"Content-Type": "application/json",
 			};
