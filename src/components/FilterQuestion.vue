@@ -78,9 +78,7 @@
             </div>
           </div>
         </md-card-content>
-
-        <!-- for down -->
-        <!-- v-if="filters" -->
+        
         <md-card-actions>
           <md-button type="button" class="md-primary" @click="clearFilters()"
             >Clear filters</md-button
