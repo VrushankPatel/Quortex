@@ -84,7 +84,6 @@ export default {
             error.response.data.code == 555
           ) {
             actions.fireLoggedOut(this.$swal, this.$router);
-            return;
           }
         }
       );

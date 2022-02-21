@@ -179,7 +179,7 @@ export default {
             response.data.code,
             response.data.status
           );
-          if (result == true) {
+          if (result) {
             window.setTimeout(() => {
               this.showSuccessSnackBar = true;
               this.sending = false;

@@ -58,10 +58,7 @@
 						autocomplete="off"
 						:options="grades"
 					/>
-				</div>
-				<!-- validation="required|after:2019-01-01"
-        min="2018-12-01"
-      max="2021-01-01"-->
+				</div>				
 				<div class="double-wide">
 					<div class="double-wide">
 						<FormulateInput
@@ -115,15 +112,7 @@
 						autocomplete="off"
 						:options="countries"
 					/>
-				</div>
-				<!-- <FormulateInput
-        v-model="formData.country"
-        name="Country"
-        type="text"
-        label="Country"
-        placeholder="Country"
-        validation="required"
-      /> -->
+				</div>				
 				<div class="double-wide" v-if="changePassword">
 					<FormulateInput
 						name="password"
@@ -247,7 +236,7 @@ export default {
 				"|min:1";
 		},
 		modifyProfile() {
-			if (this.changePassword == true) {
+			if (this.changePassword) {
 				const password = document.getElementById("passwordConf").value;
 				let pwdRegEx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 				if (!pwdRegEx.test(password)) {

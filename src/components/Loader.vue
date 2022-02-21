@@ -31,8 +31,7 @@ export default {
       setTimeout(() => {
         this.isLoading = false;
       }, 5000);
-    },
-    onCancel() {},
+    }, 
   },
 };
 </script> 

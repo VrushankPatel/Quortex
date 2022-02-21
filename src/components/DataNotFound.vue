@@ -28,7 +28,6 @@ export default {
 </script>
 <style scoped>
 @import "https://fonts.googleapis.com/css?family=Montserrat:200,400,700";
-/**/
 * {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;

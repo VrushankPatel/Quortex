@@ -545,7 +545,7 @@ export default {
             response.data.code,
             response.data.status
           );
-          if (result == true) {
+          if (result) {
             window.setTimeout(() => {
               this.showReportSuccessSnackBar = true;
             }, 1500);
@@ -555,8 +555,7 @@ export default {
             }, 1500);
           }
           this.showReportDialog = false;
-        },
-        () => {}
+        }
       );
       this.reportDesc = "";
     },
@@ -589,9 +588,7 @@ export default {
         },
       };
       utilities.sendRequest(
-        config,
-        () => {},
-        () => {}
+        config
       );
     },
     likeQuestion(questionId) {
@@ -675,7 +672,7 @@ export default {
       this.answer = "";
     },
     followUnfollowQuestion(questionId, follow) {
-      questionId = questionId["questionId"];
+      this.questionId = questionId["questionId"];
       const data = {
         userId: utilities.getUserId(this.$router),
         questionId: this.questionId,
@@ -688,9 +685,7 @@ export default {
         data: data,
       };
       utilities.sendRequest(
-        config,
-        () => {},
-        () => {}
+        config
       );
     },
     likeDislikeQuestion(questionId, like) {
@@ -708,9 +703,7 @@ export default {
         data: data,
       };
       utilities.sendRequest(
-        config,
-        () => {},
-        () => {}
+        config
       );
     },
   },
