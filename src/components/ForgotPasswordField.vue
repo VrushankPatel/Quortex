@@ -6,11 +6,11 @@
 			style="border: none"
 		>
 			<h2>Quortex</h2>
-			<center>
+			<div>
 				<u>
 					<p style="font-size: 120%; color: grey">Forgot Password</p>
 				</u>
-			</center>
+			</div>
 			<div class="double-wide">
 				<FormulateInput
 					v-model="formData.email"
@@ -23,9 +23,9 @@
 				/>
 			</div>
 
-			<center style="padding-top: 5%">
+			<div style="padding-top: 5%">
 				<FormulateInput type="submit" label="Submit" />
-			</center>
+			</div>
 		</FormulateForm>
 		<div class="text-center">
 			Continue to

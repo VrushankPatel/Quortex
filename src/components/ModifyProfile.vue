@@ -4,19 +4,19 @@
 			<div v-if="dataNotFound">
 				<DataNotFound message="Unable to fetch data, please try again later." />
 			</div>
-			<center v-if="showLoader">
+			<div v-if="showLoader">
 				<div>
 					<md-progress-spinner md-mode="indeterminate"></md-progress-spinner>
 					<h4>Loading Data</h4>
 				</div>
-			</center>
+			</div>
 			<div v-if="!showLoader && !dataNotFound">
 				<h2>Quortex</h2>				
-				<center>
+				<div>
 					<u>
 						<p style="font-size: 120%; color: grey">Modify Profile</p>
 					</u>
-				</center>
+				</div>
 				<div class="double-wide">
 					<FormulateInput
 						v-model="formData.firstName"
