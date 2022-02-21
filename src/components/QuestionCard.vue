@@ -642,7 +642,7 @@ export default {
             response.data.code,
             response.data.status
           );
-          if (result == true) {
+          if (result) {
             window.setTimeout(() => {
               this.showSuccessSnackBar = true;
             }, 1500);
@@ -689,7 +689,7 @@ export default {
       );
     },
     likeDislikeQuestion(questionId, like) {
-      questionId = questionId["questionId"];
+      this.questionId = questionId["questionId"];
       const data = {
         userId: utilities.getUserId(this.$router),
         questionId: this.questionId,

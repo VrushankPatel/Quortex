@@ -82,8 +82,7 @@ export default {
             error.response.data.code == 401 ||
             error.response.data.code == 555
           ) {
-            actions.fireLoggedOut(this.$swal, this.$router);
-            return;
+            actions.fireLoggedOut(this.$swal, this.$router);            
           }
         }
       );
