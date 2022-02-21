@@ -4,8 +4,7 @@
       <md-card class="md-layout-item md-size-95 md-small-size-95">
         <md-card-header>
           <div class="md-title">
-            <md-icon>filter_list</md-icon> Apply filters here
-            <!-- Search -->
+            <md-icon>filter_list</md-icon> Apply filters here            
           </div>
         </md-card-header>
         <md-card-content>
@@ -121,8 +120,7 @@ export default {
       topic: {},
     },
   },
-  beforeDestroy() {
-    // console.log(JSON.stringify(this.form));
+  beforeDestroy() {    
     this.callSaveFilter();
   },
   methods: {
@@ -139,8 +137,7 @@ export default {
           searchType: "ALL",
         })
       );
-      this.$emit("clearFilter");
-      // location.reload();
+      this.$emit("clearFilter");      
       this.filters = false;
     },
     getValidationClass(fieldName) {

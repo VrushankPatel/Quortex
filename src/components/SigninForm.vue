@@ -10,9 +10,7 @@
 					label="Email address"
 					placeholder="Email address"
 					validation="email"
-				/>
-				<!-- below line was for testing in password field -->
-				<!-- v-model="formValues.password" -->
+				/>				
 				<FormulateInput
 					id="pwdfield"
 					name="password"

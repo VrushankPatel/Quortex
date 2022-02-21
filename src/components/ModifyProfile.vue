@@ -11,8 +11,7 @@
 				</div>
 			</center>
 			<div v-if="!showLoader && !dataNotFound">
-				<h2>Quortex</h2>
-				<!-- <p>{{ formData }}</p> -->
+				<h2>Quortex</h2>				
 				<center>
 					<u>
 						<p style="font-size: 120%; color: grey">Modify Profile</p>
@@ -48,16 +47,7 @@
 						placeholder="Your Nickname"
 						validation="required"
 						autocomplete="off"
-					/>
-					<!-- <FormulateInput
-						v-model="formData.email"
-						name="email"
-						type="email"
-						label="Email address"
-						placeholder="Email address"
-						validation="email"
-						autocomplete="off"
-					/> -->
+					/>					
 					<FormulateInput
 						v-model="formData.grade"
 						name="Grade"
@@ -195,8 +185,7 @@ import cryptoUtil from "@/common/cryptoUtil.js";
 export default {
 	name: "ModifyProfile",
 	components: {
-		DataNotFound,
-		// Loader,
+		DataNotFound		
 	},
 	data: () => ({
 		totalTimespendByUser: utilities.secondsToHms(
@@ -291,7 +280,7 @@ export default {
 			this.showLoader = true;
 			utilities.sendRequest(
 				config,
-				(/*response*/) => {
+				() => {
 					this.showLoader = false;
 					this.$swal.fire({
 						icon: "success",
@@ -300,8 +289,7 @@ export default {
 					});
 					this.$emit("closeModifyProfile");
 				},
-				(/*error*/) => {
-					// console.log(JSON.stringify(error));
+				() => {					
 					this.showLoader = false;
 					this.$swal.fire({
 						icon: "error",
@@ -335,8 +323,7 @@ export default {
 					this.defaults = response.data;
 					this.restoreFormDefaults();
 				},
-				(/*error*/) => {
-					// console.log(error);
+				() => {					
 					this.showLoader = false;
 					this.dataNotFound = true;
 				}
@@ -345,8 +332,6 @@ export default {
 	},
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import "../styles/common.css";
 .login-form {
