@@ -157,8 +157,7 @@ a img {
 .android-be-together-section {
     position: relative;
     height: 800px;
-    width: auto;
-    background-color: #f3f3f3;
+    width: auto;    
     background: url('../assets/images/slide01.jpg') center 30% no-repeat;
     background-size: cover;
 }

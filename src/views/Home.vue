@@ -149,18 +149,15 @@ import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import ModifyProfile from "@/components/ModifyProfile.vue";
 import Following from "@/components/Following.vue";
 import AnsweredByUser from "@/components/AnsweredByUser.vue";
-// import AnswerByUser from "@/components/AnswerByUser.vue";
 import ChallengePage from "@/components/ChallengePage.vue";
 import ReportedQuestionsForAdmin from "@/components/ReportedQuestionsForAdmin.vue";
-// import Questions from "@/components/Questions.vue";
 import actions from "@/common/actions.js";
 import utilities from "@/common/utilities.js";
 import cryptoUtil from "@/common/cryptoUtil.js";
 import constants from "@/common/constants.js";
 export default {
   name: "Home",
-  beforeMount() {
-    // document.body.style.backgroundColor = "white";
+  beforeMount() {    
     utilities.awakeAPIGatewayAndBackEndHeroku();
     this.admin = utilities.getUserType(this.$router, this.$swal) == "ADMIN";
     this.userProgressLevel = JSON.parse(
@@ -178,14 +175,13 @@ export default {
   data: () => ({
     backgroundColor: constants.getGeneralBackgroundColor(),
     textColor: "white",
-    admin: false, //  true for admin.
+    admin: false,
     menuVisible: false,
     ifHome: true,
     ifFollowing: false,
     ifAnsweredByUser: false,
     ifAnswerByUser: false,
-    ifChallenge: false,
-    // ifQuestions: false,
+    ifChallenge: false,    
     showProfileDialog: false,
     form: {
       firstName: null,
@@ -199,15 +195,13 @@ export default {
     lastUser: null,
   }),
   components: {
-    ChallengePage,
-    // AnswerByUser,
+    ChallengePage,    
     LevelProgressBar,
     ReportedQuestionsForAdmin,
 
     HomePage,
     Following,
-    AnsweredByUser,
-    // Questions,
+    AnsweredByUser,    
     ModifyProfile,
   },
   methods: {

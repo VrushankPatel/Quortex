@@ -90,7 +90,7 @@
           <md-button
             v-if="!admin"
             style="color: white"
-            @click="answerTheQuestion({ questionId }, { answerList })"
+            @click="answerTheQuestion({ questionId })"
             >Comment</md-button
           >
           <div v-if="item.followerByCurrentUser && !admin">
@@ -634,15 +634,9 @@ export default {
     actionLike() {
       this.$emit("actionLike");
     },
-    answerTheQuestion(questionId, answerList) {
-      // var answers = answerList["answerList"];
-      // answers = answers.filter((answer) => {
-      //   return answer.userId == 302;
-      // });
-      // this.answer = answers.length == 1 ? answers[0]["answerDesc"] : "";
-      answerList;
+    answerTheQuestion(questionId) {      
       this.answer = "";
-      questionId = questionId["questionId"];
+      this.questionId = questionId["questionId"];
       this.showDialog = true;
     },
     postAnswer() {
@@ -727,16 +721,8 @@ export default {
       };
       utilities.sendRequest(
         config,
-        (response) => {
-          response;
-          // console.log(JSON.stringify(response));
-        },
-        (error) => {
-          error;
-          window.setTimeout(() => {
-            // console.log("failure");
-          }, 1500);
-        }
+        () => {},
+        () => {}
       );
     },
     likeDislikeQuestion(questionId, like) {
@@ -755,13 +741,8 @@ export default {
       };
       utilities.sendRequest(
         config,
-        (response) => {
-          response;
-        },
-        (error) => {
-          error;
-          window.setTimeout(() => {}, 1500);
-        }
+        () => {},
+        () => {}
       );
     },
   },
