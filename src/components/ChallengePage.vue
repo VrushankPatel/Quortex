@@ -46,7 +46,6 @@
 </template>
 
 <script>
-// import Loader from "@/components/Loader.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import actions from "@/common/actions.js";

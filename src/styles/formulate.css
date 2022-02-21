@@ -835,8 +835,7 @@
     padding: .75em;
     font-weight: 400;
     line-height: 1.2em;
-    margin: 0;
-    display: block;
+    margin: 0;    
     width: 100%;
     display: flex;
     justify-content: flex-start;

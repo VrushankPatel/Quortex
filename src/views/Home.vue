@@ -17,16 +17,7 @@
                   src="@/assets/images/quortex.png"
                   width="170"
                   alt="Quortex"
-                />
-                <!-- <span
-                  class="md-title"
-                  :style="{
-                    color: textColor,
-                    'padding-top': '20px',
-                    'font-size': '30px',
-                  }"
-                  >quortex <span v-if="admin">Admin</span></span
-                > -->
+                />                
               </div>
             </div>
             <div class="mdl-cell mdl-cell--5-col" v-if="!admin">
@@ -54,8 +45,7 @@
             </md-menu>
           </div>
         </div>
-
-        <!-- reported questions window  -->
+        
         <div v-if="admin" style="padding-left: 2%">
           <md-button
             style="border-bottom: 3px solid white"
@@ -128,8 +118,7 @@
       >
         <HomePage v-if="ifHome" />
         <Following v-if="ifFollowing" />
-        <AnsweredByUser v-if="ifAnsweredByUser" />
-        <!-- <AnswerByUser v-if="ifAnswerByUser" /> -->
+        <AnsweredByUser v-if="ifAnsweredByUser" />        
         <ChallengePage v-if="ifChallenge" />
       </md-app-content>
       <md-app-content v-else>
@@ -143,7 +132,6 @@
 </template>
 
 <script>
-// import HomePageDrawer from "@/components/HomePageDrawer.vue";
 import HomePage from "@/components/HomePage.vue";
 import LevelProgressBar from "@/components/LevelProgressBar.vue";
 import ModifyProfile from "@/components/ModifyProfile.vue";
@@ -228,23 +216,7 @@ export default {
       this.ifAnsweredByUser = true;
       this.ifAnswerByUser = false;
       this.ifChallenge = false;
-    },
-    /* moveToAnswerPage() {
-      this.ifHome = false;
-      this.ifFollowing = false;
-      this.ifAnsweredByUser = false;
-      this.ifAnswerByUser = true;
-      this.ifChallenge = false;
-      cryptoUtil.setItem(
-        "FilterData",
-        JSON.stringify({
-          subject: "",
-          topic: "",
-          questionDesc: "",
-          searchType: constants.searchTypes[3][1],
-        })
-      );
-    },*/
+    },    
     moveToChallengePage() {
       this.ifHome = false;
       this.ifFollowing = false;
@@ -282,8 +254,7 @@ export default {
   max-height: 900px;
   background-color: transparent;
 }
-.vert_btn:hover .rotating_vert {
-  // transform: rotate(360deg);
+.vert_btn:hover .rotating_vert {  
   transition-property: all;
   transition-duration: 0.7s;
 }
@@ -291,8 +262,7 @@ export default {
   transition-property: all;
   transition-duration: 0.7s;
 }
-.rotating_vert:hover {
-  //   transform: rotate(360deg);
+.rotating_vert:hover {  
   transition-property: all;
   transition-duration: 0.8s;
 }

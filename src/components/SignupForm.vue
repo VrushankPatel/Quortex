@@ -44,16 +44,7 @@
           validation="email"
           autocomplete="off"
         />
-      </div>
-      <!-- <FormulateInput
-        v-model="formData.birthdate"
-        type="date"
-        name="DOB"
-        label="Date of birth"
-        placeholder="mm-dd-YYYY"
-        validation="required"
-        autocomplete="off"
-      /> -->
+      </div>      
       <div class="double-wide">
         <FormulateInput
           v-model="date.year"
@@ -85,10 +76,7 @@
           autocomplete="off"
           :options="days"
         />
-      </div>
-      <!-- validation="required|after:2019-01-01"
-        min="2018-12-01"
-      max="2021-01-01"-->
+      </div>      
       <FormulateInput
         v-model="formData.grade"
         name="Grade"
@@ -125,9 +113,7 @@
           label="Password"
           placeholder="Your password"
           validation="required"
-        />
-        <!-- below line was for testing in password field -->
-        <!-- v-model="formData.password" -->
+        />        
         <FormulateInput
           name="password_confirm"
           type="password"
@@ -230,7 +216,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import "../styles/common.css";
 .login-form {

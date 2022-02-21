@@ -2,8 +2,7 @@
 	<div>
 		<div id="notfound">
 			<div class="notfound">
-				<div class="notfound-404">
-					<!-- <h1>Oops!</h1> -->
+				<div class="notfound-404">					
 					<h2
 						v-bind:style="{
 							backgroundColor: 'transparent',

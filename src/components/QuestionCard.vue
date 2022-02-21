@@ -1,8 +1,7 @@
 <template>
   <div style="padding-top: 1%">
     <md-card class="qacard" style="border: none">
-      <div style="color: white; background-color: #3d3d3d">
-        <!-- #4b4b4b try this for above background color-->
+      <div style="color: white; background-color: #3d3d3d">        
         <md-card-header style="width: 100%; float: left">
           <div class="md-layout md-gutter md-alignment-center">
             <div
@@ -169,8 +168,7 @@
             </md-button>
           </div>
         </md-card-actions>
-      </div>
-      <!-- <md-divider></md-divider> -->
+      </div>      
       <div v-if="this.showAnswers">
         <div
           class="md-layout md-gutter md-alignment-center"
@@ -512,12 +510,10 @@ export default {
       };
       utilities.sendRequest(
         config,
-        (/*response */) => {
-          // console.log(JSON.stringify(response));
+        () => {          
           location.reload();
         },
-        (/*error*/) => {
-          // console.log(JSON.stringify(error));
+        () => {          
           alert("unable to delete answer..");
         }
       );
@@ -560,15 +556,7 @@ export default {
           }
           this.showReportDialog = false;
         },
-        (/*error */) => {
-          /*
-          var result = actions.successQuestionPost(
-            error.data.code,
-            error.data.status
-          );
-          console.log(result);
-          */
-        }
+        () => {}
       );
       this.reportDesc = "";
     },
@@ -602,24 +590,8 @@ export default {
       };
       utilities.sendRequest(
         config,
-        (/*response */) => {
-          /*          
-          var result = actions.successQuestionPost(
-            response.data.code,
-            response.data.status
-          );
-          console.log(result);
-          */
-        },
-        (/*error */) => {
-          /*            
-          var result = actions.successQuestionPost(
-            error.data.code,
-            error.data.status
-          );
-          console.log(result);
-          */
-        }
+        () => {},
+        () => {}
       );
     },
     likeQuestion(questionId) {
@@ -668,11 +640,7 @@ export default {
       };
       utilities.sendRequest(
         config,
-        (response) => {
-          // cryptoUtil.setItem(
-          //   "userProgressLevel",
-          //   JSON.stringify(response.data.userProgressLevel)
-          // );
+        (response) => {          
           var result = actions.successQuestionPost(
             response.data.code,
             response.data.status

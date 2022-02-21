@@ -98,7 +98,6 @@
 </template>
 
 <script>
-// import Loader from "@/components/Loader.vue";
 import QuestionCard from "@/components/QuestionCard.vue";
 import DataNotFound from "@/components/DataNotFound.vue";
 import AskQuestionCard from "@/components/AskQuestionCard.vue";
@@ -205,14 +204,12 @@ export default {
 </script>
 
 <style scoped>
-.questtext {
-  padding: 10px;
-}
 .md-dialog ::v-deep .md-dialog-container {
   width: 40%;
 }
 .questtext {
   cursor: pointer;
+  padding: 10px;
 }
 .customcard {
   border: 1px solid lightgrey;
