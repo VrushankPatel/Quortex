@@ -1,6 +1,7 @@
 # Quortex-Web
 
-|[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
+|[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex?ref=badge_shield)
+|
 |------------ |
 |[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=VrushankPatel_Quortex)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
 |[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
@@ -53,3 +54,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex?ref=badge_large)
