@@ -1,17 +1,22 @@
 # Quortex-Web
 
-|[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|------------ |
-|[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=VrushankPatel_Quortex)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=bugs)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
-|[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex)|
+<div align=center>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/images/project_badges/sonarcloud-black.svg"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/quality_gate?project=VrushankPatel_Quortex"/></a><br/>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=alert_status"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=bugs"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=code_smells"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=duplicated_lines_density"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=sqale_rating"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=reliability_rating"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=security_rating"/></a><br/>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=sqale_index"/></a>
+<a href="https://sonarcloud.io/summary/new_code?id=VrushankPatel_Quortex"><img src="https://sonarcloud.io/api/project_badges/measure?project=VrushankPatel_Quortex&metric=vulnerabilities"/></a>
+<a target="_blank" href="https://app.fossa.com/reports/2ca1e3d4-0b5e-4e28-9bc5-d59aaf74dbec"><img src="https://img.shields.io/badge/Fossa-Report-blue"/></a>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex.svg?type=shield"/></a>
+</div><br/>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex?ref=badge_small" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex.svg?type=small"/></a><br/>
+<a href="https://app.fossa.com/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex?ref=badge_large" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FVrushankPatel%2FQuortex.svg?type=large"/></a>
 
 ### Getting Started
 
@@ -23,7 +28,7 @@
 
 #### Exporting and serving minified build
 
-1. run npm run build
+1. run command `npm run build`
 2. use the command below to serve page from static pages exported as minified build in build folder.
 
 ```
