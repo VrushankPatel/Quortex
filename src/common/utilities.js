@@ -29,8 +29,8 @@ export default {
 			router.push("/signin");
 		}
 	},
-	getUserType(router, swal) {
-		var userType = cryptoUtil.getItem("quortexusertype", router);
+	getUserType(router, swal, show = true) {
+		var userType = cryptoUtil.getItem("quortexusertype", router, show);
 
 		if (userType != "") {
 			return userType;

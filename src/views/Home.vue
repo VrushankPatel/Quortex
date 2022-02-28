@@ -147,7 +147,7 @@ export default {
   name: "Home",
   beforeMount() {    
     utilities.awakeAPIGatewayAndBackEndHeroku();
-    this.admin = utilities.getUserType(this.$router, this.$swal) == "ADMIN";
+    this.admin = utilities.getUserType(this.$router, this.$swal, false) == "ADMIN";
     this.userProgressLevel = JSON.parse(
       cryptoUtil.getItem("userProgressLevel", this.$router)
     ) || {
