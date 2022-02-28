@@ -30,10 +30,7 @@ export default {
 		}
 	},
 	successQuestionPost(code, status) {
-		if (status && code === 200) {
-			return true;
-		}
-		return false;
+		return (status && code === 200);
 	},
 	errorQuestionPost(code, status, router, swal) {
 		if (!this.checkLoggedIn(router) || code === 555) {
@@ -78,15 +75,12 @@ export default {
 			constants.getQuortexUserId(),
 			router
 		);
-		if (
+		return (
 			token != null &&
 			token.length != 0 &&
 			quortexuserId != null &&
 			quortexuserId.length != 0
-		) {
-			return true;
-		}
-		return false;
+		);
 	},
 	fireLoggedOut(swal, router) {
 		this.invalidate();
