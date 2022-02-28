@@ -5,15 +5,17 @@ export default {
 	setItem(key, value) {
 		localStorage.setItem(this.getEncrypted(key), this.getEncrypted(value));
 	},
-	getItem(key, router) {
+	getItem(key, router, show = true) {
 		const encValue = localStorage.getItem(this.getEncrypted(key));
 		if (encValue == "" || encValue == null) {
 			router.push("/signin");
-			Swal.fire({
-				icon: "info",
-				title: "Logged out",
-				text: "You're logged out of quortex, please login to continue.",
-			});
+			if (show) {
+				Swal.fire({
+					icon: "info",
+					title: "Logged out",
+					text: "You're logged out of quortex, please login to continue.",
+				});
+			}
 		}
 		return this.getDecrypted(encValue);
 	},
